@@ -4,39 +4,33 @@ import useUserPlan from '../hooks/useUserPlan';
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 
-const PremiumRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
     const { user, loading: authLoading } = useAuth();
-    const { isPremium, loading: planLoading } = useUserPlan();
+    const { isAdmin, loading: planLoading } = useUserPlan();
     const location = useLocation();
     const [hasShownAlert, setHasShownAlert] = useState(false);
 
     const loading = authLoading || planLoading;
 
     useEffect(() => {
-        if (!loading && user && !isPremium && !hasShownAlert) {
+        if (!loading && user && !isAdmin && !hasShownAlert) {
             Swal.fire({
-                icon: 'info',
-                title: 'Premium Feature',
-                text: 'This feature requires a Premium subscription',
-                confirmButtonColor: '#0ea5e9',
-                confirmButtonText: 'Upgrade Now',
-                showCancelButton: true,
-                cancelButtonText: 'Maybe Later',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/pricing';
-                }
+                icon: 'error',
+                title: 'Access Denied',
+                text: 'You do not have admin privileges',
+                confirmButtonColor: '#ef4444',
+                confirmButtonText: 'Go Back',
             });
             setHasShownAlert(true);
         }
-    }, [loading, user, isPremium, hasShownAlert]);
+    }, [loading, user, isAdmin, hasShownAlert]);
 
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50">
                 <div className="text-center">
                     <div className="spinner mx-auto mb-4"></div>
-                    <p className="text-lg text-gray-600 font-medium">Checking subscription...</p>
+                    <p className="text-lg text-gray-600 font-medium">Verifying admin access...</p>
                 </div>
             </div>
         );
@@ -46,11 +40,11 @@ const PremiumRoute = ({ children }) => {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
-    if (!isPremium) {
-        return <Navigate to="/pricing" replace />;
+    if (!isAdmin) {
+        return <Navigate to="/" replace />;
     }
 
     return children;
 };
 
-export default PremiumRoute;
+export default AdminRoute;
