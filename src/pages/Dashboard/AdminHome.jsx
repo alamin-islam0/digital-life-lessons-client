@@ -32,37 +32,37 @@ const AdminHome = () => {
     return (
         <div className="space-y-8">
             <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold text-gray-900 bangla-text">অ্যাডমিন ড্যাশবোর্ড</h1>
-                <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg font-semibold bangla-text">
-                    আজকের সারাংশ
+                <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+                <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg font-semibold">
+                    Today's Summary
                 </div>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatsCard
-                    title="মোট ব্যবহারকারী"
+                    title="Total Users"
                     value={stats?.totalUsers || 0}
                     icon={Users}
                     bgColor="bg-blue-50"
                     iconColor="text-blue-600"
                 />
                 <StatsCard
-                    title="মোট লেসন (সর্বমোট)"
+                    title="Total Lessons (All)"
                     value={stats?.totalLessons || 0}
                     icon={BookOpen}
                     bgColor="bg-green-50"
                     iconColor="text-green-600"
                 />
                 <StatsCard
-                    title="রিপোর্টেড লেসন"
+                    title="Reported Lessons"
                     value={stats?.reportedLessons || 0}
                     icon={Flag}
                     bgColor="bg-red-50"
                     iconColor="text-red-600"
                 />
                 <StatsCard
-                    title="আজকের নতুন লেসন"
+                    title="Today's New Lessons"
                     value={stats?.todayLessons || 0}
                     icon={BookOpen}
                     bgColor="bg-purple-50"
@@ -74,9 +74,9 @@ const AdminHome = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* User Growth Chart */}
                 <div className="bg-white p-6 rounded-2xl shadow-md">
-                    <h3 className="text-xl font-bold text-gray-900 bangla-text mb-6 flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-primary-600" />
-                        ব্যবহারকারী বৃদ্ধি (সাপ্তাহিক)
+                        User Growth (Weekly)
                     </h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -101,9 +101,9 @@ const AdminHome = () => {
 
                 {/* Lesson Growth Chart */}
                 <div className="bg-white p-6 rounded-2xl shadow-md">
-                    <h3 className="text-xl font-bold text-gray-900 bangla-text mb-6 flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <BookOpen className="w-5 h-5 text-secondary-600" />
-                        লেসন বৃদ্ধি (সাপ্তাহিক)
+                        Lesson Growth (Weekly)
                     </h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">

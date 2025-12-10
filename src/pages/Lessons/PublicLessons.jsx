@@ -21,27 +21,27 @@ const PublicLessons = () => {
     const limit = 12;
 
     const categories = [
-        'সব',
-        'ব্যক্তিগত উন্নতি',
-        'ক্যারিয়ার',
-        'সম্পর্ক',
-        'মানসিকতা',
-        'ভুল থেকে শিক্ষা',
+        'All',
+        'Personal Development',
+        'Career',
+        'Relationships',
+        'Mindset',
+        'Learning from Mistakes',
     ];
 
     const emotionalTones = [
-        'সব',
-        'প্রেরণাদায়ক',
-        'বেদনা',
-        'উপলব্ধি',
-        'কৃতজ্ঞতা',
+        'All',
+        'Motivational',
+        'Sadness',
+        'Realization',
+        'Gratitude',
     ];
 
     const sortOptions = [
-        { value: 'newest', label: 'সর্বশেষ' },
-        { value: 'oldest', label: 'পুরাতন' },
-        { value: 'most-saved', label: 'সবচেয়ে বেশি সেভড' },
-        { value: 'most-liked', label: 'সবচেয়ে বেশি লাইকড' },
+        { value: 'newest', label: 'Newest' },
+        { value: 'oldest', label: 'Oldest' },
+        { value: 'most-saved', label: 'Most Saved' },
+        { value: 'most-liked', label: 'Most Liked' },
     ];
 
     // Fetch lessons with filters
@@ -55,8 +55,8 @@ const PublicLessons = () => {
             });
 
             if (searchTerm) params.append('search', searchTerm);
-            if (category && category !== 'সব') params.append('category', category);
-            if (emotionalTone && emotionalTone !== 'সব') params.append('emotionalTone', emotionalTone);
+            if (category && category !== 'All') params.append('category', category);
+            if (emotionalTone && emotionalTone !== 'All') params.append('emotionalTone', emotionalTone);
 
             const res = await axiosSecure.get(`/lessons/public?${params}`);
             return res.data;
@@ -80,8 +80,8 @@ const PublicLessons = () => {
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <SectionHeader
-                    title="পাবলিক লাইফ লেসন"
-                    subtitle="সবার শেয়ার করা জীবন অভিজ্ঞতা থেকে শিখুন"
+                    title="Public Life Lessons"
+                    subtitle="Learn from life experiences shared by everyone"
                 />
 
                 {/* Filters Bar */}
@@ -94,8 +94,8 @@ const PublicLessons = () => {
                                 type="text"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                placeholder="লেসন খুঁজুন..."
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                                placeholder="Search lessons..."
+                                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             />
                         </div>
                     </form>
@@ -103,18 +103,18 @@ const PublicLessons = () => {
                     {/* Filter Toggle Button (Mobile) */}
                     <button
                         onClick={() => setShowFilters(!showFilters)}
-                        className="md:hidden flex items-center gap-2 w-full justify-center px-4 py-2 bg-gray-100 rounded-lg bangla-text font-medium mb-4"
+                        className="md:hidden flex items-center gap-2 w-full justify-center px-4 py-2 bg-gray-100 rounded-lg font-medium mb-4"
                     >
                         <SlidersHorizontal className="w-4 h-4" />
-                        ফিল্টার {showFilters ? 'লুকান' : 'দেখান'}
+                        Filter {showFilters ? 'Hide' : 'Show'}
                     </button>
 
                     {/* Filters */}
                     <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 ${showFilters ? 'block' : 'hidden md:grid'}`}>
                         {/* Category Filter */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
-                                ক্যাটাগরি
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Category
                             </label>
                             <select
                                 value={category}
@@ -122,10 +122,10 @@ const PublicLessons = () => {
                                     setCategory(e.target.value);
                                     setPage(1);
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             >
                                 {categories.map((cat) => (
-                                    <option key={cat} value={cat === 'সব' ? '' : cat}>
+                                    <option key={cat} value={cat === 'All' ? '' : cat}>
                                         {cat}
                                     </option>
                                 ))}
@@ -134,8 +134,8 @@ const PublicLessons = () => {
 
                         {/* Emotional Tone Filter */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
-                                ইমোশনাল টোন
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Emotional Tone
                             </label>
                             <select
                                 value={emotionalTone}
@@ -143,10 +143,10 @@ const PublicLessons = () => {
                                     setEmotionalTone(e.target.value);
                                     setPage(1);
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             >
                                 {emotionalTones.map((tone) => (
-                                    <option key={tone} value={tone === 'সব' ? '' : tone}>
+                                    <option key={tone} value={tone === 'All' ? '' : tone}>
                                         {tone}
                                     </option>
                                 ))}
@@ -155,8 +155,8 @@ const PublicLessons = () => {
 
                         {/* Sort Filter */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
-                                সাজান
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Sort
                             </label>
                             <select
                                 value={sortBy}
@@ -164,7 +164,7 @@ const PublicLessons = () => {
                                     setSortBy(e.target.value);
                                     setPage(1);
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             >
                                 {sortOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -179,17 +179,17 @@ const PublicLessons = () => {
                     {(searchTerm || category || emotionalTone || sortBy !== 'newest') && (
                         <div className="mt-4 flex flex-wrap gap-2">
                             {searchTerm && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm bangla-text">
-                                    খোঁজা: {searchTerm}
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                                    Search: {searchTerm}
                                 </span>
                             )}
                             {category && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm bangla-text">
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
                                     {category}
                                 </span>
                             )}
                             {emotionalTone && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm bangla-text">
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
                                     {emotionalTone}
                                 </span>
                             )}
@@ -201,9 +201,9 @@ const PublicLessons = () => {
                                     setSortBy('newest');
                                     setPage(1);
                                 }}
-                                className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm bangla-text hover:bg-red-200 transition-colors"
+                                className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm hover:bg-red-200 transition-colors"
                             >
-                                সব ফিল্টার মুছুন
+                                Clear all filters
                             </button>
                         </div>
                     )}
@@ -237,7 +237,7 @@ const PublicLessons = () => {
                                     showLastButton
                                     sx={{
                                         '& .MuiPaginationItem-root': {
-                                            fontFamily: 'Hind Siliguri, sans-serif',
+                                            // fontFamily: 'Inter, sans-serif', // Use global font
                                         },
                                     }}
                                 />
@@ -247,11 +247,11 @@ const PublicLessons = () => {
                 ) : (
                     <div className="text-center py-16">
                         <Filter className="w-20 h-20 text-gray-400 mx-auto mb-4" />
-                        <h3 className="text-2xl font-bold text-gray-900 bangla-text mb-2">
-                            কোনো লেসন পাওয়া যায়নি
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                            No lessons found
                         </h3>
-                        <p className="text-gray-600 bangla-text mb-6">
-                            আপনার ফিল্টার পরিবর্তন করে আবার চেষ্টা করুন
+                        <p className="text-gray-600 mb-6">
+                            Change your filters and try again
                         </p>
                         <button
                             onClick={() => {
@@ -261,9 +261,9 @@ const PublicLessons = () => {
                                 setSortBy('newest');
                                 setPage(1);
                             }}
-                            className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text"
+                            className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
                         >
-                            সব ফিল্টার মুছুন
+                            Clear all filters
                         </button>
                     </div>
                 )}

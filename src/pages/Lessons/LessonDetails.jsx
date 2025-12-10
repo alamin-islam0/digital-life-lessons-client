@@ -110,7 +110,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'ফেভারিট আপডেট হয়েছে',
+                title: 'Favorite updated',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -135,7 +135,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'রিপোর্ট সফলভাবে জমা হয়েছে',
+                title: 'Report submitted successfully',
                 showConfirmButton: false,
                 timer: 3000,
             });
@@ -155,7 +155,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'কমেন্ট যোগ হয়েছে',
+                title: 'Comment added',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -168,7 +168,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'এই কাজটি করতে প্রথমে লগইন করুন',
+                title: 'Please login first',
                 showConfirmButton: false,
                 timer: 3000,
             });
@@ -183,7 +183,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'এই কাজটি করতে প্রথমে লগইন করুন',
+                title: 'Please login first',
                 showConfirmButton: false,
                 timer: 3000,
             });
@@ -198,7 +198,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'এই কাজটি করতে প্রথমে লগইন করুন',
+                title: 'Please login first',
                 showConfirmButton: false,
                 timer: 3000,
             });
@@ -213,7 +213,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'error',
-                title: 'রিপোর্টের কারণ নির্বাচন করুন',
+                title: 'Select a reason for reporting',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -245,7 +245,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'লিংক কপি হয়েছে',
+                title: 'Link copied',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -259,7 +259,7 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'কমেন্ট করতে প্রথমে লগইন করুন',
+                title: 'Please login first to comment',
                 showConfirmButton: false,
                 timer: 3000,
             });
@@ -270,7 +270,7 @@ const LessonDetails = () => {
     };
 
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('bn-BD', {
+        return new Date(date).toLocaleDateString({
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -291,9 +291,9 @@ const LessonDetails = () => {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <BookOpen className="w-20 h-20 text-gray-400 mx-auto mb-4" />
-                    <h2 className="text-2xl font-bold text-gray-900 bangla-text mb-2">লেসন পাওয়া যায়নি</h2>
-                    <Link to="/public-lessons" className="text-primary-600 hover:underline bangla-text">
-                        পাবলিক লেসনে ফিরে যান
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Lesson not found</h2>
+                    <Link to="/public-lessons" className="text-primary-600 hover:underline">
+                        Back to public lessons
                     </Link>
                 </div>
             </div>
@@ -306,12 +306,12 @@ const LessonDetails = () => {
     const isFavorited = lesson.isFavorited;
 
     const reportReasons = [
-        'অনুপযুক্ত কনটেন্ট',
-        'ঘৃণা বা হয়রানি',
-        'ভুল বা বিভ্রান্তিকর তথ্য',
-        'স্প্যাম',
-        'সংবেদনশীল বা বিরক্তিকর কনটেন্ট',
-        'অন্যান্য',
+        'Inappropriate Content',
+        'Hate or Harassment',
+        'False or Misleading Information',
+        'Spam',
+        'Sensitive or Disturbing Content',
+        'Other',
     ];
 
     return (
@@ -320,10 +320,10 @@ const LessonDetails = () => {
                 {/* Back Button */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors mb-6 bangla-text font-medium"
+                    className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors mb-6 font-medium"
                 >
                     <ArrowLeft className="w-5 h-5" />
-                    ফিরে যান
+                    Go Back
                 </button>
 
                 {/* Premium Lock Banner */}
@@ -332,14 +332,14 @@ const LessonDetails = () => {
                         <div className="flex items-center gap-4">
                             <Lock className="w-12 h-12" />
                             <div className="flex-1">
-                                <h3 className="text-2xl font-bold bangla-text mb-1">এটি একটি প্রিমিয়াম লেসন</h3>
-                                <p className="bangla-text opacity-90">এই লেসনটি দেখতে প্রিমিয়াম প্ল্যানে আপগ্রেড করুন।</p>
+                                <h3 className="text-2xl font-bold mb-1">This is a premium lesson</h3>
+                                <p className="bangla-text opacity-90">Upgrade to premium plan to view this lesson.</p>
                             </div>
                             <Link
                                 to="/pricing"
-                                className="px-6 py-3 bg-white text-yellow-600 rounded-lg font-bold hover:bg-gray-100 transition-all bangla-text whitespace-nowrap"
+                                className="px-6 py-3 bg-white text-yellow-600 rounded-lg font-bold hover:bg-gray-100 transition-all whitespace-nowrap"
                             >
-                                আপগ্রেড করুন
+                                Upgrade Now
                             </Link>
                         </div>
                     </div>
@@ -350,20 +350,20 @@ const LessonDetails = () => {
                     {/* Header */}
                     <div className="p-8 border-b border-gray-100">
                         <div className="flex flex-wrap gap-2 mb-4">
-                            <span className="px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold bangla-text">
+                            <span className="px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                                 {lesson.category}
                             </span>
-                            <span className="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold bangla-text">
+                            <span className="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
                                 {lesson.emotionalTone}
                             </span>
                             {isPremiumLesson && (
                                 <span className="px-4 py-1.5 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-full text-sm font-semibold premium-glow">
-                                    ⭐ প্রিমিয়াম
+                                    ⭐ Premium
                                 </span>
                             )}
                         </div>
 
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 bangla-text mb-4">
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                             {lesson.title}
                         </h1>
 
@@ -375,11 +375,11 @@ const LessonDetails = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4" />
-                                <span className="bangla-text">{calculateReadingTime(lesson.description)} মিনিট পড়া</span>
+                                <span className="bangla-text">{calculateReadingTime(lesson.description)} min read</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Eye className="w-4 h-4" />
-                                <span>{Math.floor(Math.random() * 10000)} বার দেখা হয়েছে</span>
+                                <span>{Math.floor(Math.random() * 10000)} views</span>
                             </div>
                         </div>
                     </div>
@@ -387,7 +387,7 @@ const LessonDetails = () => {
                     {/* Content */}
                     <div className="p-8">
                         <div className="prose max-w-none">
-                            <p className="text-gray-700 bangla-text text-lg leading-relaxed whitespace-pre-wrap">
+                            <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-wrap">
                                 {lesson.description}
                             </p>
                         </div>
@@ -422,62 +422,62 @@ const LessonDetails = () => {
                         <div className="flex flex-wrap gap-3">
                             <button
                                 onClick={handleLike}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bangla-text ${isLiked
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${isLiked
                                     ? 'bg-red-100 text-red-700 hover:bg-red-200'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
-                                {isLiked ? 'লাইক করেছেন' : 'লাইক করুন'}
+                                {isLiked ? 'Liked' : 'Like'}
                             </button>
 
                             <button
                                 onClick={handleFavorite}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all bangla-text ${isFavorited
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${isFavorited
                                     ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 <Bookmark className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
-                                {isFavorited ? 'সেভ করেছেন' : 'সেভ করুন'}
+                                {isFavorited ? 'Saved' : 'Save'}
                             </button>
 
                             <button
                                 onClick={handleShare}
-                                className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-all bangla-text"
+                                className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-all"
                             >
                                 <Share2 className="w-5 h-5" />
-                                শেয়ার করুন
+                                Share
                             </button>
 
                             <button
                                 onClick={handleReport}
-                                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-lg font-semibold hover:bg-red-100 transition-all bangla-text"
+                                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-lg font-semibold hover:bg-red-100 transition-all"
                             >
                                 <Flag className="w-5 h-5" />
-                                রিপোর্ট করুন
+                                Report
                             </button>
                         </div>
                     </div>
 
                     {/* Author Section */}
                     <div className="p-8 border-t border-gray-100">
-                        <h3 className="text-xl font-bold text-gray-900 bangla-text mb-4">লেখক সম্পর্কে</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-4">About Author</h3>
                         <div className="flex items-start gap-4">
                             <UserAvatar user={lesson.creator} size="xl" />
                             <div className="flex-1">
-                                <h4 className="text-lg font-bold text-gray-900 bangla-text">
+                                <h4 className="text-lg font-bold text-gray-900">
                                     {lesson.creator?.name || lesson.creator?.displayName}
                                 </h4>
                                 <p className="text-gray-600 text-sm mb-3">{lesson.creator?.email}</p>
-                                <p className="text-gray-700 bangla-text text-sm mb-3">
-                                    মোট লেসন: <span className="font-semibold">{lesson.creator?.totalLessons || 0}</span>
+                                <p className="text-gray-700 text-sm mb-3">
+                                    Total Lessons: <span className="font-semibold">{lesson.creator?.totalLessons || 0}</span>
                                 </p>
                                 <Link
                                     to={`/author/${lesson.creator?._id}`}
-                                    className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-lg font-semibold hover:bg-primary-200 transition-all bangla-text text-sm"
+                                    className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-lg font-semibold hover:bg-primary-200 transition-all text-sm"
                                 >
-                                    এই লেখকের সব লেসন দেখুন
+                                    View all lessons from this author
                                 </Link>
                             </div>
                         </div>
@@ -485,24 +485,24 @@ const LessonDetails = () => {
 
                     {/* Comments Section */}
                     <div className="p-8 border-t border-gray-100">
-                        <h3 className="text-xl font-bold text-gray-900 bangla-text mb-6">কমেন্ট ({comments.length})</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mb-6">Comments ({comments.length})</h3>
 
                         {/* Comment Form */}
                         <form onSubmit={handleCommentSubmit} className="mb-8">
                             <textarea
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                placeholder="আপনার মতামত লিখুন..."
+                                placeholder="Write your opinion..."
                                 rows="3"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text resize-none"
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                             />
                             <button
                                 type="submit"
                                 disabled={!comment.trim() || commentMutation.isPending}
-                                className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Send className="w-4 h-4" />
-                                কমেন্ট করুন
+                                Post Comment
                             </button>
                         </form>
 
@@ -514,12 +514,12 @@ const LessonDetails = () => {
                                         <UserAvatar user={c.user} size="sm" />
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className="font-semibold text-gray-900 bangla-text text-sm">
+                                                <span className="font-semibold text-gray-900 text-sm">
                                                     {c.user?.name || c.user?.displayName}
                                                 </span>
                                                 <span className="text-xs text-gray-500">{formatDate(c.createdAt)}</span>
                                             </div>
-                                            <p className="text-gray-700 bangla-text text-sm">{c.text}</p>
+                                            <p className="text-gray-700 text-sm">{c.text}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -531,8 +531,8 @@ const LessonDetails = () => {
                 {/* Similar Lessons */}
                 {similarByCategory.length > 0 && (
                     <div className="mt-12">
-                        <h2 className="text-2xl font-bold text-gray-900 bangla-text mb-6">
-                            এই ক্যাটাগরির আরও লেসন
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                            More lessons in this category
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {similarByCategory.slice(0, 6).map((l) => (
@@ -544,8 +544,8 @@ const LessonDetails = () => {
 
                 {similarByTone.length > 0 && (
                     <div className="mt-12">
-                        <h2 className="text-2xl font-bold text-gray-900 bangla-text mb-6">
-                            একই টোনের আরও লেসন
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                            More lessons with this tone
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {similarByTone.slice(0, 6).map((l) => (
@@ -558,12 +558,12 @@ const LessonDetails = () => {
 
             {/* Report Dialog */}
             <Dialog open={reportDialogOpen} onClose={() => setReportDialogOpen(false)} maxWidth="sm" fullWidth>
-                <DialogTitle className="bangla-text">লেসন রিপোর্ট করুন</DialogTitle>
+                <DialogTitle className="bangla-text">Report Lesson</DialogTitle>
                 <DialogContent>
                     <TextField
                         select
                         fullWidth
-                        label="রিপোর্টের কারণ"
+                        label="Reason for report"
                         value={reportReason}
                         onChange={(e) => setReportReason(e.target.value)}
                         margin="normal"
@@ -579,7 +579,7 @@ const LessonDetails = () => {
                         fullWidth
                         multiline
                         rows={4}
-                        label="বিস্তারিত (ঐচ্ছিক)"
+                        label="Details (Optional)"
                         value={reportDescription}
                         onChange={(e) => setReportDescription(e.target.value)}
                         margin="normal"
@@ -588,7 +588,7 @@ const LessonDetails = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setReportDialogOpen(false)} className="bangla-text">
-                        বাতিল
+                        Cancel
                     </Button>
                     <Button
                         onClick={submitReport}
@@ -597,7 +597,7 @@ const LessonDetails = () => {
                         disabled={reportMutation.isPending}
                         className="bangla-text"
                     >
-                        রিপোর্ট জমা দিন
+                        Submit Report
                     </Button>
                 </DialogActions>
             </Dialog>

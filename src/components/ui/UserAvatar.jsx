@@ -29,8 +29,8 @@ const UserAvatar = ({ user, size = 'md', showName = false, className = '' }) => 
                 </div>
             )}
             {showName && (
-                <span className="font-medium text-gray-900 bangla-text">
-                    {user?.displayName || user?.name || 'ব্যবহারকারী'}
+                <span className="font-medium text-gray-900">
+                    {user?.displayName || user?.name || 'User'}
                 </span>
             )}
         </div>

@@ -51,7 +51,7 @@ const ManageLessons = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'লেসন মুছে ফেলা হয়েছে',
+                title: 'Lesson deleted',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -68,7 +68,7 @@ const ManageLessons = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'স্ট্যাটাস আপডেট হয়েছে',
+                title: 'Status updated',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -77,14 +77,14 @@ const ManageLessons = () => {
 
     const handleDelete = (id, title) => {
         Swal.fire({
-            title: 'নিশ্চিত করুন',
-            text: `"${title}" লেসনটি মুছে ফেলতে চান?`,
+            title: 'Confirm',
+            text: `Do you want to delete lesson "${title}"?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'হ্যাঁ, মুছুন',
-            cancelButtonText: 'বাতিল',
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel',
             customClass: {
                 title: 'bangla-text',
                 htmlContainer: 'bangla-text',
@@ -113,17 +113,17 @@ const ManageLessons = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 bangla-text">লেসন ব্যবস্থাপনা</h1>
-                    <p className="text-gray-500 bangla-text">মোট লেসন: {lessons.length}</p>
+                    <h1 className="text-2xl font-bold text-gray-900">Lesson Management</h1>
+                    <p className="text-gray-500">Total Lessons: {lessons.length}</p>
                 </div>
                 <div className="relative w-full md:w-64">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
                         type="text"
-                        placeholder="খুঁজুন..."
+                        placeholder="Search..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                 </div>
             </div>
@@ -132,12 +132,12 @@ const ManageLessons = () => {
                 <Table>
                     <TableHead className="bg-gray-50">
                         <TableRow>
-                            <TableCell className="bangla-text font-bold">শিরোনাম</TableCell>
-                            <TableCell className="bangla-text font-bold">লেখক</TableCell>
-                            <TableCell className="bangla-text font-bold">ক্যাটাগরি</TableCell>
-                            <TableCell className="bangla-text font-bold">অ্যাক্সেস</TableCell>
-                            <TableCell className="bangla-text font-bold">ফিচার্ড?</TableCell>
-                            <TableCell className="bangla-text font-bold text-right">অ্যাকশন</TableCell>
+                            <TableCell className="bangla-text font-bold">Title</TableCell>
+                            <TableCell className="bangla-text font-bold">Author</TableCell>
+                            <TableCell className="bangla-text font-bold">Category</TableCell>
+                            <TableCell className="bangla-text font-bold">Access</TableCell>
+                            <TableCell className="bangla-text font-bold">Featured?</TableCell>
+                            <TableCell className="bangla-text font-bold text-right">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -145,25 +145,25 @@ const ManageLessons = () => {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((lesson) => (
                                 <TableRow key={lesson._id} hover>
-                                    <TableCell className="font-medium bangla-text max-w-xs truncate">
+                                    <TableCell className="font-medium max-w-xs truncate">
                                         {lesson.title}
                                     </TableCell>
                                     <TableCell className="bangla-text text-sm">
-                                        {lesson.creator?.name || 'অজানা'}
+                                        {lesson?.creatorName || 'Unknown'}
                                     </TableCell>
                                     <TableCell>
                                         <Chip label={lesson.category} size="small" variant="outlined" className="bangla-text" />
                                     </TableCell>
                                     <TableCell>
                                         <Chip
-                                            label={lesson.accessLevel === 'premium' ? 'প্রিমিয়াম' : 'ফ্রি'}
+                                            label={lesson.accessLevel === 'premium' ? 'Premium' : 'Free'}
                                             color={lesson.accessLevel === 'premium' ? 'warning' : 'info'}
                                             size="small"
                                             className="bangla-text"
                                         />
                                     </TableCell>
                                     <TableCell>
-                                        <Tooltip title={lesson.isFeatured ? 'ফিচার্ড থেকে সরান' : 'ফিচার্ড করুন'}>
+                                        <Tooltip title={lesson.isFeatured ? 'Remove from Featured' : 'Make Featured'}>
                                             <IconButton
                                                 color={lesson.isFeatured ? 'warning' : 'default'}
                                                 onClick={() => toggleFeaturedMutation.mutate({ id: lesson._id, isFeatured: !lesson.isFeatured })}
@@ -173,14 +173,14 @@ const ManageLessons = () => {
                                         </Tooltip>
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Tooltip title="বিস্তারিত">
+                                        <Tooltip title="Details">
                                             <Link to={`/lesson/${lesson._id}`} className="mr-2 inline-block">
                                                 <IconButton size="small" color="primary">
                                                     <Eye className="w-4 h-4" />
                                                 </IconButton>
                                             </Link>
                                         </Tooltip>
-                                        <Tooltip title="মুছুন">
+                                        <Tooltip title="Delete">
                                             <IconButton
                                                 size="small"
                                                 color="error"

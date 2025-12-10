@@ -49,18 +49,18 @@ const Home = () => {
 
     const heroSlides = [
         {
-            title: 'জীবনের শেখাগুলো লিখে রাখুন',
-            subtitle: 'প্রতিটি অভিজ্ঞতা থেকে শিখুন এবং অন্যদের সাথে শেয়ার করুন',
+            title: 'Write down life lessons',
+            subtitle: 'Learn from every experience and share with others',
             gradient: 'from-blue-600 to-purple-600',
         },
         {
-            title: 'অতীত ভুল থেকে শিক্ষা নিন',
-            subtitle: 'আপনার অভিজ্ঞতা অন্যদের জন্য পথপ্রদর্শক হতে পারে',
+            title: 'Learn from past mistakes',
+            subtitle: 'Your experience can be a guide for others',
             gradient: 'from-purple-600 to-pink-600',
         },
         {
-            title: 'সবার লেসন থেকে অনুপ্রেরণা পান',
-            subtitle: 'হাজারো মানুষের জীবন অভিজ্ঞতা এক জায়গায়',
+            title: 'Get inspiration from everyone\'s lessons',
+            subtitle: 'Thousands of life experiences in one place',
             gradient: 'from-pink-600 to-orange-600',
         },
     ];
@@ -68,26 +68,26 @@ const Home = () => {
     const benefits = [
         {
             icon: Brain,
-            title: 'নিজেকে বুঝতে সাহায্য করে',
-            description: 'আপনার চিন্তাভাবনা এবং অনুভূতি লিখে রাখলে নিজেকে আরও ভালোভাবে বুঝতে পারবেন',
+            title: 'Helps to understand yourself',
+            description: 'Writing down your thoughts and feelings helps you understand yourself better',
             color: 'from-blue-500 to-blue-600',
         },
         {
             icon: Lightbulb,
-            title: 'অতীত ভুল থেকে শেখা',
-            description: 'জীবনের ভুলগুলো লিখে রাখুন যাতে একই ভুল আর না হয়',
+            title: 'Learning from past mistakes',
+            description: 'Write down life mistakes so you don\'t repeat them',
             color: 'from-yellow-500 to-yellow-600',
         },
         {
             icon: Target,
-            title: 'মানসিক স্বচ্ছতা বৃদ্ধি',
-            description: 'নিয়মিত লেখার মাধ্যমে মানসিক চাপ কমে এবং স্বচ্ছতা বাড়ে',
+            title: 'Increase mental clarity',
+            description: 'Regular writing reduces stress and increases clarity',
             color: 'from-green-500 to-green-600',
         },
         {
             icon: Users,
-            title: 'অন্যের অভিজ্ঞতা থেকে গাইডলাইন',
-            description: 'অন্যদের শেয়ার করা অভিজ্ঞতা থেকে জীবনের পথ খুঁজে পান',
+            title: 'Guideline from others\' experience',
+            description: 'Find your path from experiences shared by others',
             color: 'from-purple-500 to-purple-600',
         },
     ];
@@ -110,24 +110,24 @@ const Home = () => {
                         <SwiperSlide key={index}>
                             <div className={`h-full bg-gradient-to-r ${slide.gradient} flex items-center justify-center px-4`}>
                                 <div className="max-w-4xl mx-auto text-center text-white">
-                                    <h1 className="text-4xl md:text-6xl font-bold bangla-text mb-6 animate-fade-in">
+                                    <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
                                         {slide.title}
                                     </h1>
-                                    <p className="text-xl md:text-2xl bangla-text mb-8 opacity-90">
+                                    <p className="text-xl md:text-2xl mb-8 opacity-90">
                                         {slide.subtitle}
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                         <Link
                                             to={user ? '/dashboard/add-lesson' : '/register'}
-                                            className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition-all bangla-text shadow-lg hover:shadow-xl"
+                                            className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
                                         >
-                                            লেসন লিখতে শুরু করুন
+                                            Start writing lessons
                                         </Link>
                                         <Link
                                             to="/public-lessons"
-                                            className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold hover:bg-white/30 transition-all bangla-text border-2 border-white"
+                                            className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold hover:bg-white/30 transition-all border-2 border-white"
                                         >
-                                            সবার লেসন দেখুন
+                                            View all lessons
                                         </Link>
                                     </div>
                                 </div>
@@ -141,8 +141,8 @@ const Home = () => {
             <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <SectionHeader
-                        title="ফিচার্ড লাইফ লেসন"
-                        subtitle="আমাদের সেরা এবং জনপ্রিয় লেসনগুলো দেখুন"
+                        title="Featured Life Lessons"
+                        subtitle="Check out our best and popular lessons"
                     />
 
                     {featuredLoading ? (
@@ -156,7 +156,7 @@ const Home = () => {
                     ) : (
                         <div className="text-center py-12">
                             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                            <p className="text-gray-600 bangla-text">এখনো কোনো ফিচার্ড লেসন নেই</p>
+                            <p className="text-gray-600">No featured lessons yet</p>
                         </div>
                     )}
                 </div>
@@ -166,8 +166,8 @@ const Home = () => {
             <section className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <SectionHeader
-                        title="কেন জীবন থেকে শেখা গুরুত্বপূর্ণ?"
-                        subtitle="আপনার অভিজ্ঞতা লিখে রাখার সুবিধা"
+                        title="Why is learning from life important?"
+                        subtitle="Benefits of writing down your experience"
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -179,10 +179,10 @@ const Home = () => {
                                 <div className={`w-14 h-14 bg-gradient-to-r ${benefit.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                                     <benefit.icon className="w-7 h-7 text-white" />
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 bangla-text mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">
                                     {benefit.title}
                                 </h3>
-                                <p className="text-gray-600 bangla-text text-sm leading-relaxed">
+                                <p className="text-gray-600 text-sm leading-relaxed">
                                     {benefit.description}
                                 </p>
                             </div>
@@ -195,8 +195,8 @@ const Home = () => {
             <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <SectionHeader
-                        title="সবচেয়ে বেশি সেভ করা লেসন"
-                        subtitle="যে লেসনগুলো সবচেয়ে বেশি মানুষ সংরক্ষণ করেছে"
+                        title="Most Saved Lessons"
+                        subtitle="Lessons that most people have saved"
                     />
 
                     {savedLoading ? (
@@ -210,17 +210,17 @@ const Home = () => {
                     ) : (
                         <div className="text-center py-12">
                             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                            <p className="text-gray-600 bangla-text">এখনো কোনো সেভ করা লেসন নেই</p>
+                            <p className="text-gray-600">No saved lessons yet</p>
                         </div>
                     )}
 
                     <div className="text-center mt-10">
                         <Link
                             to="/public-lessons"
-                            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-bold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text shadow-lg hover:shadow-xl"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-bold hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg hover:shadow-xl"
                         >
                             <Sparkles className="w-5 h-5" />
-                            আরও লেসন দেখুন
+                            View More Lessons
                         </Link>
                     </div>
                 </div>

@@ -89,11 +89,11 @@ const PaymentSuccess = () => {
                     <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-900 mb-4 bangla-text">
-                        পেমেন্ট যাচাই করা হচ্ছে...
+                    <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                        Verifying payment...
                     </h1>
-                    <p className="text-gray-600 text-lg bangla-text">
-                        অনুগ্রহ করে অপেক্ষা করুন, আমরা আপনার পেমেন্ট যাচাই করছি এবং প্রিমিয়াম অ্যাক্সেস সক্রিয় করছি।
+                    <p className="text-gray-600 text-lg">
+                        Please wait, we are verifying your payment and activating premium access.
                     </p>
                 </div>
             </div>
@@ -107,28 +107,28 @@ const PaymentSuccess = () => {
                     <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <span className="text-4xl">⚠️</span>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-900 mb-4 bangla-text">
-                        যাচাইকরণ ব্যর্থ
+                    <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                        Verification Failed
                     </h1>
-                    <p className="text-gray-600 text-lg mb-8 bangla-text">
+                    <p className="text-gray-600 text-lg mb-8">
                         {error}
                     </p>
-                    <p className="text-sm text-gray-500 mb-6 bangla-text">
-                        চিন্তা করবেন না! আপনার পেমেন্ট সফল হয়েছে। কিছুক্ষণ পর আবার চেক করুন বা সাপোর্টে যোগাযোগ করুন।
+                    <p className="text-sm text-gray-500 mb-6">
+                        Don't worry! Your payment was successful. Check again later or contact support.
                     </p>
                     <div className="space-y-4">
                         <Link
                             to="/dashboard"
-                            className="block w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg bangla-text"
+                            className="block w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg"
                         >
-                            ড্যাশবোর্ডে যান
+                            Go to Dashboard
                         </Link>
                         <Link
                             to="/"
-                            className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2 bangla-text"
+                            className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2"
                         >
                             <Home className="w-5 h-5" />
-                            হোমে ফিরে যান
+                            Back to Home
                         </Link>
                     </div>
                 </div>
@@ -143,40 +143,40 @@ const PaymentSuccess = () => {
                     <CheckCircle className="w-12 h-12 text-green-600" />
                 </div>
 
-                <h1 className="text-3xl font-bold text-gray-900 mb-4 bangla-text">
-                    পেমেন্ট সফল হয়েছে!
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                    Payment Successful!
                 </h1>
-                <p className="text-gray-600 text-lg mb-6 bangla-text">
-                    অভিনন্দন! আপনি এখন একজন প্রিমিয়াম সদস্য। আপনার অ্যাকাউন্টে সমস্ত প্রিমিয়াম ফিচার সক্রিয় করা হয়েছে।
+                <p className="text-gray-600 text-lg mb-6">
+                    Congratulations! You are now a premium member. All premium features have been activated on your account.
                 </p>
 
                 {/* Payment Details */}
                 {paymentData && (
                     <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6 border border-blue-200">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 bangla-text">পেমেন্ট বিবরণ</h3>
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Payment Details</h3>
                         <div className="space-y-3 text-left">
                             <div className="flex items-center justify-between">
                                 <span className="text-gray-600 flex items-center gap-2">
                                     <CreditCard className="w-4 h-4" />
-                                    <span className="bangla-text">পরিমাণ</span>
+                                    <span className="bangla-text">Amount</span>
                                 </span>
                                 <span className="font-bold text-gray-900">
-                                    ৳{(paymentData.amount / 100).toFixed(2)}
+                                    Tk {(paymentData.amount / 100).toFixed(2)}
                                 </span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-gray-600 flex items-center gap-2">
                                     <Calendar className="w-4 h-4" />
-                                    <span className="bangla-text">তারিখ</span>
+                                    <span className="bangla-text">Date</span>
                                 </span>
                                 <span className="font-semibold text-gray-900">
-                                    {new Date(paymentData.paymentDate).toLocaleDateString('bn-BD')}
+                                    {new Date(paymentData.paymentDate).toLocaleDateString()}
                                 </span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-gray-600 bangla-text">স্ট্যাটাস</span>
-                                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold bangla-text">
-                                    সম্পন্ন
+                                <span className="text-gray-600">Status</span>
+                                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">
+                                    Completed
                                 </span>
                             </div>
                         </div>
@@ -186,21 +186,21 @@ const PaymentSuccess = () => {
                 <div className="space-y-4">
                     <Link
                         to="/dashboard"
-                        className="block w-full py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors shadow-lg bangla-text"
+                        className="block w-full py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors shadow-lg"
                     >
-                        ড্যাশবোর্ডে যান
+                        Go to Dashboard
                     </Link>
                     <Link
                         to="/"
-                        className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2 bangla-text"
+                        className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2"
                     >
                         <Home className="w-5 h-5" />
-                        হোমে ফিরে যান
+                        Back to Home
                     </Link>
                 </div>
 
-                <p className="mt-6 text-sm text-gray-500 bangla-text">
-                    আপনি স্বয়ংক্রিয়ভাবে ৬ সেকেন্ডে ড্যাশবোর্ডে রিডাইরেক্ট হবেন...
+                <p className="mt-6 text-sm text-gray-500">
+                    You will be automatically redirected to the dashboard in 6 seconds...
                 </p>
             </div>
         </div>

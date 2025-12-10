@@ -34,15 +34,15 @@ const MyFavorites = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'ফেভারিট থেকে সরানো হয়েছে',
+                title: 'Removed from favorites',
                 showConfirmButton: false,
                 timer: 2000,
             });
         },
     });
 
-    const categories = ['সব', 'ব্যক্তিগত উন্নতি', 'ক্যারিয়ার', 'সম্পর্ক', 'মানসিকতা', 'ভুল থেকে শিক্ষা'];
-    const emotionalTones = ['সব', 'প্রেরণাদায়ক', 'বেদনা', 'উপলব্ধি', 'কৃতজ্ঞতা'];
+    const categories = ['All', 'Personal Development', 'Career', 'Relationships', 'Mindset', 'Learning from Mistakes'];
+    const emotionalTones = ['All', 'Motivational', 'Sadness', 'Realization', 'Gratitude'];
 
     console.log('Favorites from API:', favorites);
     if (isLoading) return <Loading />;
@@ -50,21 +50,21 @@ const MyFavorites = () => {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 bangla-text mb-2">সেভ করা লেসন</h1>
-                <p className="text-gray-600 bangla-text">মোট {favorites.length}টি লেসন সেভ করা আছে</p>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Saved Lessons</h1>
+                <p className="text-gray-600">Total {favorites.length} lessons saved</p>
             </div>
 
             {/* Filters */}
             <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
-                            ক্যাটাগরি
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Category
                         </label>
                         <select
                             value={category}
-                            onChange={(e) => setCategory(e.target.value === 'সব' ? '' : e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                            onChange={(e) => setCategory(e.target.value === 'All' ? '' : e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         >
                             {categories.map((cat) => (
                                 <option key={cat} value={cat}>{cat}</option>
@@ -73,13 +73,13 @@ const MyFavorites = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
-                            ইমোশনাল টোন
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Emotional Tone
                         </label>
                         <select
                             value={emotionalTone}
-                            onChange={(e) => setEmotionalTone(e.target.value === 'সব' ? '' : e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                            onChange={(e) => setEmotionalTone(e.target.value === 'All' ? '' : e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         >
                             {emotionalTones.map((tone) => (
                                 <option key={tone} value={tone}>{tone}</option>
@@ -94,11 +94,11 @@ const MyFavorites = () => {
             {favorites?.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-md p-12 text-center">
                     <Bookmark className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 bangla-text mb-2">
-                        কোনো সেভ করা লেসন নেই
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        No saved lessons
                     </h3>
-                    <p className="text-gray-600 bangla-text">
-                        আপনার পছন্দের লেসনগুলো সেভ করুন এবং পরে পড়ুন
+                    <p className="text-gray-600">
+                        Save your favorite lessons to read later
                     </p>
                 </div>
             ) : (

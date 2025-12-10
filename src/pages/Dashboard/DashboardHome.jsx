@@ -39,18 +39,18 @@ const DashboardHome = () => {
         <div className="space-y-8">
             {/* Welcome Section */}
             <div className="bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-white">
-                <h1 className="text-3xl md:text-4xl font-bold bangla-text mb-2">
-                    স্বাগতম, {user?.displayName || 'ব্যবহারকারী'}!
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                    Welcome, {user?.displayName || 'User'}!
                 </h1>
-                <p className="text-lg opacity-90 bangla-text">
-                    আপনার ড্যাশবোর্ডে আপনাকে স্বাগতম। এখানে আপনার সব লেসন এবং কার্যক্রম দেখতে পারবেন।
+                <p className="text-lg opacity-90">
+                    Welcome to your dashboard. Here you can see all your lessons and activities.
                 </p>
             </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatsCard
-                    title="মোট লেসন"
+                    title="Total Lessons"
                     value={stats?.totalLessons || 0}
                     icon={BookOpen}
                     bgColor="bg-blue-50"
@@ -59,14 +59,14 @@ const DashboardHome = () => {
                     trendValue="+12%"
                 />
                 <StatsCard
-                    title="সেভ করা লেসন"
+                    title="Saved Lessons"
                     value={stats?.totalFavorites || 0}
                     icon={Bookmark}
                     bgColor="bg-purple-50"
                     iconColor="text-purple-600"
                 />
                 <StatsCard
-                    title="মোট লাইক"
+                    title="Total Likes"
                     value={stats?.totalLikes || 0}
                     icon={Heart}
                     bgColor="bg-pink-50"
@@ -75,7 +75,7 @@ const DashboardHome = () => {
                     trendValue="+8%"
                 />
                 <StatsCard
-                    title="পাবলিক লেসন"
+                    title="Public Lessons"
                     value={stats?.publicLessons || 0}
                     icon={TrendingUp}
                     bgColor="bg-green-50"
@@ -85,35 +85,35 @@ const DashboardHome = () => {
 
             {/* Quick Actions */}
             <div className="bg-white rounded-2xl shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 bangla-text mb-4">দ্রুত কাজ</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <Link
                         to="/dashboard/add-lesson"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text shadow-md hover:shadow-lg"
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg"
                     >
                         <BookOpen className="w-5 h-5" />
-                        নতুন লেসন যোগ করুন
+                        Add New Lesson
                     </Link>
                     <Link
                         to="/dashboard/my-lessons"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all bangla-text"
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
                     >
                         <BookOpen className="w-5 h-5" />
-                        আমার লেসন
+                        My Lessons
                     </Link>
                     <Link
                         to="/dashboard/my-favorites"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all bangla-text"
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
                     >
                         <Bookmark className="w-5 h-5" />
-                        সেভ করা লেসন
+                        Saved Lessons
                     </Link>
                     <Link
                         to="/dashboard/profile"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all bangla-text"
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
                     >
                         <TrendingUp className="w-5 h-5" />
-                        প্রোফাইল
+                        Profile
                     </Link>
                 </div>
             </div>
@@ -121,12 +121,12 @@ const DashboardHome = () => {
             {/* Recent Lessons */}
             <div>
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 bangla-text">সাম্প্রতিক লেসন</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Recent Lessons</h2>
                     <Link
                         to="/dashboard/my-lessons"
-                        className="text-primary-600 hover:text-primary-700 font-semibold bangla-text"
+                        className="text-primary-600 hover:text-primary-700 font-semibold"
                     >
-                        সব দেখুন →
+                        View All →
                     </Link>
                 </div>
 
@@ -141,18 +141,18 @@ const DashboardHome = () => {
                 ) : (
                     <div className="bg-white rounded-2xl shadow-md p-12 text-center">
                         <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-gray-900 bangla-text mb-2">
-                            এখনো কোনো লেসন নেই
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                            No lessons yet
                         </h3>
-                        <p className="text-gray-600 bangla-text mb-6">
-                            আপনার প্রথম লাইফ লেসন তৈরি করুন এবং অন্যদের সাথে শেয়ার করুন
+                        <p className="text-gray-600 mb-6">
+                            Create your first life lesson and share with others
                         </p>
                         <Link
                             to="/dashboard/add-lesson"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
                         >
                             <BookOpen className="w-5 h-5" />
-                            লেসন তৈরি করুন
+                            Create Lesson
                         </Link>
                     </div>
                 )}
@@ -160,9 +160,9 @@ const DashboardHome = () => {
 
             {/* Activity Chart Placeholder */}
             <div className="bg-white rounded-2xl shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 bangla-text mb-4">সাপ্তাহিক কার্যক্রম</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Weekly Activity</h2>
                 <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl">
-                    <p className="text-gray-600 bangla-text">চার্ট শীঘ্রই আসছে...</p>
+                    <p className="text-gray-600">Chart coming soon...</p>
                 </div>
             </div>
         </div>

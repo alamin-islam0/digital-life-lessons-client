@@ -62,7 +62,7 @@ const ReportedLessons = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'লেসন মুছে ফেলা হয়েছে',
+                title: 'Lesson deleted',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -72,14 +72,14 @@ const ReportedLessons = () => {
 
     const handleDelete = (lessonId) => {
         Swal.fire({
-            title: 'নিশ্চিত করুন',
-            text: 'এই লেসনটি মুছে ফেলতে চান?',
+            title: 'Confirm',
+            text: 'Do you want to delete this lesson?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'হ্যাঁ, মুছুন',
-            cancelButtonText: 'বাতিল',
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel',
             customClass: { title: 'bangla-text', htmlContainer: 'bangla-text' },
         }).then((result) => {
             if (result.isConfirmed) {
@@ -103,9 +103,9 @@ const ReportedLessons = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 bangla-text">রিপোর্টেড লেসন</h1>
-                    <p className="text-gray-500 bangla-text">
-                        মোট রিপোর্টেড লেসন: {reports.length}
+                    <h1 className="text-2xl font-bold text-gray-900">Reported Lessons</h1>
+                    <p className="text-gray-500">
+                        Total Reported Lessons: {reports.length}
                     </p>
                 </div>
             </div>
@@ -114,9 +114,9 @@ const ReportedLessons = () => {
                 <Table>
                     <TableHead className="bg-gray-50">
                         <TableRow>
-                            <TableCell className="bangla-text font-bold">লেসন শিরোনাম</TableCell>
-                            <TableCell className="bangla-text font-bold">মোট রিপোর্ট</TableCell>
-                            <TableCell className="bangla-text font-bold text-right">অ্যাকশন</TableCell>
+                            <TableCell className="bangla-text font-bold">Lesson Title</TableCell>
+                            <TableCell className="bangla-text font-bold">Total Reports</TableCell>
+                            <TableCell className="bangla-text font-bold text-right">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -124,8 +124,8 @@ const ReportedLessons = () => {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((report) => (
                                 <TableRow key={report._id} hover>
-                                    <TableCell className="font-medium bangla-text max-w-xs truncate">
-                                        {report.lesson?.title || 'মুছে ফেলা লেসন'}
+                                    <TableCell className="font-medium max-w-xs truncate">
+                                        {report.lesson?.title || 'Deleted Lesson'}
                                     </TableCell>
                                     <TableCell className="bangla-text text-sm">
                                         <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-100 text-red-700 rounded-full font-bold">
@@ -134,7 +134,7 @@ const ReportedLessons = () => {
                                         </span>
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Tooltip title="বিস্তারিত দেখুন">
+                                        <Tooltip title="View Details">
                                             <IconButton
                                                 color="info"
                                                 onClick={() => setSelectedLessonId(report._id)}
@@ -144,7 +144,7 @@ const ReportedLessons = () => {
                                                 <Eye className="w-4 h-4" />
                                             </IconButton>
                                         </Tooltip>
-                                        <Tooltip title="লেসন মুছুন">
+                                        <Tooltip title="Delete Lesson">
                                             <IconButton
                                                 color="error"
                                                 onClick={() => handleDelete(report._id)}
@@ -171,7 +171,7 @@ const ReportedLessons = () => {
 
             {/* Report Details Dialog */}
             <Dialog open={!!selectedLessonId} onClose={() => setSelectedLessonId(null)} maxWidth="md" fullWidth>
-                <DialogTitle className="bangla-text font-bold">রিপোর্ট বিস্তারিত</DialogTitle>
+                <DialogTitle className="bangla-text font-bold">Report Details</DialogTitle>
                 <DialogContent dividers>
                     {detailsLoading ? (
                         <div className="flex justify-center p-4">
@@ -182,11 +182,11 @@ const ReportedLessons = () => {
                             {/* Lesson Info */}
                             <div className="bg-blue-50 p-4 rounded-xl mb-4">
                                 <Typography variant="subtitle2" color="textSecondary" className="bangla-text mb-1">
-                                    লেসন
+                                    Lesson
                                 </Typography>
                                 <Link
                                     to={`/lesson/${selectedLessonId}`}
-                                    className="text-lg font-bold text-primary-700 hover:underline bangla-text block"
+                                    className="text-lg font-bold text-primary-700 hover:underline block"
                                     target="_blank"
                                 >
                                     {/* Since backend details endpoint doesn't return lesson title in the list of reports, 
@@ -195,13 +195,13 @@ const ReportedLessons = () => {
                                         Wait, reports array from details endpoint has populate('reporter').
                                         It does not seem to populate lesson info again.
                                      */}
-                                    লেসনটি দেখতে এখানে ক্লিক করুন
+                                    Click here to view lesson
                                 </Link>
                             </div>
 
                             {/* Reports List */}
                             <Typography variant="h6" className="bangla-text mb-3">
-                                অভিযোগসমূহ ({reportDetails.length})
+                                Complaints ({reportDetails.length})
                             </Typography>
 
                             <div className="space-y-4">
@@ -210,7 +210,7 @@ const ReportedLessons = () => {
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
                                                 <Typography variant="subtitle2" className="bangla-text font-bold text-gray-900">
-                                                    {detail.reporter?.name || 'অজানা ব্যবহারকারী'} ({detail.reporter?.email})
+                                                    {detail.reporter?.name || 'Unknown User'} ({detail.reporter?.email})
                                                 </Typography>
                                                 <Typography variant="caption" color="textSecondary">
                                                     {new Date(detail.createdAt).toLocaleDateString()}
@@ -221,7 +221,7 @@ const ReportedLessons = () => {
                                             </span>
                                         </div>
                                         {detail.message && (
-                                            <div className="bg-white p-3 rounded-lg border border-gray-100 text-gray-700 text-sm bangla-text mt-2">
+                                            <div className="bg-white p-3 rounded-lg border border-gray-100 text-gray-700 text-sm mt-2">
                                                 {detail.message}
                                             </div>
                                         )}
@@ -230,14 +230,14 @@ const ReportedLessons = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="text-center py-8 text-gray-500 bangla-text">
-                            কোনো বিস্তারিত তথ্য পাওয়া যায়নি
+                        <div className="text-center py-8 text-gray-500">
+                            No details found
                         </div>
                     )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setSelectedLessonId(null)} className="bangla-text">
-                        বন্ধ করুন
+                        Close
                     </Button>
                     <Button
                         variant="contained"
@@ -245,7 +245,7 @@ const ReportedLessons = () => {
                         onClick={() => handleDelete(selectedLessonId)}
                         className="bangla-text"
                     >
-                        লেসন ডিলিট করুন
+                        Delete Lesson
                     </Button>
                 </DialogActions>
             </Dialog>

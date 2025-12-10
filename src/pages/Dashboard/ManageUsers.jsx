@@ -52,7 +52,7 @@ const ManageUsers = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'রোল আপডেট হয়েছে',
+                title: 'Role updated',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -62,20 +62,15 @@ const ManageUsers = () => {
     const handleRoleUpdate = (user) => {
         const newRole = user.role === 'admin' ? 'user' : 'admin';
         Swal.fire({
-            title: 'রোল পরিবর্তন করবেন?',
-            text: `${user.name}-এর রোল ${newRole === 'admin' ? 'অ্যাডমিন' : 'ব্যবহারকারী'} করতে চান?`,
+            title: 'Change role?',
+            text: `Do you want to make ${user.name}'s role ${newRole === 'admin' ? 'Admin' : 'User'}?`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'হ্যাঁ, পরিবর্তন করুন',
-            cancelButtonText: 'বাতিল',
-            customClass: {
-                title: 'bangla-text',
-                htmlContainer: 'bangla-text',
-                confirmButton: 'bangla-text',
-                cancelButton: 'bangla-text',
-            },
+            confirmButtonText: 'Yes, change',
+            cancelButtonText: 'Cancel',
+
         }).then((result) => {
             if (result.isConfirmed) {
                 updateUserRoleMutation.mutate({ id: user._id, role: newRole });
@@ -98,17 +93,17 @@ const ManageUsers = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 bangla-text">ব্যবহারকারী ব্যবস্থাপনা</h1>
-                    <p className="text-gray-500 bangla-text">মোট ব্যবহারকারী: {users.length}</p>
+                    <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+                    <p className="text-gray-500">Total Users: {users.length}</p>
                 </div>
                 <div className="relative w-full md:w-64">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
                         type="text"
-                        placeholder="খুঁজুন..."
+                        placeholder="Search..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bangla-text"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                 </div>
             </div>
@@ -117,11 +112,11 @@ const ManageUsers = () => {
                 <Table>
                     <TableHead className="bg-gray-50">
                         <TableRow>
-                            <TableCell className="bangla-text font-bold">ব্যবহারকারী</TableCell>
-                            <TableCell className="bangla-text font-bold">ইমেইল</TableCell>
-                            <TableCell className="bangla-text font-bold">রোল</TableCell>
-                            <TableCell className="bangla-text font-bold">মেম্বারশিপ</TableCell>
-                            <TableCell className="bangla-text font-bold text-right">অ্যাকশন</TableCell>
+                            <TableCell className="font-bold">User</TableCell>
+                            <TableCell className="font-bold">Email</TableCell>
+                            <TableCell className="font-bold">Role</TableCell>
+                            <TableCell className="font-bold">Membership</TableCell>
+                            <TableCell className="font-bold text-right">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -134,29 +129,29 @@ const ManageUsers = () => {
                                             <Avatar src={user.photoURL} alt={user.name}>
                                                 {user.name?.charAt(0)}
                                             </Avatar>
-                                            <span className="font-medium bangla-text">{user.name}</span>
+                                            <span className="font-medium">{user.name}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell>{user.email}</TableCell>
                                     <TableCell>
                                         <Chip
                                             icon={user.role === 'admin' ? <ShieldCheck size={14} /> : <User size={14} />}
-                                            label={user.role === 'admin' ? 'অ্যাডমিন' : 'ইউজার'}
+                                            label={user.role === 'admin' ? 'Admin' : 'User'}
                                             color={user.role === 'admin' ? 'primary' : 'default'}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                         />
                                     </TableCell>
                                     <TableCell>
                                         <Chip
-                                            label={user.isPremium ? 'প্রিমিয়াম' : 'ফ্রি'}
+                                            label={user.isPremium ? 'Premium' : 'Free'}
                                             color={user.isPremium ? 'warning' : 'default'}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                         />
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Tooltip title="রোল পরিবর্তন">
+                                        <Tooltip title="Change Role">
                                             <IconButton
                                                 color="primary"
                                                 onClick={() => handleRoleUpdate(user)}

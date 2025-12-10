@@ -50,7 +50,7 @@ const MyLessons = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'লেসন মুছে ফেলা হয়েছে',
+                title: 'Lesson deleted',
                 showConfirmButton: false,
                 timer: 2000,
             });
@@ -68,14 +68,14 @@ const MyLessons = () => {
 
     const handleDelete = (id, title) => {
         Swal.fire({
-            title: 'নিশ্চিত করুন',
-            text: `"${title}" লেসনটি মুছে ফেলতে চান?`,
+            title: 'Confirm',
+            text: `Do you want to delete lesson "${title}"?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#ef4444',
             cancelButtonColor: '#6b7280',
-            confirmButtonText: 'হ্যাঁ, মুছুন',
-            cancelButtonText: 'বাতিল',
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel',
             customClass: {
                 title: 'bangla-text',
                 htmlContainer: 'bangla-text',
@@ -108,33 +108,33 @@ const MyLessons = () => {
         <div>
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 bangla-text mb-2">আমার লেসন</h1>
-                    <p className="text-gray-600 bangla-text">মোট {lessons.length}টি লেসন</p>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">My Lessons</h1>
+                    <p className="text-gray-600">Total {lessons.length} lessons</p>
                 </div>
                 <Link
                     to="/dashboard/add-lesson"
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text shadow-md hover:shadow-lg"
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg"
                 >
                     <BookOpen className="w-5 h-5" />
-                    নতুন লেসন
+                    New Lesson
                 </Link>
             </div>
 
             {lessons.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-md p-12 text-center">
                     <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 bangla-text mb-2">
-                        এখনো কোনো লেসন নেই
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        No lessons yet
                     </h3>
-                    <p className="text-gray-600 bangla-text mb-6">
-                        আপনার প্রথম লাইফ লেসন তৈরি করুন
+                    <p className="text-gray-600 mb-6">
+                        Create your first life lesson
                     </p>
                     <Link
                         to="/dashboard/add-lesson"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all bangla-text"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
                     >
                         <BookOpen className="w-5 h-5" />
-                        লেসন তৈরি করুন
+                        Create Lesson
                     </Link>
                 </div>
             ) : (
@@ -142,14 +142,14 @@ const MyLessons = () => {
                     <Table>
                         <TableHead>
                             <TableRow className="bg-gray-50">
-                                <TableCell className="bangla-text font-bold">শিরোনাম</TableCell>
-                                <TableCell className="bangla-text font-bold">ক্যাটাগরি</TableCell>
-                                <TableCell className="bangla-text font-bold">টোন</TableCell>
-                                <TableCell className="bangla-text font-bold">প্রাইভেসি</TableCell>
-                                <TableCell className="bangla-text font-bold">অ্যাক্সেস</TableCell>
-                                <TableCell className="bangla-text font-bold">তারিখ</TableCell>
-                                <TableCell className="bangla-text font-bold">স্ট্যাটস</TableCell>
-                                <TableCell className="bangla-text font-bold">কাজ</TableCell>
+                                <TableCell className="bangla-text font-bold">Title</TableCell>
+                                <TableCell className="bangla-text font-bold">Category</TableCell>
+                                <TableCell className="bangla-text font-bold">Tone</TableCell>
+                                <TableCell className="bangla-text font-bold">Privacy</TableCell>
+                                <TableCell className="bangla-text font-bold">Access</TableCell>
+                                <TableCell className="bangla-text font-bold">Date</TableCell>
+                                <TableCell className="bangla-text font-bold">Stats</TableCell>
+                                <TableCell className="bangla-text font-bold">Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -178,7 +178,7 @@ const MyLessons = () => {
                                     </TableCell>
                                     <TableCell>
                                         <Chip
-                                            label={lesson.visibility === 'public' ? 'পাবলিক' : 'প্রাইভেট'}
+                                            label={lesson.visibility === 'public' ? 'Public' : 'Private'}
                                             size="small"
                                             className="bangla-text"
                                             color={lesson.visibility === 'public' ? 'success' : 'default'}
@@ -186,7 +186,7 @@ const MyLessons = () => {
                                     </TableCell>
                                     <TableCell>
                                         <Chip
-                                            label={lesson.accessLevel === 'premium' ? 'প্রিমিয়াম' : 'ফ্রি'}
+                                            label={lesson.accessLevel === 'premium' ? 'Premium' : 'Free'}
                                             size="small"
                                             className="bangla-text"
                                             color={lesson.accessLevel === 'premium' ? 'warning' : 'info'}
@@ -209,21 +209,21 @@ const MyLessons = () => {
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center gap-1">
-                                            <Tooltip title="দেখুন">
+                                            <Tooltip title="View">
                                                 <Link to={`/lesson/${lesson._id}`}>
                                                     <IconButton size="small" color="primary">
                                                         <Eye className="w-4 h-4" />
                                                     </IconButton>
                                                 </Link>
                                             </Tooltip>
-                                            <Tooltip title="এডিট করুন">
+                                            <Tooltip title="Edit">
                                                 <Link to={`/dashboard/update-lesson/${lesson._id}`}>
                                                     <IconButton size="small" color="info">
                                                         <Edit className="w-4 h-4" />
                                                     </IconButton>
                                                 </Link>
                                             </Tooltip>
-                                            <Tooltip title={lesson.visibility === 'public' ? 'প্রাইভেট করুন' : 'পাবলিক করুন'}>
+                                            <Tooltip title={lesson.visibility === 'public' ? 'Make Private' : 'Make Public'}>
                                                 <IconButton
                                                     size="small"
                                                     color="warning"
@@ -236,7 +236,7 @@ const MyLessons = () => {
                                                     )}
                                                 </IconButton>
                                             </Tooltip>
-                                            <Tooltip title="মুছুন">
+                                            <Tooltip title="Delete">
                                                 <IconButton
                                                     size="small"
                                                     color="error"
