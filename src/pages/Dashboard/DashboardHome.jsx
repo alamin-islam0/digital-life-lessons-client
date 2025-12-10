@@ -12,26 +12,38 @@ const DashboardHome = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    // Fetch dashboard overview (stats & recent lessons)
-    const { data: dashboardData, isLoading: loading } = useQuery({
-        queryKey: ['dashboard-overview'],
+    // Fetch User Details for Total Likes
+    const { data: userData, isLoading: userLoading } = useQuery({
+        queryKey: ['user-stats-profile'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/dashboard/overview');
+            const res = await axiosSecure.get('/users/me');
             return res.data;
         },
     });
 
+    // Fetch My Lessons for Public Lessons count and Recent Lessons
+    const { data: myLessons = [], isLoading: lessonsQueryLoading } = useQuery({
+        queryKey: ['my-lessons-dashboard'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/lessons/my');
+            return res.data || [];
+        },
+    });
+
+    // Calculate Public Lessons and Total Likes (using user data as requested)
+    const publicLessonsCount = myLessons.filter(lesson => lesson.visibility === 'public').length;
+    // Note: User says "using users data" for Total Likes. The user object has 'totalLikes'.
+    const totalLikes = userData?.totalLikes || 0;
+
     const stats = {
-        totalLessons: dashboardData?.totalLessons || dashboardData?.lessonsCount || 0,
-        totalFavorites: dashboardData?.totalFavorites || dashboardData?.favoritesCount || 0,
-        totalLikes: dashboardData?.totalLikes || dashboardData?.likesCount || 0,
-        publicLessons: dashboardData?.publicLessons || dashboardData?.publicLessonsCount || 0,
-        recentLessons: dashboardData?.recentLessons || [],
+        totalLikes: totalLikes,
+        publicLessons: publicLessonsCount,
+        recentLessons: myLessons.slice(0, 3) || [],
     };
 
     const recentLessons = stats.recentLessons;
-    const statsLoading = loading;
-    const lessonsLoading = loading;
+    const statsLoading = userLoading || lessonsQueryLoading;
+    const lessonsLoading = lessonsQueryLoading;
 
     if (statsLoading) return <Loading />;
 
