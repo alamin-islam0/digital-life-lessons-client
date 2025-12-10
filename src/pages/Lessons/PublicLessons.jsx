@@ -18,7 +18,7 @@ const PublicLessons = () => {
     const [sortBy, setSortBy] = useState('newest');
     const [page, setPage] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
-    const limit = 12;
+    const itemsPerPage = 12;
 
     const categories = [
         'All',
@@ -44,27 +44,54 @@ const PublicLessons = () => {
         { value: 'most-liked', label: 'Most Liked' },
     ];
 
-    // Fetch lessons with filters
-    const { data, isLoading } = useQuery({
-        queryKey: ['public-lessons', searchTerm, category, emotionalTone, sortBy, page],
+    // Fetch all lessons once (up to 1000)
+    const { data: allLessonsData, isLoading } = useQuery({
+        queryKey: ['public-lessons'],
         queryFn: async () => {
-            const params = new URLSearchParams({
-                page,
-                limit,
-                sort: sortBy,
-            });
-
-            if (searchTerm) params.append('search', searchTerm);
-            if (category && category !== 'All') params.append('category', category);
-            if (emotionalTone && emotionalTone !== 'All') params.append('emotionalTone', emotionalTone);
-
-            const res = await axiosSecure.get(`/lessons/public?${params}`);
+            // Fetch a large number to handle client-side sorting effectively
+            const res = await axiosSecure.get(`/lessons/public?limit=1000`);
             return res.data;
         },
     });
 
-    const lessons = data?.lessons || [];
-    const totalPages = data?.totalPages || 1;
+    const allLessons = allLessonsData?.lessons || [];
+
+    // Filter and Sort Logic
+    const processedData = allLessons
+        .filter(lesson => {
+            // Search Filter
+            const matchesSearch = searchTerm === '' ||
+                lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                lesson.description?.toLowerCase().includes(searchTerm.toLowerCase());
+
+            // Category Filter
+            const matchesCategory = category === '' || category === 'All' || lesson.category === category;
+
+            // Emotional Tone Filter
+            const matchesTone = emotionalTone === '' || emotionalTone === 'All' || lesson.emotionalTone === emotionalTone;
+
+            return matchesSearch && matchesCategory && matchesTone;
+        })
+        .sort((a, b) => {
+            switch (sortBy) {
+                case 'newest':
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                case 'oldest':
+                    return new Date(a.createdAt) - new Date(b.createdAt);
+                case 'most-liked':
+                    return (b.likesCount || 0) - (a.likesCount || 0);
+                case 'most-saved':
+                    return (b.favoritesCount || 0) - (a.favoritesCount || 0);
+                default:
+                    return 0; // consistent default
+            }
+        });
+
+    // Client-side Pagination
+    const totalItems = processedData.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const startIndex = (page - 1) * itemsPerPage;
+    const paginatedLessons = processedData.slice(startIndex, startIndex + itemsPerPage);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -212,10 +239,10 @@ const PublicLessons = () => {
                 {/* Lessons Grid */}
                 {isLoading ? (
                     <Loading fullScreen={false} />
-                ) : lessons.length > 0 ? (
+                ) : paginatedLessons.length > 0 ? (
                     <>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                            {lessons.map((lesson) => (
+                            {paginatedLessons.map((lesson) => (
                                 <LessonCard
                                     key={lesson._id}
                                     lesson={lesson}
