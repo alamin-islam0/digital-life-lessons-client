@@ -5,6 +5,7 @@ import { User, Mail, Save, Star } from 'lucide-react';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { uploadImage } from '../../utils/imageUpload';
 import UserAvatar from '../../components/ui/UserAvatar';
 import LessonCard from '../../components/lessons/LessonCard';
 import Loading from '../../components/ui/Loading';
@@ -47,13 +48,23 @@ const Profile = () => {
 
     const onSubmit = async (data) => {
         try {
+            let photoURL = user?.photoURL;
+
+            // Upload new image if selected
+            if (data.image && data.image[0]) {
+                const uploadedUrl = await uploadImage(data.image[0]);
+                if (uploadedUrl) {
+                    photoURL = uploadedUrl;
+                }
+            }
+
             // Update Firebase Profile
-            await updateUserProfile(data.name, data.photoURL);
+            await updateUserProfile(data.name, photoURL);
 
             // Sync Database
             await axiosSecure.post('/users/sync', {
                 name: data.name,
-                photoURL: data.photoURL,
+                photoURL: photoURL,
                 email: user?.email
             });
 
@@ -95,7 +106,7 @@ const Profile = () => {
                 <div className="px-8 pb-8">
                     <div className="relative flex flex-col md:flex-row items-center md:items-end -mt-16 mb-6 gap-6">
                         <div className="ring-4 ring-white rounded-full bg-white">
-                            <UserAvatar user={user} size="xl" className="w-32 h-32 text-4xl" />
+                            <UserAvatar user={user} size="xl" className="w-full h-full text-4xl" />
                         </div>
 
                         <div className="flex-1 text-center md:text-left mb-2">
@@ -142,12 +153,13 @@ const Profile = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                    Photo URL
+                                    Profile Picture
                                 </label>
                                 <input
-                                    type="url"
-                                    {...register('photoURL')}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                                    type="file"
+                                    accept="image/*"
+                                    {...register('image')}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                                 />
                             </div>
                             <div className="flex gap-2">

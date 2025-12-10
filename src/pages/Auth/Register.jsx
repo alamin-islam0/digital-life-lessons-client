@@ -6,6 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { uploadImage } from '../../utils/imageUpload';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -37,8 +38,12 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         try {
+            // Upload image to ImgBB
+            const imageFile = data.image[0];
+            const photoURL = await uploadImage(imageFile);
+
             // Register with Firebase
-            await registerUser(data.email, data.password, data.name, data.photoURL);
+            await registerUser(data.email, data.password, data.name, photoURL || 'https://i.ibb.co/5GzXkwq/user.png');
 
             // Note: AuthProvider handles database sync and profile update automatically
 
@@ -191,27 +196,22 @@ const Register = () => {
                                 )}
                             </div>
 
-                            {/* Photo URL */}
+                            {/* Photo Upload */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                    Photo URL
+                                    Profile Picture
                                 </label>
                                 <div className="relative">
                                     <Image className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                     <input
-                                        type="url"
-                                        {...register('photoURL', {
-                                            pattern: {
-                                                value: /^https?:\/\/.+/,
-                                                message: 'Please enter a valid URL',
-                                            },
-                                        })}
-                                        className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                        placeholder="https://example.com/photo.jpg"
+                                        type="file"
+                                        accept="image/*"
+                                        {...register('image', { required: 'Profile picture is required' })}
+                                        className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                                     />
                                 </div>
-                                {errors.photoURL && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.photoURL.message}</p>
+                                {errors.image && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.image.message}</p>
                                 )}
                             </div>
 

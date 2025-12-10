@@ -166,6 +166,7 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         isPremium: userDetails?.isPremium || false,
         role: userDetails?.role || 'user',
+        refreshUser: fetchUserDetails,
     };
 
     return (

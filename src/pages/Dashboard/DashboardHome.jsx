@@ -38,6 +38,7 @@ const DashboardHome = () => {
     const stats = {
         totalLikes: totalLikes,
         publicLessons: publicLessonsCount,
+        totalFavorites: userData?.totalFavorites || 0,
         recentLessons: myLessons.slice(0, 3) || [],
     };
 

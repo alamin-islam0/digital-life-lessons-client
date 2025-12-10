@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import {
     BookOpen,
     Heart,
@@ -16,6 +18,7 @@ import {
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import useUserPlan from '../../hooks/useUserPlan';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LessonCard from '../../components/lessons/LessonCard';
@@ -25,7 +28,15 @@ import UserAvatar from '../../components/ui/UserAvatar';
 
 const Home = () => {
     const { user } = useAuth();
+    const { isPremium } = useUserPlan();
     const axiosSecure = useAxiosSecure();
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    }, []);
 
     // Fetch featured lessons
     const { data: featuredLessons = [], isLoading: featuredLoading } = useQuery({
@@ -109,14 +120,14 @@ const Home = () => {
                     {heroSlides.map((slide, index) => (
                         <SwiperSlide key={index}>
                             <div className={`h-full bg-gradient-to-r ${slide.gradient} flex items-center justify-center px-4`}>
-                                <div className="max-w-4xl mx-auto text-center text-white">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                                <div className="max-w-4xl mx-auto text-center text-white" data-aos="zoom-in">
+                                    <h1 className="text-4xl md:text-6xl font-bold mb-6">
                                         {slide.title}
                                     </h1>
-                                    <p className="text-xl md:text-2xl mb-8 opacity-90">
+                                    <p className="text-xl md:text-2xl mb-8 opacity-90" data-aos="fade-up" data-aos-delay="200">
                                         {slide.subtitle}
                                     </p>
-                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
                                         <Link
                                             to={user ? '/dashboard/add-lesson' : '/register'}
                                             className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
@@ -140,21 +151,28 @@ const Home = () => {
             {/* Featured Lessons */}
             <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <SectionHeader
-                        title="Featured Life Lessons"
-                        subtitle="Check out our best and popular lessons"
-                    />
+                    <div data-aos="fade-down">
+                        <SectionHeader
+                            title="Featured Life Lessons"
+                            subtitle="Check out our best and popular lessons"
+                        />
+                    </div>
 
                     {featuredLoading ? (
                         <Loading fullScreen={false} />
                     ) : featuredLessons.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {featuredLessons.slice(0, 6).map((lesson) => (
-                                <LessonCard key={lesson._id} lesson={lesson} />
+                            {featuredLessons.slice(0, 6).map((lesson, index) => (
+                                <div key={lesson._id} data-aos="fade-up" data-aos-delay={index * 100}>
+                                    <LessonCard
+                                        lesson={lesson}
+                                        showBlur={lesson.accessLevel === 'premium' && !isPremium}
+                                    />
+                                </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-12">
+                        <div className="text-center py-12" data-aos="fade-up">
                             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <p className="text-gray-600">No featured lessons yet</p>
                         </div>
@@ -165,15 +183,19 @@ const Home = () => {
             {/* Benefits Section */}
             <section className="py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <SectionHeader
-                        title="Why is learning from life important?"
-                        subtitle="Benefits of writing down your experience"
-                    />
+                    <div data-aos="fade-down">
+                        <SectionHeader
+                            title="Why is learning from life important?"
+                            subtitle="Benefits of writing down your experience"
+                        />
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {benefits.map((benefit, index) => (
                             <div
                                 key={index}
+                                data-aos="flip-left"
+                                data-aos-delay={index * 150}
                                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 group"
                             >
                                 <div className={`w-14 h-14 bg-gradient-to-r ${benefit.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -194,27 +216,34 @@ const Home = () => {
             {/* Most Saved Lessons */}
             <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <SectionHeader
-                        title="Most Saved Lessons"
-                        subtitle="Lessons that most people have saved"
-                    />
+                    <div data-aos="fade-down">
+                        <SectionHeader
+                            title="Most Saved Lessons"
+                            subtitle="Lessons that most people have saved"
+                        />
+                    </div>
 
                     {savedLoading ? (
                         <Loading fullScreen={false} />
                     ) : mostSavedLessons.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {mostSavedLessons.slice(0, 6).map((lesson) => (
-                                <LessonCard key={lesson._id} lesson={lesson} />
+                            {mostSavedLessons.slice(0, 6).map((lesson, index) => (
+                                <div key={lesson._id} data-aos="fade-up" data-aos-delay={index * 100}>
+                                    <LessonCard
+                                        lesson={lesson}
+                                        showBlur={lesson.accessLevel === 'premium' && !isPremium}
+                                    />
+                                </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-12">
+                        <div className="text-center py-12" data-aos="fade-up">
                             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <p className="text-gray-600">No saved lessons yet</p>
                         </div>
                     )}
 
-                    <div className="text-center mt-10">
+                    <div className="text-center mt-10" data-aos="zoom-in" data-aos-delay="200">
                         <Link
                             to="/public-lessons"
                             className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-bold hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg hover:shadow-xl"
