@@ -48,7 +48,7 @@ const AdminHome = () => {
                     iconColor="text-blue-600"
                 />
                 <StatsCard
-                    title="মোট লেসন"
+                    title="মোট লেসন (সর্বমোট)"
                     value={stats?.totalLessons || 0}
                     icon={BookOpen}
                     bgColor="bg-green-50"
@@ -62,7 +62,7 @@ const AdminHome = () => {
                     iconColor="text-red-600"
                 />
                 <StatsCard
-                    title="নতুন লেসন (আজ)"
+                    title="আজকের নতুন লেসন"
                     value={stats?.todayLessons || 0}
                     icon={BookOpen}
                     bgColor="bg-purple-50"
@@ -78,7 +78,7 @@ const AdminHome = () => {
                         <TrendingUp className="w-5 h-5 text-primary-600" />
                         ব্যবহারকারী বৃদ্ধি (সাপ্তাহিক)
                     </h3>
-                    <div className="h-80">
+                    <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>
@@ -105,7 +105,7 @@ const AdminHome = () => {
                         <BookOpen className="w-5 h-5 text-secondary-600" />
                         লেসন বৃদ্ধি (সাপ্তাহিক)
                     </h3>
-                    <div className="h-80">
+                    <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>

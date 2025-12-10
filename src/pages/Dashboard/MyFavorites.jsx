@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Bookmark, Filter, BookOpen } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Loading from '../../components/ui/Loading';
@@ -44,6 +44,7 @@ const MyFavorites = () => {
     const categories = ['সব', 'ব্যক্তিগত উন্নতি', 'ক্যারিয়ার', 'সম্পর্ক', 'মানসিকতা', 'ভুল থেকে শিক্ষা'];
     const emotionalTones = ['সব', 'প্রেরণাদায়ক', 'বেদনা', 'উপলব্ধি', 'কৃতজ্ঞতা'];
 
+    console.log('Favorites from API:', favorites);
     if (isLoading) return <Loading />;
 
     return (
@@ -89,7 +90,8 @@ const MyFavorites = () => {
             </div>
 
             {/* Favorites Grid */}
-            {favorites.length === 0 ? (
+            {/* Favorites Grid */}
+            {favorites?.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-md p-12 text-center">
                     <Bookmark className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                     <h3 className="text-xl font-bold text-gray-900 bangla-text mb-2">
@@ -101,17 +103,25 @@ const MyFavorites = () => {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {favorites.map((fav) => (
-                        <div key={fav._id} className="relative">
-                            <LessonCard lesson={fav.lesson} />
-                            <button
-                                onClick={() => removeFavoriteMutation.mutate(fav.lesson._id)}
-                                className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md"
-                            >
-                                <Bookmark className="w-4 h-4 fill-current" />
-                            </button>
-                        </div>
-                    ))}
+                    {favorites.map((fav) => {
+                        // Handle both structures: wrapping object with .lesson OR direct lesson object
+                        const lessonData = fav.lesson || fav;
+
+                        // Skip if no valid lesson data found
+                        if (!lessonData || !lessonData._id) return null;
+
+                        return (
+                            <div key={fav._id || lessonData._id} className="relative">
+                                <LessonCard lesson={lessonData} />
+                                <button
+                                    onClick={() => removeFavoriteMutation.mutate(lessonData._id)}
+                                    className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md"
+                                >
+                                    <Bookmark className="w-4 h-4 fill-current" />
+                                </button>
+                            </div>
+                        );
+                    })}
                 </div>
             )}
         </div>

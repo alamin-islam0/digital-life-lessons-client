@@ -22,14 +22,12 @@ const DashboardHome = () => {
     });
 
     const stats = {
-        totalLessons: dashboardData?.totalLessons || 0,
-        totalFavorites: dashboardData?.totalFavorites || 0,
+        totalLessons: dashboardData?.totalLessons || dashboardData?.lessonsCount || 0,
+        totalFavorites: dashboardData?.totalFavorites || dashboardData?.favoritesCount || 0,
+        totalLikes: dashboardData?.totalLikes || dashboardData?.likesCount || 0,
+        publicLessons: dashboardData?.publicLessons || dashboardData?.publicLessonsCount || 0,
         recentLessons: dashboardData?.recentLessons || [],
     };
-
-    // We don't have totalLikes or publicLessons in the overview endpoint anymore, 
-    // so we will show available stats or placeholder/other stats.
-    // However, stats card expects specific props. We can map what we have.
 
     const recentLessons = stats.recentLessons;
     const statsLoading = loading;

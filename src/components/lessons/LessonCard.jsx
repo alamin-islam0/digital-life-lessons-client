@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import UserAvatar from '../ui/UserAvatar';
 
 const LessonCard = ({ lesson, showBlur = false }) => {
+    if (!lesson) return null;
+
     const {
         _id,
         title,
