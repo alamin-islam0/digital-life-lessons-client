@@ -102,6 +102,22 @@ const MyLessons = () => {
         });
     };
 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterCategory, setFilterCategory] = useState('all');
+    const [filterVisibility, setFilterVisibility] = useState('all');
+    const [filterAccess, setFilterAccess] = useState('all');
+
+    const categories = [...new Set(lessons.map(lesson => lesson.category))];
+
+    const filteredLessons = lessons.filter(lesson => {
+        const matchesSearch = lesson.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = filterCategory === 'all' || lesson.category === filterCategory;
+        const matchesVisibility = filterVisibility === 'all' || lesson.visibility === filterVisibility;
+        const matchesAccess = filterAccess === 'all' || lesson.accessLevel === filterAccess;
+
+        return matchesSearch && matchesCategory && matchesVisibility && matchesAccess;
+    });
+
     if (isLoading) return <Loading />;
 
     return (
@@ -118,6 +134,50 @@ const MyLessons = () => {
                     <BookOpen className="w-5 h-5" />
                     New Lesson
                 </Link>
+            </div>
+
+            {/* Filters */}
+            <div className="bg-white p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="md:col-span-1">
+                    <input
+                        type="text"
+                        placeholder="Search lessons..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
+                    />
+                </div>
+
+                <select
+                    value={filterCategory}
+                    onChange={(e) => setFilterCategory(e.target.value)}
+                    className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+                >
+                    <option value="all">All Categories</option>
+                    {categories.map(category => (
+                        <option key={category} value={category}>{category}</option>
+                    ))}
+                </select>
+
+                <select
+                    value={filterVisibility}
+                    onChange={(e) => setFilterVisibility(e.target.value)}
+                    className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+                >
+                    <option value="all">All Visibility</option>
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+
+                <select
+                    value={filterAccess}
+                    onChange={(e) => setFilterAccess(e.target.value)}
+                    className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+                >
+                    <option value="all">All Access Levels</option>
+                    <option value="free">Free</option>
+                    <option value="premium">Premium</option>
+                </select>
             </div>
 
             {lessons.length === 0 ? (
@@ -137,32 +197,47 @@ const MyLessons = () => {
                         Create Lesson
                     </Link>
                 </div>
+            ) : filteredLessons.length === 0 ? (
+                <div className="bg-white rounded-2xl shadow-md p-12 text-center">
+                    <p className="text-gray-600">No lessons match your filters.</p>
+                    <button
+                        onClick={() => {
+                            setSearchTerm('');
+                            setFilterCategory('all');
+                            setFilterVisibility('all');
+                            setFilterAccess('all');
+                        }}
+                        className="mt-4 text-primary-600 hover:underline"
+                    >
+                        Clear all filters
+                    </button>
+                </div>
             ) : (
                 <TableContainer component={Paper} className="rounded-2xl shadow-md">
                     <Table>
                         <TableHead>
                             <TableRow className="bg-gray-50">
-                                <TableCell className="bangla-text font-bold">Title</TableCell>
-                                <TableCell className="bangla-text font-bold">Category</TableCell>
-                                <TableCell className="bangla-text font-bold">Tone</TableCell>
-                                <TableCell className="bangla-text font-bold">Privacy</TableCell>
-                                <TableCell className="bangla-text font-bold">Access</TableCell>
-                                <TableCell className="bangla-text font-bold">Date</TableCell>
-                                <TableCell className="bangla-text font-bold">Stats</TableCell>
-                                <TableCell className="bangla-text font-bold">Actions</TableCell>
+                                <TableCell className="font-bold">Title</TableCell>
+                                <TableCell className="font-bold">Category</TableCell>
+                                <TableCell className="font-bold">Tone</TableCell>
+                                <TableCell className="font-bold">Privacy</TableCell>
+                                <TableCell className="font-bold">Access</TableCell>
+                                <TableCell className="font-bold">Date</TableCell>
+                                <TableCell className="font-bold">Stats</TableCell>
+                                <TableCell className="font-bold">Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {lessons.map((lesson) => (
+                            {filteredLessons.map((lesson) => (
                                 <TableRow key={lesson._id} hover>
-                                    <TableCell className="bangla-text font-medium max-w-xs">
+                                    <TableCell className="font-medium max-w-xs">
                                         <div className="line-clamp-2">{lesson.title}</div>
                                     </TableCell>
                                     <TableCell>
                                         <Chip
                                             label={lesson.category}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                             color="primary"
                                             variant="outlined"
                                         />
@@ -171,7 +246,7 @@ const MyLessons = () => {
                                         <Chip
                                             label={lesson.emotionalTone}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                             color="secondary"
                                             variant="outlined"
                                         />
@@ -180,7 +255,7 @@ const MyLessons = () => {
                                         <Chip
                                             label={lesson.visibility === 'public' ? 'Public' : 'Private'}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                             color={lesson.visibility === 'public' ? 'success' : 'default'}
                                         />
                                     </TableCell>
@@ -188,7 +263,7 @@ const MyLessons = () => {
                                         <Chip
                                             label={lesson.accessLevel === 'premium' ? 'Premium' : 'Free'}
                                             size="small"
-                                            className="bangla-text"
+                                            className=""
                                             color={lesson.accessLevel === 'premium' ? 'warning' : 'info'}
                                         />
                                     </TableCell>
