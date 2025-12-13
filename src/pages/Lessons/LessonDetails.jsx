@@ -49,6 +49,7 @@ const LessonDetails = () => {
         queryKey: ['lesson', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/lessons/${id}`);
+            console.log('Lesson Data:', res.data); // Debugging: Check what fields are available
             return res.data;
         },
     });
@@ -300,6 +301,23 @@ const LessonDetails = () => {
         );
     }
 
+    // Safer author data extraction
+    const author = lesson.creator || {};
+    // Try to find an ID in various places. 
+    // If lesson.creator is a string, it's likely the ID. 
+    // If it's an object, check _id or id.
+    const authorId = author._id || author.id || (typeof lesson.creator === 'string' ? lesson.creator : undefined) || lesson.creatorId || lesson.userId;
+
+    const authorName = author.name || author.displayName || lesson.creatorName || lesson.authorName || "Unknown Author";
+    const authorEmail = author.email || lesson.creatorEmail || "";
+    const authorImage = author?.photoURL || author.image || lesson.creatorImage;
+    // Create a normalized user object for UserAvatar
+    const displayUser = {
+        ...author,
+        displayName: authorName,
+        photoURL: authorImage
+    };
+
     const isPremiumLesson = lesson.accessLevel === 'premium';
     const canView = !isPremiumLesson || isPremium;
     const isLiked = lesson.likes?.includes(user?.uid);
@@ -459,72 +477,85 @@ const LessonDetails = () => {
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    {/* Author Section */}
-                    <div className="p-8 border-t border-gray-100">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4">About Author</h3>
-                        <div className="flex items-start gap-4">
-                            <UserAvatar user={lesson.creator} size="xl" />
-                            <div className="flex-1">
-                                <h4 className="text-lg font-bold text-gray-900">
-                                    {lesson.creator?.name || lesson.creator?.displayName}
-                                </h4>
-                                <p className="text-gray-600 text-sm mb-3">{lesson.creator?.email}</p>
-                                <p className="text-gray-700 text-sm mb-3">
-                                    Total Lessons: <span className="font-semibold">{lesson.creator?.totalLessons || 0}</span>
-                                </p>
-                                <Link
-                                    to={`/author/${lesson.creator?._id}`}
-                                    className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-lg font-semibold hover:bg-primary-200 transition-all text-sm"
-                                >
-                                    View all lessons from this author
-                                </Link>
+                {/* Dedicated Author Section Card */}
+                <div className="bg-white rounded-2xl shadow-lg mt-8 p-8">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">
+                        About the Creator
+                    </h3>
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                        <UserAvatar user={displayUser} size="xl" className="w-24 h-24 text-3xl" />
+                        <div className="flex-1 text-center md:text-left">
+                            <h4 className="text-2xl font-bold text-gray-900 mb-2">
+                                {authorName}
+                            </h4>
+                            {authorEmail && <p className="text-gray-500 mb-4">{authorEmail}</p>}
+
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-gray-700 font-medium mb-4">
+                                <BookOpen className="w-4 h-4" />
+                                <span>{author.totalLessons || 0} Lessons Created</span>
+                            </div>
+
+                            <div className="mt-2">
+                                {authorId && (
+                                    <Link
+                                        to={`/author/${authorId}`}
+                                        className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary-500 text-primary-600 rounded-xl font-bold hover:bg-primary-50 transition-all shadow-sm hover:shadow-md"
+                                    >
+                                        View all lessons by this author
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Comments Section */}
-                    <div className="p-8 border-t border-gray-100">
-                        <h3 className="text-xl font-bold text-gray-900 mb-6">Comments ({comments.length})</h3>
+                {/* Dedicated Comments Section Card */}
+                <div className="bg-white rounded-2xl shadow-lg mt-8 p-8">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6">Comments ({comments.length})</h3>
 
-                        {/* Comment Form */}
-                        <form onSubmit={handleCommentSubmit} className="mb-8">
-                            <textarea
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                                placeholder="Write your opinion..."
-                                rows="3"
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                            />
-                            <button
-                                type="submit"
-                                disabled={!comment.trim() || commentMutation.isPending}
-                                className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <Send className="w-4 h-4" />
-                                Post Comment
-                            </button>
-                        </form>
+                    {/* Comment Form */}
+                    <form onSubmit={handleCommentSubmit} className="mb-8">
+                        <textarea
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder="Write your opinion..."
+                            rows="3"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none bg-gray-50"
+                        />
+                        <button
+                            type="submit"
+                            disabled={!comment.trim() || commentMutation.isPending}
+                            className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                        >
+                            <Send className="w-4 h-4" />
+                            Post Comment
+                        </button>
+                    </form>
 
-                        {/* Comments List */}
-                        <div className="space-y-4">
-                            {comments.map((c) => (
-                                <div key={c._id} className="bg-gray-50 rounded-lg p-4">
-                                    <div className="flex items-start gap-3">
-                                        <UserAvatar user={c.user} size="sm" />
+                    {/* Comments List */}
+                    <div className="space-y-4">
+                        {comments.length > 0 ? (
+                            comments.map((c) => (
+                                <div key={c._id} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+                                    <div className="flex items-start gap-4">
+                                        <UserAvatar user={c.user} size="md" />
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className="font-semibold text-gray-900 text-sm">
+                                                <span className="font-bold text-gray-900">
                                                     {c.user?.name || c.user?.displayName}
                                                 </span>
-                                                <span className="text-xs text-gray-500">{formatDate(c.createdAt)}</span>
+                                                <span className="text-xs text-gray-500">• {formatDate(c.createdAt)}</span>
                                             </div>
-                                            <p className="text-gray-700 text-sm">{c.text}</p>
+                                            <p className="text-gray-700 leading-relaxed">{c.text}</p>
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-500 text-center py-4">No comments yet. Be the first to share your thoughts!</p>
+                        )}
                     </div>
                 </div>
 
@@ -601,7 +632,7 @@ const LessonDetails = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </div >
     );
 };
 

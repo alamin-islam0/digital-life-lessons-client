@@ -12,6 +12,7 @@ import Pricing from '../pages/Pricing/Pricing';
 import PaymentSuccess from '../pages/Payment/PaymentSuccess';
 import PaymentCancel from '../pages/Payment/PaymentCancel';
 import NotFound from '../pages/Error/NotFound';
+import AuthorProfile from '../pages/Lessons/AuthorProfile';
 
 // User Dashboard Pages
 import DashboardHome from '../pages/Dashboard/DashboardHome';
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                         <LessonDetails />
                     </PrivateRoute>
                 ),
+            },
+            {
+                path: 'author/:id',
+                element: <AuthorProfile />,
             },
             {
                 path: 'pricing',

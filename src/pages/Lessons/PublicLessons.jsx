@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Filter, SlidersHorizontal } from 'lucide-react';
+import { Search, Filter, SlidersHorizontal, X } from 'lucide-react';
 import { Pagination } from '@mui/material';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useUserPlan from '../../hooks/useUserPlan';
@@ -11,6 +12,8 @@ import SectionHeader from '../../components/ui/SectionHeader';
 const PublicLessons = () => {
     const axiosSecure = useAxiosSecure();
     const { isPremium } = useUserPlan();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const authorId = searchParams.get('authorId');
 
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('');
@@ -70,7 +73,11 @@ const PublicLessons = () => {
             // Emotional Tone Filter
             const matchesTone = emotionalTone === '' || emotionalTone === 'All' || lesson.emotionalTone === emotionalTone;
 
-            return matchesSearch && matchesCategory && matchesTone;
+            // Author Filter
+            const matchesAuthor = !authorId ||
+                (lesson.creator && (lesson.creator._id === authorId || lesson.creator === authorId));
+
+            return matchesSearch && matchesCategory && matchesTone && matchesAuthor;
         })
         .sort((a, b) => {
             switch (sortBy) {
@@ -203,21 +210,31 @@ const PublicLessons = () => {
                     </div>
 
                     {/* Active Filters Display */}
-                    {(searchTerm || category || emotionalTone || sortBy !== 'newest') && (
+                    {/* Active Filters Display */}
+                    {(searchTerm || category || emotionalTone || sortBy !== 'newest' || authorId) && (
                         <div className="mt-4 flex flex-wrap gap-2">
                             {searchTerm && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
                                     Search: {searchTerm}
+                                    <X className="w-3 h-3 cursor-pointer" onClick={() => setSearchTerm('')} />
                                 </span>
                             )}
                             {category && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
                                     {category}
+                                    <X className="w-3 h-3 cursor-pointer" onClick={() => setCategory('')} />
                                 </span>
                             )}
                             {emotionalTone && (
-                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
                                     {emotionalTone}
+                                    <X className="w-3 h-3 cursor-pointer" onClick={() => setEmotionalTone('')} />
+                                </span>
+                            )}
+                            {authorId && (
+                                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
+                                    Filtered by Author
+                                    <X className="w-3 h-3 cursor-pointer" onClick={() => setSearchParams({})} />
                                 </span>
                             )}
                             <button
@@ -226,6 +243,7 @@ const PublicLessons = () => {
                                     setCategory('');
                                     setEmotionalTone('');
                                     setSortBy('newest');
+                                    setSearchParams({});
                                     setPage(1);
                                 }}
                                 className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm hover:bg-red-200 transition-colors"
@@ -286,6 +304,7 @@ const PublicLessons = () => {
                                 setCategory('');
                                 setEmotionalTone('');
                                 setSortBy('newest');
+                                setSearchParams({});
                                 setPage(1);
                             }}
                             className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
