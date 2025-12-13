@@ -238,7 +238,7 @@ const LessonDetails = () => {
                     url,
                 });
             } catch (error) {
-                console.log('Share cancelled');
+                console.log(error,'Share cancelled');
             }
         } else {
             navigator.clipboard.writeText(url);
@@ -322,6 +322,8 @@ const LessonDetails = () => {
     const canView = !isPremiumLesson || isPremium;
     const isLiked = lesson.likes?.includes(user?.uid);
     const isFavorited = lesson.isFavorited;
+    const hasLikes = (lesson.likes?.length || 0) > 0;
+    const hasFavorites = (lesson.favoritesCount || 0) > 0;
 
     const reportReasons = [
         'Inappropriate Content',
@@ -426,11 +428,11 @@ const LessonDetails = () => {
                         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                             <div className="flex items-center gap-6">
                                 <div className="flex items-center gap-2 text-gray-700">
-                                    <Heart className={`w-5 h-5 ${isLiked ? 'fill-red-500 text-red-500' : ''}`} />
+                                    <Heart className={`w-5 h-5 ${hasLikes ? 'fill-red-500 text-red-500' : ''}`} />
                                     <span className="font-semibold">{lesson.likesCount || 0}</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-gray-700">
-                                    <Bookmark className={`w-5 h-5 ${isFavorited ? 'fill-primary-500 text-primary-500' : ''}`} />
+                                    <Bookmark className={`w-5 h-5 ${hasFavorites ? 'fill-primary-500 text-primary-500' : ''}`} />
                                     <span className="font-semibold">{lesson.favoritesCount || 0}</span>
                                 </div>
                             </div>
@@ -445,7 +447,7 @@ const LessonDetails = () => {
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
-                                <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+                                <Heart className={`w-5 h-5 ${hasLikes ? 'fill-current' : ''}`} />
                                 {isLiked ? 'Liked' : 'Like'}
                             </button>
 
@@ -456,7 +458,7 @@ const LessonDetails = () => {
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
-                                <Bookmark className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
+                                <Bookmark className={`w-5 h-5 ${hasFavorites ? 'fill-current' : ''}`} />
                                 {isFavorited ? 'Saved' : 'Save'}
                             </button>
 
