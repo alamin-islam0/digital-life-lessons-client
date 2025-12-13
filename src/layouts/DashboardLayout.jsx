@@ -13,6 +13,7 @@ import {
 } from "react-icons/rx";
 import { FiUsers, FiSettings, FiAlertCircle } from "react-icons/fi";
 import { MdOutlineAdminPanelSettings, MdClass } from "react-icons/md";
+import UserAvatar from '../components/ui/UserAvatar';
 
 const DashboardLayout = () => {
     const { user, role } = useAuth();
@@ -132,11 +133,7 @@ const DashboardLayout = () => {
                     {user && (
                         <div className="p-4 border-t border-gray-100">
                             <div className="flex items-center gap-3">
-                                <img
-                                    src={user?.photoURL || "https://ui-avatars.com/api/?name=User"}
-                                    alt="User"
-                                    className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
-                                />
+                                <UserAvatar user={user} size="md" />
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-900 truncate">
                                         {user?.displayName || 'User'}

@@ -1,4 +1,6 @@
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { BookOpen, Bookmark, Heart, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
@@ -11,6 +13,7 @@ import SectionHeader from '../../components/ui/SectionHeader';
 const DashboardHome = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [chartView, setChartView] = useState('weekly');
 
     // Fetch User Details for Total Likes
     const { data: userData, isLoading: userLoading } = useQuery({
@@ -37,10 +40,60 @@ const DashboardHome = () => {
 
     const stats = {
         totalLikes: totalLikes,
+        totalLessons: myLessons.length,
         publicLessons: publicLessonsCount,
         totalFavorites: userData?.totalFavorites || 0,
         recentLessons: myLessons.slice(0, 3) || [],
     };
+
+    const chartData = useMemo(() => {
+        // If data is loading or empty, return placeholder data or empty
+        if (!myLessons) return [];
+
+        const now = new Date();
+        const data = [];
+
+        if (chartView === 'weekly') {
+            // Last 7 days
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(now);
+                d.setDate(d.getDate() - i);
+                const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+                data.push({
+                    name: dayName,
+                    date: d.toISOString().split('T')[0],
+                    count: 0
+                });
+            }
+
+            myLessons.forEach(lesson => {
+                if (!lesson.createdAt) return;
+                const date = new Date(lesson.createdAt).toISOString().split('T')[0];
+                const item = data.find(d => d.date === date);
+                if (item) item.count++;
+            });
+        } else {
+            // Monthly view (Last 6 months)
+            for (let i = 5; i >= 0; i--) {
+                const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                const monthName = d.toLocaleDateString('en-US', { month: 'short' });
+                const key = `${d.getFullYear()}-${d.getMonth()}`;
+                data.push({
+                    name: monthName,
+                    key: key,
+                    count: 0
+                });
+            }
+            myLessons.forEach(lesson => {
+                if (!lesson.createdAt) return;
+                const d = new Date(lesson.createdAt);
+                const key = `${d.getFullYear()}-${d.getMonth()}`;
+                const item = data.find(i => i.key === key);
+                if (item) item.count++;
+            });
+        }
+        return data;
+    }, [myLessons, chartView]);
 
     const recentLessons = stats.recentLessons;
     const statsLoading = userLoading || lessonsQueryLoading;
@@ -171,11 +224,65 @@ const DashboardHome = () => {
                 )}
             </div>
 
-            {/* Activity Chart Placeholder */}
             <div className="bg-white rounded-2xl shadow-md p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Weekly Activity</h2>
-                <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl">
-                    <p className="text-gray-600">Chart coming soon...</p>
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900">Activity & contributions</h2>
+                    <div className="flex bg-gray-100 rounded-lg p-1">
+                        <button
+                            onClick={() => setChartView('weekly')}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${chartView === 'weekly'
+                                ? 'bg-white text-primary-600 shadow-sm'
+                                : 'text-gray-600 hover:text-gray-900'
+                                }`}
+                        >
+                            Weekly
+                        </button>
+                        <button
+                            onClick={() => setChartView('monthly')}
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${chartView === 'monthly'
+                                ? 'bg-white text-primary-600 shadow-sm'
+                                : 'text-gray-600 hover:text-gray-900'
+                                }`}
+                        >
+                            Monthly
+                        </button>
+                    </div>
+                </div>
+
+                <div className="h-80 w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                            <XAxis
+                                dataKey="name"
+                                axisLine={false}
+                                tickLine={false}
+                                tick={{ fill: '#6B7280', fontSize: 12 }}
+                                dy={10}
+                            />
+                            <YAxis
+                                axisLine={false}
+                                tickLine={false}
+                                tick={{ fill: '#6B7280', fontSize: 12 }}
+                            />
+                            <Tooltip
+                                cursor={{ fill: '#F3F4F6' }}
+                                contentStyle={{
+                                    backgroundColor: '#fff',
+                                    borderRadius: '8px',
+                                    border: 'none',
+                                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                                }}
+                            />
+                            <Bar
+                                dataKey="count"
+                                fill="#4F46E5"
+                                radius={[4, 4, 0, 0]}
+                                barSize={40}
+                                name="Lessons Created"
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
                 </div>
             </div>
         </div>

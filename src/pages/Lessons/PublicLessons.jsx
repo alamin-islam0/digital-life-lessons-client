@@ -79,9 +79,9 @@ const PublicLessons = () => {
                 case 'oldest':
                     return new Date(a.createdAt) - new Date(b.createdAt);
                 case 'most-liked':
-                    return (b.likesCount || 0) - (a.likesCount || 0);
+                    return (Number(b.likesCount) || b.likes?.length || 0) - (Number(a.likesCount) || a.likes?.length || 0);
                 case 'most-saved':
-                    return (b.favoritesCount || 0) - (a.favoritesCount || 0);
+                    return (Number(b.favoritesCount) || b.favorites?.length || 0) - (Number(a.favoritesCount) || a.favorites?.length || 0);
                 default:
                     return 0; // consistent default
             }

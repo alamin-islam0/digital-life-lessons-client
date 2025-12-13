@@ -13,11 +13,13 @@ const LessonCard = ({ lesson, showBlur = false }) => {
         emotionalTone,
         accessLevel,
         creator,
-        likesCount = 0,
-        favoritesCount = 0,
+
         views = Math.floor(Math.random() * 10000),
         createdAt,
     } = lesson;
+
+    const displayLikesCount = Number(lesson.likesCount) || lesson.likes?.length || 0;
+    const displayFavoritesCount = Number(lesson.favoritesCount) || lesson.favorites?.length || 0;
 
     const isPremium = accessLevel === 'premium';
 
@@ -107,11 +109,11 @@ const LessonCard = ({ lesson, showBlur = false }) => {
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                         <span className="flex items-center gap-1">
                             <Heart className="w-4 h-4" />
-                            {likesCount}
+                            {displayLikesCount}
                         </span>
                         <span className="flex items-center gap-1">
                             <Bookmark className="w-4 h-4" />
-                            {favoritesCount}
+                            {displayFavoritesCount}
                         </span>
                         <span className="flex items-center gap-1">
                             <Eye className="w-4 h-4" />

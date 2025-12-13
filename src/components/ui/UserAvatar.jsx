@@ -1,38 +1,45 @@
-const UserAvatar = ({ user, size = 'md', showName = false, className = '' }) => {
+
+import React from 'react';
+import { User } from 'lucide-react';
+
+const UserAvatar = ({ user, size = 'md' }) => {
     const sizeClasses = {
         sm: 'w-8 h-8 text-xs',
         md: 'w-10 h-10 text-sm',
         lg: 'w-12 h-12 text-base',
-        xl: 'w-16 h-16 text-lg',
+        xl: 'w-16 h-16 text-xl'
     };
 
-    const getInitials = (name) => {
-        if (!name) return 'U';
-        const parts = name.split(' ');
-        if (parts.length >= 2) {
-            return parts[0][0] + parts[1][0];
-        }
-        return name.substring(0, 2).toUpperCase();
-    };
+    const currentSize = sizeClasses[size] || sizeClasses.md;
+
+    if (user?.photoURL) {
+        return (
+            <img
+                src={user?.photoURL}
+                alt={user?.displayName || 'User'}
+                className={`${currentSize} rounded-full object-cover border-2 border-white shadow-sm`}
+            />
+        );
+    }
+
+    if (user?.displayName) {
+        const initials = user.displayName
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+
+        return (
+            <div className={`${currentSize} rounded-full bg-primary-100 text-primary-600 flex items-center justify-center font-bold border-2 border-white shadow-sm`}>
+                {initials}
+            </div>
+        );
+    }
 
     return (
-        <div className={`flex items-center gap-3 ${className}`}>
-            {user?.photoURL ? (
-                <img
-                    src={user.photoURL}
-                    alt={user.displayName || 'User'}
-                    className={`${sizeClasses[size]} rounded-full object-cover ring-2 ring-primary-200`}
-                />
-            ) : (
-                <div className={`${sizeClasses[size]} rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white font-semibold ring-2 ring-primary-200`}>
-                    {getInitials(user?.displayName || user?.name)}
-                </div>
-            )}
-            {showName && (
-                <span className="font-medium text-gray-900">
-                    {user?.displayName || user?.name || 'User'}
-                </span>
-            )}
+        <div className={`${currentSize} rounded-full bg-gray-100 text-gray-400 flex items-center justify-center border-2 border-white shadow-sm`}>
+            <User className="w-1/2 h-1/2" />
         </div>
     );
 };
