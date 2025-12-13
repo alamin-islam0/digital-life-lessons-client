@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Users, BookOpen, Flag, TrendingUp, UserPlus } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -8,7 +9,7 @@ import Loading from '../../components/ui/Loading';
 const AdminHome = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: stats, isLoading } = useQuery({
+    const { data: stats, isLoading: statsLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
             const res = await axiosSecure.get('/admin/stats');
@@ -16,18 +17,55 @@ const AdminHome = () => {
         },
     });
 
-    // Sample data for charts (replace with real API data if available)
-    const chartData = [
-        { name: 'Day 1', users: 4, lessons: 2 },
-        { name: 'Day 2', users: 7, lessons: 5 },
-        { name: 'Day 3', users: 5, lessons: 8 },
-        { name: 'Day 4', users: 10, lessons: 12 },
-        { name: 'Day 5', users: 15, lessons: 10 },
-        { name: 'Day 6', users: 12, lessons: 15 },
-        { name: 'Day 7', users: 18, lessons: 20 },
-    ];
+    const { data: users = [], isLoading: usersLoading } = useQuery({
+        queryKey: ['all-users-chart'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/admin/users');
+            return res.data;
+        },
+    });
 
-    if (isLoading) return <Loading />;
+    const { data: lessons = [], isLoading: lessonsLoading } = useQuery({
+        queryKey: ['all-lessons-chart'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/admin/lessons');
+            return res.data;
+        },
+    });
+
+    // Process data for charts (Last 7 days)
+    const chartData = useMemo(() => {
+        const data = [];
+        const today = new Date();
+
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+            const dateString = d.toISOString().split('T')[0];
+            const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+
+            // Count users created on this day
+            const dailyUsers = users.filter(user => {
+                if (!user.createdAt) return false;
+                return new Date(user.createdAt).toISOString().split('T')[0] === dateString;
+            }).length;
+
+            // Count lessons created on this day
+            const dailyLessons = lessons.filter(lesson => {
+                if (!lesson.createdAt) return false;
+                return new Date(lesson.createdAt).toISOString().split('T')[0] === dateString;
+            }).length;
+
+            data.push({
+                name: dayName,
+                users: dailyUsers,
+                lessons: dailyLessons
+            });
+        }
+        return data;
+    }, [users, lessons]);
+
+    if (statsLoading || usersLoading || lessonsLoading) return <Loading />;
 
     return (
         <div className="space-y-8">
@@ -76,7 +114,7 @@ const AdminHome = () => {
                 <div className="bg-white p-6 rounded-2xl shadow-md">
                     <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-primary-600" />
-                        User Growth (Weekly)
+                        User Growth (Last 7 Days)
                     </h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -103,7 +141,7 @@ const AdminHome = () => {
                 <div className="bg-white p-6 rounded-2xl shadow-md">
                     <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <BookOpen className="w-5 h-5 text-secondary-600" />
-                        Lesson Growth (Weekly)
+                        Lesson Growth (Last 7 Days)
                     </h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
