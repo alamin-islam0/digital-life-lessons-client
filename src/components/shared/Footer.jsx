@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { FaFacebookF, FaXTwitter, FaLinkedinIn } from 'react-icons/fa6';
+import Logo from '../ui/Logo';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -32,12 +33,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* About Section */}
                     <div>
-                        <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">DL</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white">Digital Life Lessons</h3>
-                        </div>
+                        <Logo />
                         <p className="text-sm leading-relaxed mb-4">
                             A platform where you can share your life experiences and learn from others. Every experience is valuable.
                         </p>

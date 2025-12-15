@@ -5,6 +5,7 @@ import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
+import Logo from '../../components/ui/Logo';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -108,9 +109,7 @@ const Login = () => {
                 <div className="w-full">
                     <div className="bg-white rounded-4xl shadow-2xl p-8 sm:p-10">
                         <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                <span className="text-white font-bold text-2xl">DL</span>
-                            </div>
+                            <Logo />
                             <h2 className="text-3xl font-bold text-gray-900 mb-2">Login</h2>
                             <p className="text-gray-600">Access your account</p>
                         </div>

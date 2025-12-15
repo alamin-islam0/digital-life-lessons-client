@@ -14,6 +14,7 @@ import {
 import { FiUsers, FiSettings, FiAlertCircle } from "react-icons/fi";
 import { MdOutlineAdminPanelSettings, MdClass } from "react-icons/md";
 import UserAvatar from '../components/ui/UserAvatar';
+import Logo from '../components/ui/Logo';
 
 const DashboardLayout = () => {
     const { user, role } = useAuth();
@@ -57,9 +58,7 @@ const DashboardLayout = () => {
                 <div className="h-full flex flex-col">
                     {/* Logo Area */}
                     <div className="h-16 flex items-center justify-between px-6 border-b border-gray-100">
-                        <Link to="/" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            Life Lessons
-                        </Link>
+                        <Logo />
                         <button
                             onClick={closeSidebar}
                             className="lg:hidden text-gray-500 hover:text-gray-700"

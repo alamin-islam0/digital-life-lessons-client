@@ -26,9 +26,12 @@ const Navbar = () => {
     { path: "/public-lessons", label: "Public Lessons" },
   ];
 
-  // Add pricing link if user is logged in but not premium
-  if (user && !isPremium) {
-    navLinks.push({ path: "/pricing", label: "Upgrade" });
+  if (user) {
+    navLinks.push({ path: "/dashboard/add-lesson", label: "Add Lesson" });
+    navLinks.push({ path: "/dashboard/my-lessons", label: "My Lessons" });
+    if (!isPremium) {
+      navLinks.push({ path: "/pricing", label: "Upgrade" });
+    }
   }
 
   const NavLinkItem = ({ to, children, mobile = false }) => (
@@ -36,18 +39,15 @@ const Navbar = () => {
       to={to}
       onClick={() => mobile && setIsOpen(false)}
       className={({ isActive }) =>
-        `font-medium transition-colors ${
-          mobile
-            ? `block px-4 py-3 rounded-lg ${
-                isActive
-                  ? "bg-primary-100 text-primary-700"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`
-            : `${
-                isActive
-                  ? "text-primary-600"
-                  : "text-gray-700 hover:text-primary-600"
-              }`
+        `font-medium transition-colors ${mobile
+          ? `block px-4 py-3 rounded-lg ${isActive
+            ? "bg-primary-100 text-primary-700"
+            : "text-gray-700 hover:bg-gray-100"
+          }`
+          : `${isActive
+            ? "text-primary-600"
+            : "text-gray-700 hover:text-primary-600"
+          }`
         }`
       }
     >
@@ -60,7 +60,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Logo/>
+          <Logo />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

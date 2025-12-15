@@ -17,6 +17,7 @@ const UserAvatar = ({ user, size = 'md', className = '' }) => {
             <img
                 src={user?.photoURL || user?.image}
                 alt={user?.displayName || 'User'}
+                referrerPolicy="no-referrer"
                 className={`${currentSize} rounded-full object-cover border-2 border-white shadow-sm ${className}`}
             />
         );

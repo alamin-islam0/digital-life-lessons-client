@@ -34,7 +34,7 @@ import LessonCard from '../../components/lessons/LessonCard';
 const LessonDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, userDetails } = useAuth();
     const { isPremium } = useUserPlan();
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
@@ -87,41 +87,148 @@ const LessonDetails = () => {
         },
     });
 
-    // Like mutation
+    // Fetch user favorites to check status
+    const { data: userFavorites = [] } = useQuery({
+        queryKey: ['userFavorites'],
+        queryFn: async () => {
+            if (!user) return [];
+            const res = await axiosSecure.get(`/lessons/favorites`);
+            return res.data;
+        },
+        enabled: !!user,
+    });
+
+    // Determine if the current lesson is favorited by the user
+    // The favorite object might be the lesson itself or an object containing the lesson
+    const isFavorited = userFavorites.some(fav => {
+        const favId = fav.lesson?._id || fav._id;
+        return favId === id;
+    });
+
+    // Like mutation with Optimistic Update
     const likeMutation = useMutation({
         mutationFn: async () => {
             const res = await axiosSecure.patch(`/lessons/${id}/like`);
             return res.data;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries(['lesson', id]);
-        },
-    });
+        onMutate: async () => {
+            await queryClient.cancelQueries(['lesson', id]);
+            const previousLesson = queryClient.getQueryData(['lesson', id]);
 
-    // Favorite mutation
-    const favoriteMutation = useMutation({
-        mutationFn: async () => {
-            // Correct endpoint for favorites
-            const res = await axiosSecure.post(`/lessons/favorites/${id}`);
-            return res.data;
+            queryClient.setQueryData(['lesson', id], (old) => {
+                if (!old) return old;
+                // Use userDetails._id which matches the MongoDB ObjectIds in the likes array
+                const userId = userDetails?._id;
+                if (!userId) return old; // Sould generally not happen if logged in
+
+                const isLiked = old.likes?.includes(userId);
+                const newLikes = isLiked
+                    ? old.likes.filter((uid) => uid !== userId)
+                    : [...(old.likes || []), userId];
+
+                return {
+                    ...old,
+                    likes: newLikes,
+                    likesCount: isLiked ? Math.max((old.likesCount || 0) - 1, 0) : (old.likesCount || 0) + 1,
+                };
+            });
+
+            return { previousLesson };
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries(['lesson', id]);
+        onError: (err, newTodo, context) => {
+            queryClient.setQueryData(['lesson', id], context.previousLesson);
             Swal.fire({
                 toast: true,
                 position: 'top-end',
-                icon: 'success',
-                title: 'Favorite updated',
+                icon: 'error',
+                title: 'Failed to update like',
                 showConfirmButton: false,
                 timer: 2000,
             });
         },
+        onSettled: () => {
+            queryClient.invalidateQueries(['lesson', id]);
+        },
+    });
+
+    // Favorite mutation with Optimistic Update
+    const favoriteMutation = useMutation({
+        mutationFn: async (currentlyFavorited) => {
+            if (currentlyFavorited) {
+                const res = await axiosSecure.delete(`/lessons/favorites/${id}`);
+                return res.data;
+            } else {
+                const res = await axiosSecure.post(`/lessons/favorites/${id}`);
+                return res.data;
+            }
+        },
+        onMutate: async (currentlyFavorited) => {
+            // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+            await queryClient.cancelQueries(['lesson', id]);
+            await queryClient.cancelQueries(['userFavorites']);
+
+            // Snapshot the previous values
+            const previousLesson = queryClient.getQueryData(['lesson', id]);
+            const previousFavorites = queryClient.getQueryData(['userFavorites']);
+
+            // Optimistically update lesson stats
+            queryClient.setQueryData(['lesson', id], (old) => {
+                if (!old) return old;
+                return {
+                    ...old,
+                    favoritesCount: currentlyFavorited
+                        ? Math.max((old.favoritesCount || 0) - 1, 0)
+                        : (old.favoritesCount || 0) + 1,
+                };
+            });
+
+            // Optimistically update user's favorites list (toggle presence)
+            queryClient.setQueryData(['userFavorites'], (old = []) => {
+                if (currentlyFavorited) {
+                    // Remove
+                    return old.filter(fav => (fav.lesson?._id || fav._id) !== id);
+                } else {
+                    // Add (mock structure)
+                    // We don't have the full object here, but we can add what we have so the check passes
+                    return [...old, { _id: id, lesson: lesson }];
+                }
+            });
+
+            return { previousLesson, previousFavorites };
+        },
+        onError: (err, newTodo, context) => {
+            queryClient.setQueryData(['lesson', id], context.previousLesson);
+            queryClient.setQueryData(['userFavorites'], context.previousFavorites);
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Failed to update favorite',
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries(['lesson', id]);
+            queryClient.invalidateQueries(['userFavorites']);
+            queryClient.invalidateQueries(['my-favorites']); // Also invalidate the dashboard query
+        },
+        onSuccess: (data, currentlyFavorited) => {
+            const message = currentlyFavorited ? 'Removed from favorites' : 'Added to favorites';
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: message,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
     });
 
     // Report mutation
     const reportMutation = useMutation({
         mutationFn: async (data) => {
-            // Correct endpoint and payload for report
             const res = await axiosSecure.post(`/lessons/${id}/report`, {
                 reason: data.reason,
                 message: data.description
@@ -169,10 +276,11 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'Please login first',
+                title: 'Please log in to like',
                 showConfirmButton: false,
                 timer: 3000,
             });
+            // Optional: navigate('/login');
             return;
         }
         likeMutation.mutate();
@@ -184,13 +292,14 @@ const LessonDetails = () => {
                 toast: true,
                 position: 'top-end',
                 icon: 'warning',
-                title: 'Please login first',
+                title: 'Please log in to add to favorites',
                 showConfirmButton: false,
                 timer: 3000,
             });
             return;
         }
-        favoriteMutation.mutate();
+        // Use the derived isFavorited state
+        favoriteMutation.mutate(isFavorited);
     };
 
     const handleReport = () => {
@@ -238,7 +347,7 @@ const LessonDetails = () => {
                     url,
                 });
             } catch (error) {
-                console.log(error,'Share cancelled');
+                console.log(error, 'Share cancelled');
             }
         } else {
             navigator.clipboard.writeText(url);
@@ -310,7 +419,8 @@ const LessonDetails = () => {
 
     const authorName = author.name || author.displayName || lesson.creatorName || lesson.authorName || "Unknown Author";
     const authorEmail = author.email || lesson.creatorEmail || "";
-    const authorImage = author?.photoURL || author.image || lesson.creatorImage;
+    // Include creatorPhoto (from user JSON) in fallback chain
+    const authorImage = author?.photoURL || author?.image || lesson.creatorPhoto || lesson.creatorImage;
     // Create a normalized user object for UserAvatar
     const displayUser = {
         ...author,
@@ -320,8 +430,9 @@ const LessonDetails = () => {
 
     const isPremiumLesson = lesson.accessLevel === 'premium';
     const canView = !isPremiumLesson || isPremium;
-    const isLiked = lesson.likes?.includes(user?.uid);
-    const isFavorited = lesson.isFavorited;
+    // Check using userDetails._id which comes from MongoDB
+    const isLiked = lesson.likes?.includes(userDetails?._id);
+    // const isFavorited = lesson.isFavorited; <--- REMOVED this line as it is now derived from userFavorites query
     const hasLikes = (lesson.likes?.length || 0) > 0;
     const hasFavorites = (lesson.favoritesCount || 0) > 0;
 
@@ -442,7 +553,7 @@ const LessonDetails = () => {
                         <div className="flex flex-wrap gap-3">
                             <button
                                 onClick={handleLike}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${isLiked
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${isLiked
                                     ? 'bg-red-100 text-red-700 hover:bg-red-200'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
@@ -453,18 +564,18 @@ const LessonDetails = () => {
 
                             <button
                                 onClick={handleFavorite}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${isFavorited
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${isFavorited
                                     ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
-                                <Bookmark className={`w-5 h-5 ${hasFavorites ? 'fill-current' : ''}`} />
+                                <Bookmark className={`w-5 h-5 ${isFavorited ? 'fill-current' : ''}`} />
                                 {isFavorited ? 'Saved' : 'Save'}
                             </button>
 
                             <button
                                 onClick={handleShare}
-                                className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-all"
+                                className="flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-all active:scale-95"
                             >
                                 <Share2 className="w-5 h-5" />
                                 Share
@@ -472,7 +583,7 @@ const LessonDetails = () => {
 
                             <button
                                 onClick={handleReport}
-                                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-lg font-semibold hover:bg-red-100 transition-all"
+                                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-lg font-semibold hover:bg-red-100 transition-all active:scale-95"
                             >
                                 <Flag className="w-5 h-5" />
                                 Report

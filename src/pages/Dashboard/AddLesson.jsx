@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Save } from 'lucide-react';
+import { BookOpen, Save, Image } from 'lucide-react';
 import Swal from 'sweetalert2';
 import useUserPlan from '../../hooks/useUserPlan';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { uploadImage } from '../../utils/imageUpload';
 
 const AddLesson = () => {
     const { isPremium } = useUserPlan();
@@ -63,9 +64,28 @@ const AddLesson = () => {
         },
     });
 
-    const onSubmit = (data) => {
-        console.log('SUBMIT DATA:', data); // 👈 see if form actually submits
-        createLessonMutation.mutate(data);
+    const onSubmit = async (data) => {
+        try {
+            let imageURL = '';
+            if (data.image && data.image.length > 0) {
+                const imageFile = data.image[0];
+                imageURL = await uploadImage(imageFile);
+            }
+
+            const lessonData = {
+                ...data,
+                image: imageURL
+            };
+
+            createLessonMutation.mutate(lessonData);
+        } catch (error) {
+            console.error('Error preparing lesson data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to upload image or prepare data',
+            });
+        }
     };
 
 
@@ -188,22 +208,20 @@ const AddLesson = () => {
                         </div>
                     </div>
 
-                    {/* Image URL */}
+                    {/* Image Upload */}
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Image Link (Optional)
+                            Lesson Image (Optional)
                         </label>
-                        <input
-                            type="url"
-                            {...register('image', {
-                                pattern: {
-                                    value: /^https?:\/\/.+/,
-                                    message: 'Enter valid URL',
-                                },
-                            })}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            placeholder="https://example.com/image.jpg"
-                        />
+                        <div className="relative">
+                            <Image className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                {...register('image')}
+                                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                            />
+                        </div>
                         {errors.image && (
                             <p className="mt-1 text-sm text-red-600">{errors.image.message}</p>
                         )}
