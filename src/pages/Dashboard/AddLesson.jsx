@@ -3,9 +3,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Save, Image } from 'lucide-react';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import Lottie from 'lottie-react';
 import useUserPlan from '../../hooks/useUserPlan';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { uploadImage } from '../../utils/imageUpload';
+import successAnimation from '../../assets/success.json';
+
+const MySwal = withReactContent(Swal);
 
 const AddLesson = () => {
     const { isPremium } = useUserPlan();
@@ -34,16 +39,23 @@ const AddLesson = () => {
             queryClient.invalidateQueries(['my-lessons']);
             queryClient.invalidateQueries(['user-stats']);
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Lesson created successfully',
+            MySwal.fire({
+                html: (
+                    <div className="flex flex-col items-center">
+                        <div className="w-40 h-40">
+                            <Lottie animationData={successAnimation} loop={false} />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mt-4">Success!</h3>
+                        <p className="text-gray-600 mt-2">Lesson created successfully</p>
+                    </div>
+                ),
+                showConfirmButton: true,
                 confirmButtonText: 'Thank you',
                 customClass: {
-                    title: 'bangla-text',
-                    htmlContainer: 'bangla-text',
-                    confirmButton: 'bangla-text',
+                    popup: 'rounded-2xl',
+                    confirmButton: 'bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-all border-none font-semibold',
                 },
+                buttonsStyling: false,
             });
 
             reset();
@@ -55,11 +67,6 @@ const AddLesson = () => {
                 title: 'Error!',
                 text: error.message || 'Failed to create lesson',
                 confirmButtonText: 'Okay',
-                customClass: {
-                    title: 'bangla-text',
-                    htmlContainer: 'bangla-text',
-                    confirmButton: 'bangla-text',
-                },
             });
         },
     });

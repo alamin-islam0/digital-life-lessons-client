@@ -26,13 +26,13 @@ const Register = () => {
 
     const validatePassword = (value) => {
         if (value.length < 6) {
-            return 'Password must be at least 6 characters';
+            return 'Length must be at least 6 characters';
         }
         if (!/[A-Z]/.test(value)) {
-            return 'Must contain at least 1 uppercase letter';
+            return 'Must have an Uppercase letter in the password';
         }
         if (!/[a-z]/.test(value)) {
-            return 'Must contain at least 1 lowercase letter';
+            return 'Must have a Lowercase letter in the password';
         }
         return true;
     };

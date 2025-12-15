@@ -20,6 +20,19 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
+    const validatePassword = (value) => {
+        if (value.length < 6) {
+            return 'Length must be at least 6 characters';
+        }
+        if (!/[A-Z]/.test(value)) {
+            return 'Must have an Uppercase letter in the password';
+        }
+        if (!/[a-z]/.test(value)) {
+            return 'Must have a Lowercase letter in the password';
+        }
+        return true;
+    };
+
     const onSubmit = async (data) => {
         try {
             await login(data.email, data.password);
@@ -151,6 +164,7 @@ const Login = () => {
                                         type={showPassword ? 'text' : 'password'}
                                         {...register('password', {
                                             required: 'Password is required',
+                                            validate: validatePassword,
                                         })}
                                         className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                                         placeholder="Your password"

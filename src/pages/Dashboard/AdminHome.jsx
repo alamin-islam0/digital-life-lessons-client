@@ -110,55 +110,73 @@ const AdminHome = () => {
 
             {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* User Growth Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-primary-600" />
-                        User Growth (Last 7 Days)
-                    </h3>
-                    <div className="h-80 w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={chartData}>
-                                <defs>
-                                    <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.8} />
-                                        <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#6b7280' }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6b7280' }} />
-                                <Tooltip
-                                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                                />
-                                <Area type="monotone" dataKey="users" stroke="#0ea5e9" fillOpacity={1} fill="url(#colorUsers)" />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
+                <ChartWidget
+                    title="User Growth (Last 7 Days)"
+                    icon={TrendingUp}
+                    iconColor="text-primary-600"
+                    data={chartData}
+                    dataKey="users"
+                    color="#0ea5e9"
+                    gradientId="colorUsers"
+                />
+                <ChartWidget
+                    title="Lesson Growth (Last 7 Days)"
+                    icon={BookOpen}
+                    iconColor="text-secondary-600"
+                    data={chartData}
+                    dataKey="lessons"
+                    color="#d946ef"
+                    gradientId="colorLessons"
+                />
+            </div>
+        </div>
+    );
+};
+
+// Helper Component for Fixed Y-Axis Chart
+const ChartWidget = ({ title, icon: Icon, iconColor, data, dataKey, color, gradientId }) => {
+    return (
+        <div className="bg-white p-6 rounded-2xl shadow-md">
+            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Icon className={`w-5 h-5 ${iconColor}`} />
+                {title}
+            </h3>
+            <div className="flex h-80">
+                {/* Fixed Y-Axis Container */}
+                <div className="w-12 h-full flex-shrink-0 -mr-2 z-10 bg-white">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+                            {/* Invisible Area to establish Scale */}
+                            <Area dataKey={dataKey} stroke="none" fill="none" />
+                            <YAxis
+                                axisLine={false}
+                                tickLine={false}
+                                tick={{ fill: '#6b7280', fontSize: 12 }}
+                                width={48}
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
                 </div>
 
-                {/* Lesson Growth Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-secondary-600" />
-                        Lesson Growth (Last 7 Days)
-                    </h3>
-                    <div className="h-80 w-full">
+                {/* Scrollable Chart Content */}
+                <div className="flex-1 overflow-x-auto overflow-y-hidden">
+                    <div className="h-full min-w-[600px]">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={chartData}>
+                            <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                                 <defs>
-                                    <linearGradient id="colorLessons" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#d946ef" stopOpacity={0.8} />
-                                        <stop offset="95%" stopColor="#d946ef" stopOpacity={0} />
+                                    <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor={color} stopOpacity={0.8} />
+                                        <stop offset="95%" stopColor={color} stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#6b7280' }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6b7280' }} />
+                                {/* Hidden Y-Axis to maintain grid alignment logic if needed, or omit */}
                                 <Tooltip
+                                    cursor={{ stroke: '#9ca3af', strokeWidth: 1, strokeDasharray: '4 4' }}
                                     contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                                 />
-                                <Area type="monotone" dataKey="lessons" stroke="#d946ef" fillOpacity={1} fill="url(#colorLessons)" />
+                                <Area type="monotone" dataKey={dataKey} stroke={color} fillOpacity={1} fill={`url(#${gradientId})`} />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
