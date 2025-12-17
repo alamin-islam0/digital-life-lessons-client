@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Mail, Lock, Eye, EyeOff, User, Image } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, User, Image, PenTool, BookOpen, Gem } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
@@ -115,19 +115,19 @@ const Register = () => {
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">📝</span>
+                                    <PenTool className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Create unlimited lessons</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">🌟</span>
+                                    <BookOpen className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Learn from thousands of lessons</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">💎</span>
+                                    <Gem className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Unlock premium features</p>
                             </div>

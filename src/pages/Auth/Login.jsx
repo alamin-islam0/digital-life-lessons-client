@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, PenTool, BookOpen, Gem } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
@@ -98,19 +98,19 @@ const Login = () => {
                         <div className="space-y-4">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">✓</span>
+                                    <PenTool className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Write down your experiences</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">✓</span>
+                                    <BookOpen className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Get inspired by others' lessons</p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-2xl">✓</span>
+                                    <Gem className="text-white w-6 h-6" />
                                 </div>
                                 <p className="text-gray-700">Access premium content</p>
                             </div>

@@ -64,7 +64,7 @@ const LessonCard = ({ lesson, showBlur = false }) => {
     };
 
     return (
-        <div className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group ${showBlur ? 'relative' : ''}`}>
+        <div className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full ${showBlur ? 'relative' : ''}`}>
             {/* Premium Lock Overlay */}
             {showBlur && isPremium && (
                 <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center">
