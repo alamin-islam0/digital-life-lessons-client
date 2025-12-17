@@ -95,7 +95,7 @@ const MyLessons = () => {
     };
 
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('bn-BD', {
+        return new Date(date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',

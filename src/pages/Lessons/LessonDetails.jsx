@@ -680,7 +680,11 @@ const LessonDetails = () => {
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {similarByCategory.slice(0, 6).map((l) => (
-                                <LessonCard key={l._id} lesson={l} />
+                                <LessonCard
+                                    key={l._id}
+                                    lesson={l}
+                                    showBlur={l.accessLevel === 'premium' && !isPremium}
+                                />
                             ))}
                         </div>
                     </div>
@@ -693,7 +697,11 @@ const LessonDetails = () => {
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {similarByTone.slice(0, 6).map((l) => (
-                                <LessonCard key={l._id} lesson={l} />
+                                <LessonCard
+                                    key={l._id}
+                                    lesson={l}
+                                    showBlur={l.accessLevel === 'premium' && !isPremium}
+                                />
                             ))}
                         </div>
                     </div>
