@@ -49,7 +49,7 @@ const LessonDetails = () => {
         queryKey: ['lesson', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/lessons/${id}`);
-            console.log('Lesson Data:', res.data); // Debugging: Check what fields are available
+
             return res.data;
         },
     });
@@ -347,7 +347,7 @@ const LessonDetails = () => {
                     url,
                 });
             } catch (error) {
-                console.log(error, 'Share cancelled');
+
             }
         } else {
             navigator.clipboard.writeText(url);

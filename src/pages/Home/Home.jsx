@@ -58,6 +58,54 @@ const Home = () => {
     });
     const mostSavedLessons = mostSavedData?.lessons || [];
 
+    // Fetch Top Contributors (Dynamic Calculation)
+    const { data: topContributors = [], isLoading: contributorsLoading } = useQuery({
+        queryKey: ['top-contributors'],
+        queryFn: async () => {
+            // Fetch 100 recent lessons to calculate "Top Contributors"
+            const res = await axiosSecure.get('/lessons/public?limit=100');
+            const lessons = res.data.lessons || [];
+
+            // Helper to get author email efficiently
+            const getAuthorEmail = (lesson) => {
+                if (lesson.creator?.email) return lesson.creator.email;
+                if (lesson.createdBy?.email) return lesson.createdBy.email;
+                return lesson.creatorEmail || lesson.authorEmail;
+            };
+
+            // Helper to get author ID efficiently
+            const getAuthorId = (lesson) => {
+                if (lesson.creator && typeof lesson.creator === 'object' && lesson.creator._id) return lesson.creator._id;
+                if (lesson.creator && typeof lesson.creator === 'string' && !lesson.creator.includes('@')) return lesson.creator;
+                if (lesson.createdBy && typeof lesson.createdBy === 'object' && lesson.createdBy._id) return lesson.createdBy._id;
+                if (lesson.createdBy && typeof lesson.createdBy === 'string' && !lesson.createdBy.includes('@')) return lesson.createdBy;
+                return null;
+            };
+
+            const authorStats = {};
+
+            lessons.forEach((lesson) => {
+                const email = getAuthorEmail(lesson);
+                if (!email) return;
+
+                if (!authorStats[email]) {
+                    authorStats[email] = {
+                        name: lesson.creatorName || lesson.authorName || 'Unknown',
+                        email: email,
+                        photoURL: lesson.creatorPhoto || lesson.authorPhotoURL || lesson.authorImage,
+                        count: 0,
+                        id: getAuthorId(lesson)
+                    };
+                }
+                authorStats[email].count++;
+            });
+
+            // Return top 4 contributors
+            return Object.values(authorStats)
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 4);
+        },
+    });
     const heroSlides = [
         {
             title: 'Write down life lessons',
@@ -252,6 +300,61 @@ const Home = () => {
                             View More Lessons
                         </Link>
                     </div>
+                </div>
+            </section>
+
+            {/* Top Contributors Section */}
+            <section className="py-16 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div data-aos="fade-down">
+                        <SectionHeader
+                            title="Top Contributors of the Week"
+                            subtitle="Recognizing our most active community members"
+                        />
+                    </div>
+
+                    {contributorsLoading ? (
+                        <Loading fullScreen={false} />
+                    ) : topContributors.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {topContributors.map((w, index) => (
+                                <div
+                                    key={w.email || index}
+                                    data-aos="fade-up"
+                                    data-aos-delay={index * 100}
+                                    className="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all"
+                                >
+                                    <div className="mb-4 transform hover:scale-110 transition-transform duration-300">
+                                        <UserAvatar user={w} size="lg" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                                        {w.name}
+                                    </h3>
+                                    <p className="text-primary-600 font-medium text-sm mb-3">
+                                        {w.count} Lessons
+                                    </p>
+
+                                    {w.id && !w.id.includes('@') ? (
+                                        <Link
+                                            to={`/author/${w.id}`}
+                                            className="text-sm text-gray-500 hover:text-primary-600 transition-colors"
+                                        >
+                                            View Profile
+                                        </Link>
+                                    ) : (
+                                        <span className="text-sm text-gray-400">
+                                            Community Member
+                                        </span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-12" data-aos="fade-up">
+                            <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                            <p className="text-gray-600">No active contributors this week</p>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

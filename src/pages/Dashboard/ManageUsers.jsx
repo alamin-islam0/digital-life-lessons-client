@@ -115,6 +115,7 @@ const ManageUsers = () => {
                             <TableCell className="font-bold">User</TableCell>
                             <TableCell className="font-bold">Email</TableCell>
                             <TableCell className="font-bold">Role</TableCell>
+                            <TableCell className="font-bold">Total Lessons</TableCell>
                             <TableCell className="font-bold">Membership</TableCell>
                             <TableCell className="font-bold text-right">Action</TableCell>
                         </TableRow>
@@ -141,6 +142,12 @@ const ManageUsers = () => {
                                             size="small"
                                             className=""
                                         />
+                                    </TableCell>
+                                    <TableCell>
+                                        {/* Display total lessons or 0 if not available */}
+                                        <span className="font-semibold text-gray-700">
+                                            {user.totalLessons || 0}
+                                        </span>
                                     </TableCell>
                                     <TableCell>
                                         <Chip

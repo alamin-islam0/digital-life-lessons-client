@@ -19,8 +19,7 @@ const PaymentSuccess = () => {
     useEffect(() => {
         const verifyPayment = async () => {
             try {
-                console.log('💳 Payment success page loaded');
-                console.log('📝 Session ID:', sessionId);
+
 
                 if (!sessionId) {
                     setError('No session ID found');
@@ -29,7 +28,7 @@ const PaymentSuccess = () => {
                 }
 
                 // Wait for webhook/verification to process with polling
-                console.log('⏳ Polling for premium status update...');
+
 
                 let isPremiumConfirmed = false;
                 let attempts = 0;
@@ -45,7 +44,7 @@ const PaymentSuccess = () => {
                                     setPaymentData(verifyRes.data.payment);
                                 }
                             } catch (e) {
-                                console.log('Verify endpoint skipped or failed, using polling:', e.message);
+
                             }
                         }
 
@@ -53,7 +52,7 @@ const PaymentSuccess = () => {
                         const { data: userProfile } = await axiosSecure.get('/users/me');
 
                         if (userProfile?.isPremium) {
-                            console.log('✅ Premium status confirmed!');
+
                             isPremiumConfirmed = true;
                             setPaymentData(prev => prev || {
                                 amount: 0, // Fallback if verify failed
@@ -64,33 +63,33 @@ const PaymentSuccess = () => {
                         }
                     } catch (e) {
                         attempts++;
-                        console.log(`Attempt ${attempts}/${maxAttempts}: Waiting for update...`);
+
                         await new Promise(resolve => setTimeout(resolve, 2000));
                     }
                 }
 
                 // Force refresh all data
-                console.log('🔄 Final data refresh...');
+
                 await queryClient.invalidateQueries(['user']);
                 await queryClient.invalidateQueries(['user-profile']);
                 await queryClient.invalidateQueries(['userPlan']);
                 await queryClient.invalidateQueries(['payment-history']);
 
                 if (isPremiumConfirmed) {
-                    console.log('✅ All data refreshed and verified');
+
                     // Update global auth state immediately
                     await refreshUser();
                     setVerifying(false);
                 } else {
                     // Even if polling "failed" (timed out), we might still be okay, 
                     // just proceed to dashboard. Webhook might be slow.
-                    console.log('⚠️ Polling timed out, proceeding to dashboard...');
+
                     setVerifying(false);
                 }
 
                 // Redirect to dashboard after 6 seconds
                 const timer = setTimeout(() => {
-                    console.log('🚀 Redirecting to dashboard...');
+
                     navigate('/dashboard');
                 }, 6000);
 

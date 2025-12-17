@@ -44,7 +44,7 @@ const MyFavorites = () => {
     const categories = ['All', 'Personal Development', 'Career', 'Relationships', 'Mindset', 'Learning from Mistakes'];
     const emotionalTones = ['All', 'Motivational', 'Sadness', 'Realization', 'Gratitude'];
 
-    console.log('Favorites from API:', favorites);
+
     if (isLoading) return <Loading />;
 
     return (
