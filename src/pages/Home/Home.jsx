@@ -110,17 +110,17 @@ const Home = () => {
         {
             title: 'Write down life lessons',
             subtitle: 'Learn from every experience and share with others',
-            gradient: 'from-blue-600 to-purple-600',
+            image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2573&auto=format&fit=crop',
         },
         {
             title: 'Learn from past mistakes',
             subtitle: 'Your experience can be a guide for others',
-            gradient: 'from-purple-600 to-pink-600',
+            image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2670&auto=format&fit=crop',
         },
         {
             title: 'Get inspiration from everyone\'s lessons',
             subtitle: 'Thousands of life experiences in one place',
-            gradient: 'from-pink-600 to-orange-600',
+            image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2670&auto=format&fit=crop',
         },
     ];
 
@@ -167,24 +167,30 @@ const Home = () => {
                 >
                     {heroSlides.map((slide, index) => (
                         <SwiperSlide key={index}>
-                            <div className={`h-full bg-gradient-to-r ${slide.gradient} flex items-center justify-center px-4`}>
-                                <div className="max-w-4xl mx-auto text-center text-white" data-aos="zoom-in">
-                                    <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                            <div
+                                className="h-full relative flex items-center justify-center px-4 bg-cover bg-center bg-no-repeat"
+                                style={{ backgroundImage: `url(${slide.image})` }}
+                            >
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-black/50"></div>
+
+                                <div className="max-w-4xl mx-auto text-center text-white relative z-10" data-aos="zoom-in">
+                                    <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
                                         {slide.title}
                                     </h1>
-                                    <p className="text-xl md:text-2xl mb-8 opacity-90" data-aos="fade-up" data-aos-delay="200">
+                                    <p className="text-xl md:text-2xl mb-8 opacity-90 drop-shadow-md" data-aos="fade-up" data-aos-delay="200">
                                         {slide.subtitle}
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
                                         <Link
                                             to={user ? '/dashboard/add-lesson' : '/register'}
-                                            className="px-8 py-4 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                                            className="px-8 py-4 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-all shadow-lg hover:shadow-xl border border-transparent hover:scale-105"
                                         >
                                             Start writing lessons
                                         </Link>
                                         <Link
                                             to="/public-lessons"
-                                            className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-bold hover:bg-white/30 transition-all border-2 border-white"
+                                            className="px-8 py-4 bg-white/20 backdrop-blur-md text-white rounded-xl font-bold hover:bg-white/30 transition-all border-2 border-white/50 hover:border-white hover:scale-105"
                                         >
                                             View all lessons
                                         </Link>
