@@ -106,7 +106,7 @@ const Profile = () => {
                 <div className="px-8 pb-8">
                     <div className="relative flex flex-col md:flex-row items-center md:items-end -mt-16 mb-6 gap-6">
                         <div className="ring-4 ring-white rounded-full bg-white">
-                            <UserAvatar user={user} size="xl" className="w-full h-full text-4xl" />
+                            <UserAvatar user={user} size="sm" className="w-[150px] h-[150px] text-4xl" />
                         </div>
 
                         <div className="flex-1 text-center md:text-left mb-2">
@@ -187,7 +187,10 @@ const Profile = () => {
                             <p className="text-2xl font-bold text-blue-600">{myLessons.length}</p>
                             <p className="text-gray-600 text-sm">Public Lessons</p>
                         </div>
-                        {/* Add more stats if available from backend */}
+                        <div className="text-center p-4 bg-purple-50 rounded-xl">
+                            <p className="text-2xl font-bold text-purple-600">{dbUser?.totalFavorites || 0}</p>
+                            <p className="text-gray-600 text-sm">Saved Lessons</p>
+                        </div>
                     </div>
                 </div>
             </div>

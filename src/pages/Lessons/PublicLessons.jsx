@@ -21,7 +21,7 @@ const PublicLessons = () => {
     const [sortBy, setSortBy] = useState('newest');
     const [page, setPage] = useState(1);
     const [showFilters, setShowFilters] = useState(false);
-    const itemsPerPage = 12;
+    const itemsPerPage = 6;
 
     const categories = [
         'All',
