@@ -10,6 +10,7 @@ import {
   Lock,
   Unlock,
   BookOpen,
+  DollarSign,
 } from "lucide-react";
 import {
   Table,
@@ -26,8 +27,10 @@ import {
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../components/ui/Loading";
+import useUserPlan from "../../hooks/useUserPlan";
 
 const MyLessons = () => {
+  const { isPremium } = useUserPlan();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
@@ -66,6 +69,33 @@ const MyLessons = () => {
     },
   });
 
+  const toggleAccessLevelMutation = useMutation({
+    mutationFn: async ({ id, accessLevel }) => {
+      await axiosSecure.patch(`/lessons/${id}`, { accessLevel });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["my-lessons"]);
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Access level updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    onError: (error) => {
+      // Revert if failed (though invalidate will fix UI eventually)
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        title: "Failed to update access level",
+        text: error.response?.data?.message || "Something went wrong",
+      });
+    },
+  });
+
   const handleDelete = (id, title) => {
     Swal.fire({
       title: "Confirm",
@@ -92,6 +122,26 @@ const MyLessons = () => {
   const handleToggleVisibility = (id, currentVisibility) => {
     const newVisibility = currentVisibility === "public" ? "private" : "public";
     toggleVisibilityMutation.mutate({ id, visibility: newVisibility });
+  };
+
+  const handleToggleAccessLevel = (id, currentAccessLevel) => {
+    if (!isPremium) {
+      Swal.fire({
+        title: "Premium Required",
+        text: "You need to be a premium member to create premium lessons.",
+        icon: "warning",
+        confirmButtonText: "Upgrade Now",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Navigate to pricing
+          window.location.href = "/pricing";
+        }
+      });
+      return;
+    }
+    const newAccessLevel =
+      currentAccessLevel === "free" ? "premium" : "free";
+    toggleAccessLevelMutation.mutate({ id, accessLevel: newAccessLevel });
   };
 
   const formatDate = (date) => {
@@ -337,6 +387,37 @@ const MyLessons = () => {
                           )}
                         </IconButton>
                       </Tooltip>
+
+                      <Tooltip
+                        title={
+                          !isPremium
+                            ? "Upgrade to change access level"
+                            : lesson.accessLevel === "free"
+                              ? "Make Premium"
+                              : "Make Free"
+                        }
+                      >
+                        <div>
+                          <IconButton
+                            size="small"
+                            color={
+                              lesson.accessLevel === "premium"
+                                ? "warning"
+                                : "default"
+                            }
+                            onClick={() =>
+                              handleToggleAccessLevel(
+                                lesson._id,
+                                lesson.accessLevel
+                              )
+                            }
+                            disabled={!isPremium}
+                          >
+                            <DollarSign className="w-4 h-4" />
+                          </IconButton>
+                        </div>
+                      </Tooltip>
+
                       <Tooltip title="Delete">
                         <IconButton
                           size="small"

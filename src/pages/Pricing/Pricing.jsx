@@ -31,128 +31,160 @@ const Pricing = () => {
         subtitle="Choose the best plan according to your needs"
       />
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        {/* Free Plan */}
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-          <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900">Free</h3>
-            <p className="text-gray-500 mt-2">Best to start with</p>
-            <div className="mt-4 flex items-baseline">
-              <span className="text-4xl font-bold text-gray-900">Tk 0</span>
-              <span className="text-gray-500 ml-2">/ Lifetime</span>
-            </div>
-          </div>
-
-          <ul className="space-y-4 mb-8">
-            <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-              <span className="text-gray-700">
-                {" "}
-                Watch unlimited free lessons
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-              <span className="text-gray-700">
-                {" "}
-                Create your own lessons (limited)
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-              <span className="text-gray-700"> Comment and Like</span>
-            </li>
-          </ul>
-
-          <button className="w-full py-3 bg-gray-100 text-gray-900 rounded-xl font-bold hover:bg-gray-200 transition-colors cursor-default">
-            Your Current Plan
-          </button>
-        </div>
-
-        {/* Premium Plan */}
-        <div className="relative bg-white rounded-2xl p-8 shadow-xl border-2 border-primary-500 transform md:scale-105 z-10">
-          <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3">
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg premium-glow">
-              <Zap className="w-8 h-8 text-white" />
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              Premium
-              <span className="px-3 py-1 bg-primary-100 text-primary-700 text-xs rounded-full font-bold uppercase tracking-wider">
-                Popular
-              </span>
-            </h3>
-            <p className="text-gray-500 mt-2">Unlock all features</p>
-            <div className="mt-4 flex items-baseline">
-              <span className="text-4xl font-bold text-gray-900">Tk 500</span>
-              <span className="text-gray-500 ml-2">/ One-time</span>
-            </div>
-          </div>
-
-          <ul className="space-y-4 mb-8">
-            <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
-              </div>
-              <span className="text-gray-700 font-medium">
-                Access all premium lessons
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
-              </div>
-              <span className="text-gray-700 font-medium">
-                Create premium lessons
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
-              </div>
-              <span className="text-gray-700 font-medium">
-                Ad-free experience
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
-              </div>
-              <span className="text-gray-700 font-medium">
-                Lifetime membership
-              </span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
-              </div>
-              <span className="text-gray-700 font-medium">
-                Priority support
-              </span>
-            </li>
-          </ul>
-
-          {isPremium ? (
-            <button
-              disabled
-              className="w-full py-3 bg-green-100 text-green-700 rounded-xl font-bold flex items-center justify-center gap-2 cursor-default"
-            >
-              <Check className="w-5 h-5" />
-              You are already premium
-            </button>
-          ) : (
-            <button
-              onClick={handleUpgrade}
-              disabled={createCheckoutSession.isPending}
-              className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-bold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed"
-            >
-              {createCheckoutSession.isPending
-                ? "Processing..."
-                : "Upgrade Now"}
-            </button>
-          )}
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-gray-50 border-b border-gray-100">
+                <th className="py-6 px-6 text-left text-xl font-bold text-gray-900 w-1/3">
+                  Features
+                </th>
+                <th className="py-6 px-6 text-center w-1/3">
+                  <div className="text-xl font-bold text-gray-900">Free</div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    Tk 0 / lifetime
+                  </div>
+                </th>
+                <th className="py-6 px-6 text-center w-1/3 bg-primary-50">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-xl font-bold text-primary-700">
+                      Premium
+                    </span>
+                    <Star className="w-5 h-5 text-yellow-500 fill-current" />
+                  </div>
+                  <div className="text-sm text-primary-600 mt-1">
+                    Tk 1500 / lifetime
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Watch Public Lessons
+                </td>
+                <td className="py-4 px-6 text-center text-gray-600">
+                  Free Only
+                </td>
+                <td className="py-4 px-6 text-center text-primary-700 font-semibold bg-primary-50/30">
+                  All (Free + Premium)
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Create Lessons
+                </td>
+                <td className="py-4 px-6 text-center text-gray-600">
+                  Unlimited
+                </td>
+                <td className="py-4 px-6 text-center text-primary-700 font-semibold bg-primary-50/30">
+                  Unlimited
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Create Premium Lessons
+                </td>
+                <td className="py-4 px-6 text-center">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-gray-400">
+                    ✕
+                  </span>
+                </td>
+                <td className="py-4 px-6 text-center bg-primary-50/30">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100 text-green-600">
+                    <Check className="w-4 h-4" />
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Ad-free Experience
+                </td>
+                <td className="py-4 px-6 text-center">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-gray-400">
+                    ✕
+                  </span>
+                </td>
+                <td className="py-4 px-6 text-center bg-primary-50/30">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100 text-green-600">
+                    <Check className="w-4 h-4" />
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Profile Badge
+                </td>
+                <td className="py-4 px-6 text-center text-gray-600">
+                  None
+                </td>
+                <td className="py-4 px-6 text-center text-primary-700 font-semibold bg-primary-50/30">
+                  Premium Badge
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Priority Listing
+                </td>
+                <td className="py-4 px-6 text-center">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-gray-400">
+                    ✕
+                  </span>
+                </td>
+                <td className="py-4 px-6 text-center bg-primary-50/30">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100 text-green-600">
+                    <Check className="w-4 h-4" />
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-6 text-gray-700 font-medium">
+                  Support
+                </td>
+                <td className="py-4 px-6 text-center text-gray-600">
+                  Standard
+                </td>
+                <td className="py-4 px-6 text-center text-primary-700 font-semibold bg-primary-50/30">
+                  Priority
+                </td>
+              </tr>
+              {/* Action Rows */}
+              <tr className="bg-gray-50 border-t border-gray-100">
+                <td className="py-6 px-6"></td>
+                <td className="py-6 px-6 text-center">
+                  {!isPremium && (
+                    <button
+                      disabled
+                      className="px-6 py-2.5 bg-gray-200 text-gray-600 rounded-lg font-semibold cursor-default"
+                    >
+                      Current Plan
+                    </button>
+                  )}
+                </td>
+                <td className="py-6 px-6 text-center bg-primary-50/30">
+                  {isPremium ? (
+                    <button
+                      disabled
+                      className="px-6 py-2.5 bg-green-100 text-green-700 rounded-lg font-bold flex items-center justify-center gap-2 mx-auto cursor-default"
+                    >
+                      <Check className="w-5 h-5" />
+                      Paid
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleUpgrade}
+                      disabled={createCheckoutSession.isPending}
+                      className="px-8 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-bold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed transform hover:scale-105"
+                    >
+                      {createCheckoutSession.isPending
+                        ? "Processing..."
+                        : "Upgrade Now"}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

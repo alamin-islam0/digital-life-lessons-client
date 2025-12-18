@@ -1,8 +1,12 @@
 # Digital Life Lessons 🌟
 
+
+**Live Site URL:** [Digital Life Lessons](https://digital-life-lesson.netlify.app/)
+
 **Digital Life Lessons** is a modern, full-stack web application designed to connect people through shared experiences. It serves as a platform where users can document their life lessons, learn from others' mistakes and successes, and build a community grounded in wisdom and empathy.
 
 Designed with a premium user experience in mind, the platform features a responsive interface, dark/light mode, and seamless content discovery tools.
+
 
 ## 🚀 Key Features
 

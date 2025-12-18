@@ -160,6 +160,14 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {
+        path: "admin/profile",
+        element: (
+          <AdminRoute>
+            <Profile />
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);
