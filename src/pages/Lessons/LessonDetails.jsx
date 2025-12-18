@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
     Heart,
@@ -468,6 +469,9 @@ const LessonDetails = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
+            <Helmet>
+                <title>{lesson.title} | Digital Life Lessons</title>
+            </Helmet>
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Back Button */}
                 <button
@@ -610,8 +614,8 @@ const LessonDetails = () => {
                             <button
                                 onClick={handleLike}
                                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${isLiked
-                                        ? "bg-red-100 text-red-700 hover:bg-red-200"
-                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    ? "bg-red-100 text-red-700 hover:bg-red-200"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                     }`}
                             >
                                 <Heart
@@ -623,8 +627,8 @@ const LessonDetails = () => {
                             <button
                                 onClick={handleFavorite}
                                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${isFavorited
-                                        ? "bg-primary-100 text-primary-700 hover:bg-primary-200"
-                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    ? "bg-primary-100 text-primary-700 hover:bg-primary-200"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                     }`}
                             >
                                 <Bookmark

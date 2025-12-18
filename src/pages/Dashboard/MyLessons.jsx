@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
   Edit,
@@ -179,6 +180,9 @@ const MyLessons = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Lessons | Digital Life Lessons</title>
+      </Helmet>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">My Lessons</h1>

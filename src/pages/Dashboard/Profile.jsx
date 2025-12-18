@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import { User, Mail, Save, Star } from "lucide-react";
 import Swal from "sweetalert2";
@@ -100,6 +101,9 @@ const Profile = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <Helmet>
+        <title>Profile | Digital Life Lessons</title>
+      </Helmet>
       {/* Profile Header Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-primary-500 to-secondary-500 h-32 md:h-48"></div>

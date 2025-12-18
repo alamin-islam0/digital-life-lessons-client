@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Search, Trash2, Eye, Star } from "lucide-react";
 import {
   Table,
@@ -26,19 +27,35 @@ const ManageLessons = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterAccess, setFilterAccess] = useState("all");
+
   const { data: lessons = [], isLoading } = useQuery({
-    queryKey: ["all-lessons", searchTerm],
+    queryKey: ["all-lessons"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/lessons");
-      if (searchTerm) {
-        return res.data.filter(
-          (l) =>
-            l.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            l.creator?.name?.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      }
       return res.data;
     },
+  });
+
+  const categories = [...new Set(lessons.map((lesson) => lesson.category))];
+
+  const filteredLessons = lessons.filter((lesson) => {
+    // Search
+    const matchesSearch =
+      !searchTerm ||
+      lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lesson.creator?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // Category
+    const matchesCategory =
+      filterCategory === "all" || lesson.category === filterCategory;
+
+    // Access
+    const matchesAccess =
+      filterAccess === "all" || lesson.accessLevel === filterAccess;
+
+    return matchesSearch && matchesCategory && matchesAccess;
   });
 
   const deleteLessonMutation = useMutation({
@@ -111,22 +128,53 @@ const ManageLessons = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Lesson Management
-          </h1>
-          <p className="text-gray-500">Total Lessons: {lessons.length}</p>
+      <Helmet>
+        <title>Manage Lessons | Digital Life Lessons</title>
+      </Helmet>
+      <div className="flex flex-col gap-4 mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Lesson Management
+            </h1>
+            <p className="text-gray-500">Total Lessons: {lessons.length}</p>
+          </div>
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            />
+          </div>
         </div>
-        <div className="relative w-full md:w-64">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
+
+        {/* Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <select
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-gray-50"
+          >
+            <option value="all">All Categories</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={filterAccess}
+            onChange={(e) => setFilterAccess(e.target.value)}
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-gray-50"
+          >
+            <option value="all">All Access Levels</option>
+            <option value="free">Free</option>
+            <option value="premium">Premium</option>
+          </select>
         </div>
       </div>
 
@@ -149,7 +197,7 @@ const ManageLessons = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {lessons
+            {filteredLessons
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((lesson) => (
                 <TableRow key={lesson._id} hover>
@@ -197,9 +245,8 @@ const ManageLessons = () => {
                         }
                       >
                         <Star
-                          className={`w-5 h-5 ${
-                            lesson.isFeatured ? "fill-current" : ""
-                          }`}
+                          className={`w-5 h-5 ${lesson.isFeatured ? "fill-current" : ""
+                            }`}
                         />
                       </IconButton>
                     </Tooltip>
@@ -232,7 +279,7 @@ const ManageLessons = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={lessons.length}
+          count={filteredLessons.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

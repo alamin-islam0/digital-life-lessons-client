@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Users, BookOpen, Flag, TrendingUp, UserPlus } from "lucide-react";
 import {
   AreaChart,
@@ -81,6 +82,9 @@ const AdminHome = () => {
 
   return (
     <div className="space-y-8">
+      <Helmet>
+        <title>Admin Dashboard | Digital Life Lessons</title>
+      </Helmet>
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
         <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg font-semibold">

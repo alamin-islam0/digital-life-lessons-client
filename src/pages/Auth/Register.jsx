@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import {
   Mail,
@@ -121,6 +122,9 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-white to-primary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>Register | Digital Life Lessons</title>
+      </Helmet>
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Side - Illustration/Info */}
         <div className="hidden lg:block">
@@ -282,29 +286,26 @@ const Register = () => {
                 {password && (
                   <div className="mt-2 space-y-1">
                     <p
-                      className={`text-xs ${
-                        password.length >= 6
-                          ? "text-green-600"
-                          : "text-gray-500"
-                      }`}
+                      className={`text-xs ${password.length >= 6
+                        ? "text-green-600"
+                        : "text-gray-500"
+                        }`}
                     >
                       ✓ At least 6 characters
                     </p>
                     <p
-                      className={`text-xs ${
-                        /[A-Z]/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
-                      }`}
+                      className={`text-xs ${/[A-Z]/.test(password)
+                        ? "text-green-600"
+                        : "text-gray-500"
+                        }`}
                     >
                       ✓ 1 uppercase letter
                     </p>
                     <p
-                      className={`text-xs ${
-                        /[a-z]/.test(password)
-                          ? "text-green-600"
-                          : "text-gray-500"
-                      }`}
+                      className={`text-xs ${/[a-z]/.test(password)
+                        ? "text-green-600"
+                        : "text-gray-500"
+                        }`}
                     >
                       ✓ 1 lowercase letter
                     </p>

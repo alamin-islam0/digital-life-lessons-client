@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Search, Trash2, UserCog, ShieldCheck, User } from "lucide-react";
 import {
   Table,
@@ -26,20 +27,35 @@ const ManageUsers = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [filterRole, setFilterRole] = useState("all");
+  const [filterPlan, setFilterPlan] = useState("all");
+
   const { data: users = [], isLoading } = useQuery({
-    queryKey: ["users", searchTerm],
+    queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/users");
-      // Simple client-side filtering
-      if (searchTerm) {
-        return res.data.filter(
-          (u) =>
-            u.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            u.email?.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      }
       return res.data;
     },
+  });
+
+  const filteredUsers = users.filter((user) => {
+    // Search Filter
+    const matchesSearch =
+      !searchTerm ||
+      user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // Role Filter
+    const matchesRole =
+      filterRole === "all" || user.role === filterRole;
+
+    // Plan Filter
+    // Note: user.isPremium is boolean
+    let matchesPlan = true;
+    if (filterPlan === "premium") matchesPlan = user.isPremium === true;
+    if (filterPlan === "free") matchesPlan = user.isPremium === false;
+
+    return matchesSearch && matchesRole && matchesPlan;
   });
 
   const updateUserRoleMutation = useMutation({
@@ -63,9 +79,8 @@ const ManageUsers = () => {
     const newRole = user.role === "admin" ? "user" : "admin";
     Swal.fire({
       title: "Change role?",
-      text: `Do you want to make ${user.name}'s role ${
-        newRole === "admin" ? "Admin" : "User"
-      }?`,
+      text: `Do you want to make ${user.name}'s role ${newRole === "admin" ? "Admin" : "User"
+        }?`,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -92,20 +107,48 @@ const ManageUsers = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-          <p className="text-gray-500">Total Users: {users.length}</p>
+      <Helmet>
+        <title>Manage Users | Digital Life Lessons</title>
+      </Helmet>
+      <div className="flex flex-col gap-4 mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+            <p className="text-gray-500">Total Users: {users.length}</p>
+          </div>
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            />
+          </div>
         </div>
-        <div className="relative w-full md:w-64">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          />
+
+        {/* Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <select
+            value={filterRole}
+            onChange={(e) => setFilterRole(e.target.value)}
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-gray-50"
+          >
+            <option value="all">All Roles</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+
+          <select
+            value={filterPlan}
+            onChange={(e) => setFilterPlan(e.target.value)}
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-gray-50"
+          >
+            <option value="all">All Plans</option>
+            <option value="premium">Premium</option>
+            <option value="free">Free</option>
+          </select>
         </div>
       </div>
 
@@ -126,7 +169,7 @@ const ManageUsers = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users
+            {filteredUsers
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((user) => (
                 <TableRow key={user._id} hover>
@@ -186,7 +229,7 @@ const ManageUsers = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={users.length}
+          count={filteredUsers.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

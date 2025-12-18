@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { BookOpen, Save, Image } from "lucide-react";
 import Swal from "sweetalert2";
@@ -113,6 +114,9 @@ const AddLesson = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
+      <Helmet>
+        <title>Add Lesson | Digital Life Lessons</title>
+      </Helmet>
       <div className="bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">

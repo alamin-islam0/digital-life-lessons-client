@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import {
   BarChart,
   Bar,
@@ -113,6 +114,9 @@ const DashboardHome = () => {
 
   return (
     <div className="space-y-8">
+      <Helmet>
+        <title>Dashboard | Digital Life Lessons</title>
+      </Helmet>
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-white">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -243,21 +247,19 @@ const DashboardHome = () => {
           <div className="flex bg-gray-100 rounded-lg p-1">
             <button
               onClick={() => setChartView("weekly")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                chartView === "weekly"
-                  ? "bg-white text-primary-600 shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${chartView === "weekly"
+                ? "bg-white text-primary-600 shadow-sm"
+                : "text-gray-600 hover:text-gray-900"
+                }`}
             >
               Weekly
             </button>
             <button
               onClick={() => setChartView("monthly")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                chartView === "monthly"
-                  ? "bg-white text-primary-600 shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
+              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${chartView === "monthly"
+                ? "bg-white text-primary-600 shadow-sm"
+                : "text-gray-600 hover:text-gray-900"
+                }`}
             >
               Monthly
             </button>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BookOpen, Save, Image } from "lucide-react";
@@ -119,6 +120,9 @@ const UpdateLesson = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
+      <Helmet>
+        <title>Update Lesson | Digital Life Lessons</title>
+      </Helmet>
       <div className="bg-white rounded-2xl shadow-lg p-8">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">

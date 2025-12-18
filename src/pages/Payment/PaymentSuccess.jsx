@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { CheckCircle, Home, Loader2, CreditCard, Calendar } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
@@ -43,7 +44,7 @@ const PaymentSuccess = () => {
                 if (verifyRes.data?.payment) {
                   setPaymentData(verifyRes.data.payment);
                 }
-              } catch (e) {}
+              } catch (e) { }
             }
 
             // 2. Check user profile directly
@@ -166,6 +167,9 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
+      <Helmet>
+        <title>Payment Success | Digital Life Lessons</title>
+      </Helmet>
       <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
         <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
           <CheckCircle className="w-12 h-12 text-green-600" />

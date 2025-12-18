@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { Check, Star, Zap } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserPlan from "../../hooks/useUserPlan";
 import SectionHeader from "../../components/ui/SectionHeader";
@@ -26,6 +27,9 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-16 px-4">
+      <Helmet>
+        <title>Pricing | Digital Life Lessons</title>
+      </Helmet>
       <SectionHeader
         title="Our Plans"
         subtitle="Choose the best plan according to your needs"

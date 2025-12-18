@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Mail, Lock, Eye, EyeOff, PenTool, BookOpen, Gem } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
@@ -85,6 +86,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>Login | Digital Life Lessons</title>
+      </Helmet>
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Side - Illustration/Info */}
         <div className="hidden lg:block">

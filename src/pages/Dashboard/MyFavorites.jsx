@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import { Bookmark } from "lucide-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -61,6 +62,9 @@ const MyFavorites = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>My Favorites | Digital Life Lessons</title>
+      </Helmet>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Saved Lessons</h1>
         <p className="text-gray-600">Total {favorites.length} lessons saved</p>
