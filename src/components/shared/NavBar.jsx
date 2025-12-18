@@ -31,6 +31,8 @@ const Navbar = () => {
     navLinks.push({ path: "/dashboard/my-lessons", label: "My Lessons" });
     if (!isPremium) {
       navLinks.push({ path: "/pricing", label: "Upgrade" });
+    } else {
+      navLinks.push({ path: "/pricing", label: "Pricing" });
     }
   }
 
