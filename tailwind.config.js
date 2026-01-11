@@ -76,14 +76,16 @@ export default {
           "warning": "#f59e0b",
           "error": "#ef4444",
         },
+      },
+      {
         dark: {
           "primary": "#32B2C9", // Use Teal as primary in dark mode for better visibility
           "secondary": "#0B2C56",
           "accent": "#4FC3DC",
           "neutral": "#e2e8f0",
-          "base-100": "#020617", // Very dark navy/black background
-          "base-200": "#0f172a",
-          "base-300": "#1e293b",
+          "base-100": "#0f172a", // Very dark navy/black background
+          "base-200": "#1e293b",
+          "base-300": "#334155",
           "info": "#32B2C9",
           "success": "#4ade80",
           "warning": "#fbbf24",
@@ -91,5 +93,6 @@ export default {
         },
       },
     ],
+    darkTheme: "dark",
   },
 }

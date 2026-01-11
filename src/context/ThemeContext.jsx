@@ -18,11 +18,17 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
+    
     if (isDark) {
       root.classList.add("dark");
+      root.setAttribute("data-theme", "dark");
+      body.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
+      root.setAttribute("data-theme", "light");
+      body.setAttribute("data-theme", "light");
       localStorage.setItem("theme", "light");
     }
   }, [isDark]);
