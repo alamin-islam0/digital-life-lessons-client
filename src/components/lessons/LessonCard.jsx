@@ -1,4 +1,4 @@
-import { Heart, Bookmark, Eye, Lock, Calendar, User } from "lucide-react";
+import { Heart, Bookmark, Eye, Lock, Calendar, User, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import UserAvatar from "../ui/UserAvatar";
 
@@ -18,7 +18,6 @@ const LessonCard = ({ lesson, showBlur = false }) => {
     creatorPhoto,
     creatorEmail,
     createdBy,
-
     views = Math.floor(Math.random() * 10000),
     createdAt,
   } = lesson;
@@ -44,47 +43,51 @@ const LessonCard = ({ lesson, showBlur = false }) => {
   const isPremium = accessLevel === "premium";
 
   // Category badge colors
-  // Category badge colors
   const categoryColors = {
-    "Personal Development": "bg-primary/10 text-primary",
-    Career: "bg-secondary/10 text-secondary",
-    Relationships: "bg-accent/10 text-accent",
-    Mindset: "bg-info/10 text-info",
-    "Learning from Mistakes": "bg-warning/10 text-warning-content", // using warning-content for better contrast if needed, or stick to text-warning
+    "Personal Development": "bg-primary/10 text-primary border-primary/20",
+    Career: "bg-secondary/10 text-secondary border-secondary/20",
+    Relationships: "bg-accent/10 text-accent border-accent/20",
+    Mindset: "bg-info/10 text-info border-info/20",
+    "Learning from Mistakes": "bg-warning/10 text-warning-content border-warning/20",
   };
 
   // Emotional tone colors
   const toneColors = {
-    Motivational: "bg-success/10 text-success",
-    Sadness: "bg-neutral/10 text-neutral-content",
-    Realization: "bg-primary/5 text-primary",
-    Gratitude: "bg-secondary/5 text-secondary",
+    Motivational: "bg-success/10 text-success border-success/20",
+    Sadness: "bg-neutral/10 text-neutral-content border-neutral/20",
+    Realization: "bg-primary/5 text-primary border-primary/20",
+    Gratitude: "bg-secondary/5 text-secondary border-secondary/20",
   };
 
   const formatDate = (date) => {
     const d = new Date(date);
-    return d.toLocaleDateString();
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
   return (
     <div
-      className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full ${showBlur ? "relative" : ""
-        }`}
+      className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group h-[520px] flex flex-col border border-gray-100 hover:border-primary/20 ${
+        showBlur ? "relative" : ""
+      }`}
     >
       {/* Premium Lock Overlay */}
-      {/* Premium Lock Overlay */}
       {showBlur && isPremium && (
-        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center">
-          <div className="text-center p-6">
-            <Lock className="w-12 h-12 text-secondary mx-auto mb-3" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Premium Lesson
+        <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex items-center justify-center">
+          <div className="text-center p-8 max-w-sm">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+              <Lock className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              Premium Content
             </h3>
-            <p className="text-gray-600 mb-4">Upgrade to view this lesson</p>
+            <p className="text-gray-600 mb-6">
+              Unlock this lesson and thousands more with Premium
+            </p>
             <Link
               to="/pricing"
-              className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-all"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
             >
+              <Star className="w-5 h-5" />
               Upgrade Now
             </Link>
           </div>
@@ -92,60 +95,79 @@ const LessonCard = ({ lesson, showBlur = false }) => {
       )}
 
       <div
-        className={`flex flex-col h-full ${showBlur && isPremium ? "blur-sm" : ""
-          }`}
+        className={`flex flex-col h-full ${
+          showBlur && isPremium ? "blur-sm" : ""
+        }`}
       >
-        {/* Lesson Cover Image */}
-        {image && (
-          <div className="relative h-48 w-full overflow-hidden">
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-        )}
+        {/* Image Section with Overlay */}
+        <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+          {image ? (
+            <>
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+              
+              {/* Premium Badge on Image */}
+              {isPremium && (
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold shadow-lg premium-glow">
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    Premium
+                  </div>
+                </div>
+              )}
 
-        <div className="p-6 flex-1 flex flex-col">
-          {/* Header with badges */}
-          <div className="flex items-start justify-between mb-3">
-            <div className="flex flex-wrap gap-2">
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[category] || "bg-gray-100 text-gray-700"
+              {/* Category Badge on Image */}
+              <div className="absolute top-4 left-4 z-10">
+                <span
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-md bg-white/90 border ${
+                    categoryColors[category] || "bg-white/90 text-gray-700 border-gray-200"
                   }`}
-              >
-                {category}
-              </span>
-              <span
-                className={`px-3 py-1 rounded-full text-xs font-semibold ${toneColors[emotionalTone] || "bg-gray-100 text-gray-700"
-                  }`}
-              >
-                {emotionalTone}
-              </span>
+                >
+                  {category}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+              <Eye className="w-12 h-12 text-gray-300" />
             </div>
-            {isPremium && (
-              <span className="px-3 w-28 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-secondary text-white premium-glow">
-                ⭐ Premium
-              </span>
-            )}
+          )}
+        </div>
+
+        {/* Content Section */}
+        <div className="p-5 flex-1 flex flex-col">
+          {/* Emotional Tone Badge */}
+          <div className="mb-3">
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
+                toneColors[emotionalTone] || "bg-gray-100 text-gray-700 border-gray-200"
+              }`}
+            >
+              {emotionalTone}
+            </span>
           </div>
 
           {/* Title */}
-          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+          <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed flex-grow">
             {description}
           </p>
 
-          {/* Creator Info */}
-          <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-100 mt-auto">
+          {/* Author Info */}
+          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
             <UserAvatar user={displayAuthor} size="sm" />
-            <div>
-              <p className="text-sm font-medium text-gray-900">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-gray-900 truncate">
                 {displayAuthor.name}
               </p>
               <p className="text-xs text-gray-500 flex items-center gap-1">
@@ -155,20 +177,20 @@ const LessonCard = ({ lesson, showBlur = false }) => {
             </div>
           </div>
 
-          {/* Stats */}
+          {/* Stats Row */}
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <span className="flex items-center gap-1">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-error transition-colors">
                 <Heart className="w-4 h-4" />
-                {displayLikesCount}
+                <span className="font-medium">{displayLikesCount}</span>
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-primary transition-colors">
                 <Bookmark className="w-4 h-4" />
-                {displayFavoritesCount}
+                <span className="font-medium">{displayFavoritesCount}</span>
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600">
                 <Eye className="w-4 h-4" />
-                {views}
+                <span className="font-medium">{views.toLocaleString()}</span>
               </span>
             </div>
           </div>
@@ -176,9 +198,11 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           {/* CTA Button */}
           <Link
             to={`/lesson/${_id}`}
-            className="block w-full text-center bg-gradient-to-r from-primary to-secondary text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition-all"
+            className="group/btn relative overflow-hidden flex items-center justify-center gap-2 w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
           >
-            View Details
+            <span className="relative z-10">View Details</span>
+            <ArrowRight className="w-4 h-4 relative z-10 group-hover/btn:translate-x-1 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
           </Link>
         </div>
       </div>

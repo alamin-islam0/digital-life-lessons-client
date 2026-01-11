@@ -23,9 +23,12 @@ const MostSavedLessons = ({ lessons, isLoading, isPremium }) => {
           <div data-aos="fade-left">
             <Link
               to="/public-lessons"
-              className="btn btn-outline btn-secondary rounded-full px-8 hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary rounded-full font-bold hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               View All Lessons
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -33,7 +36,7 @@ const MostSavedLessons = ({ lessons, isLoading, isPremium }) => {
         {isLoading ? (
           <Loading fullScreen={false} />
         ) : lessons.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {lessons.slice(0, 6).map((lesson, index) => (
               <div
                 key={lesson._id}

@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useUserPlan from "../../hooks/useUserPlan";
 import UserAvatar from "../ui/UserAvatar";
 import Logo from "../ui/Logo";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,11 +48,11 @@ const Navbar = () => {
         `font-medium transition-colors ${mobile
           ? `block px-4 py-3 rounded-lg ${isActive
             ? "bg-primary/10 text-primary"
-            : "text-gray-700 hover:bg-gray-100"
+            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
           }`
           : `${isActive
             ? "text-primary"
-            : "text-gray-700 hover:text-primary"
+            : "text-gray-700 dark:text-gray-300 hover:text-primary"
           }`
         }`
       }
@@ -61,7 +62,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-40">
+    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-40 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -86,6 +87,7 @@ const Navbar = () => {
 
           {/* Right Side - Auth */}
           <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
             {user ? (
               <div className="relative">
                 <button
@@ -102,12 +104,12 @@ const Navbar = () => {
                       className="fixed inset-0 z-10"
                       onClick={() => setShowDropdown(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-20">
-                      <div className="px-4 py-3 border-b border-gray-100">
-                        <p className="font-semibold text-gray-900">
+                    <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-20">
+                      <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+                        <p className="font-semibold text-gray-900 dark:text-white">
                           {user.displayName || "User"}
                         </p>
-                        <p className="text-sm text-gray-500">{user.email}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                         {isPremium && (
                           <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-semibold">
                             <Star className="w-3 h-3" />
@@ -119,9 +121,9 @@ const Navbar = () => {
                       <Link
                         to="/dashboard/profile"
                         onClick={() => setShowDropdown(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
                       >
-                        <User className="w-4 h-4 text-gray-600" />
+                        <User className="w-4 h-4" />
                         Profile
                       </Link>
 
@@ -130,9 +132,9 @@ const Navbar = () => {
                           role === "admin" ? "/dashboard/admin" : "/dashboard"
                         }
                         onClick={() => setShowDropdown(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-gray-600" />
+                        <LayoutDashboard className="w-4 h-4" />
                         Dashboard
                       </Link>
 

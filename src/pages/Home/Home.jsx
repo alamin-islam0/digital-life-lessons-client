@@ -1,7 +1,4 @@
-import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import useUserPlan from "../../hooks/useUserPlan";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -21,14 +18,6 @@ import CtaSection from "./components/CtaSection";
 const Home = () => {
   const { isPremium } = useUserPlan();
   const axiosSecure = useAxiosSecure();
-
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: "ease-out-cubic",
-    });
-  }, []);
 
   // Fetch featured lessons
   const { data: featuredLessons = [], isLoading: featuredLoading } = useQuery({

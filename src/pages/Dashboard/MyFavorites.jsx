@@ -1,25 +1,42 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Bookmark } from "lucide-react";
+import { Link } from "react-router-dom";
+import {
+  Bookmark,
+  Eye,
+  Heart,
+  Trash2,
+  BookOpen,
+  Search,
+} from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Chip,
+  Tooltip,
+} from "@mui/material";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../../components/ui/Loading";
-import LessonCard from "../../components/lessons/LessonCard";
 
 const MyFavorites = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const [category, setCategory] = useState("");
-  const [emotionalTone, setEmotionalTone] = useState("");
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterTone, setFilterTone] = useState("all");
 
   const { data: favorites = [], isLoading } = useQuery({
-    queryKey: ["my-favorites", category, emotionalTone],
+    queryKey: ["my-favorites"],
     queryFn: async () => {
-      const params = new URLSearchParams();
-      if (category) params.append("category", category);
-      if (emotionalTone) params.append("emotionalTone", emotionalTone);
-
-      const res = await axiosSecure.get(`/lessons/favorites?${params}`);
+      const res = await axiosSecure.get(`/lessons/favorites`);
       return res.data;
     },
   });
@@ -41,100 +58,230 @@ const MyFavorites = () => {
     },
   });
 
+  const handleRemove = (lessonId, title) => {
+    Swal.fire({
+      title: "Remove from Favorites?",
+      text: `Do you want to remove "${title}" from your favorites?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, remove it",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeFavoriteMutation.mutate(lessonId);
+      }
+    });
+  };
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  // Extract unique categories and tones
   const categories = [
-    "All",
-    "Personal Development",
-    "Career",
-    "Relationships",
-    "Mindset",
-    "Learning from Mistakes",
+    ...new Set(
+      favorites.map((fav) => (fav.lesson || fav).category).filter(Boolean)
+    ),
   ];
-  const emotionalTones = [
-    "All",
-    "Motivational",
-    "Sadness",
-    "Realization",
-    "Gratitude",
+  const tones = [
+    ...new Set(
+      favorites
+        .map((fav) => (fav.lesson || fav).emotionalTone)
+        .filter(Boolean)
+    ),
   ];
+
+  // Filter favorites
+  const filteredFavorites = favorites.filter((fav) => {
+    const lesson = fav.lesson || fav;
+    const matchesSearch =
+      lesson.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lesson.description?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      filterCategory === "all" || lesson.category === filterCategory;
+    const matchesTone =
+      filterTone === "all" || lesson.emotionalTone === filterTone;
+
+    return matchesSearch && matchesCategory && matchesTone;
+  });
 
   if (isLoading) return <Loading />;
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Saved Lessons</h1>
-        <p className="text-gray-600">Total {favorites.length} lessons saved</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Saved Lessons
+        </h1>
+        <p className="text-gray-600">
+          Total {favorites.length} lessons saved
+        </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Category
-            </label>
-            <select
-              value={category}
-              onChange={(e) =>
-                setCategory(e.target.value === "All" ? "" : e.target.value)
-              }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Emotional Tone
-            </label>
-            <select
-              value={emotionalTone}
-              onChange={(e) =>
-                setEmotionalTone(e.target.value === "All" ? "" : e.target.value)
-              }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              {emotionalTones.map((tone) => (
-                <option key={tone} value={tone}>
-                  {tone}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="bg-white p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search saved lessons..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+          />
         </div>
+
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+        >
+          <option value="all">All Categories</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filterTone}
+          onChange={(e) => setFilterTone(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+        >
+          <option value="all">All Emotional Tones</option>
+          {tones.map((tone) => (
+            <option key={tone} value={tone}>
+              {tone}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* Favorites Grid */}
-      {/* Favorites Grid */}
-      {favorites?.length === 0 ? (
+      {/* Results */}
+      {favorites.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-md p-12 text-center">
           <Bookmark className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-gray-900 mb-2">
-            No saved lessons
+            No saved lessons yet
           </h3>
-          <p className="text-gray-600">
-            Save your favorite lessons to read later
+          <p className="text-gray-600 mb-6">
+            Start saving lessons you want to read later
           </p>
+          <Link
+            to="/public-lessons"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:opacity-90 transition-all"
+          >
+            <BookOpen className="w-5 h-5" />
+            Explore Lessons
+          </Link>
+        </div>
+      ) : filteredFavorites.length === 0 ? (
+        <div className="bg-white rounded-2xl shadow-md p-12 text-center">
+          <p className="text-gray-600">No lessons match your filters.</p>
+          <button
+            onClick={() => {
+              setSearchTerm("");
+              setFilterCategory("all");
+              setFilterTone("all");
+            }}
+            className="mt-4 text-primary hover:underline font-semibold"
+          >
+            Clear all filters
+          </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            return (
-              <div key={fav._id || lessonData._id} className="relative">
-                <LessonCard lesson={lessonData} />
-                <button
-                  onClick={() => removeFavoriteMutation.mutate(lessonData._id)}
-                  className="absolute top-4 right-4 p-2 bg-error text-white rounded-lg hover:opacity-90 transition-all shadow-md"
-                >
-                  <Bookmark className="w-4 h-4 fill-current" />
-                </button>
-              </div>
-            );
-        </div>
+        <TableContainer component={Paper} className="rounded-2xl shadow-md">
+          <Table>
+            <TableHead>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-bold">Title</TableCell>
+                <TableCell className="font-bold">Category</TableCell>
+                <TableCell className="font-bold">Emotional Tone</TableCell>
+                <TableCell className="font-bold">Author</TableCell>
+                <TableCell className="font-bold">Saved On</TableCell>
+                <TableCell className="font-bold">Stats</TableCell>
+                <TableCell className="font-bold">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredFavorites.map((fav) => {
+                const lesson = fav.lesson || fav;
+                const author = lesson.creator || lesson.createdBy || {};
+                
+                return (
+                  <TableRow key={fav._id || lesson._id} hover>
+                    <TableCell className="font-medium max-w-xs">
+                      <div className="line-clamp-2">{lesson.title}</div>
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={lesson.category}
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={lesson.emotionalTone}
+                        size="small"
+                        color="secondary"
+                        variant="outlined"
+                      />
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-600">
+                      {author.name || author.displayName || "Unknown"}
+                    </TableCell>
+                    <TableCell className="text-sm text-gray-600">
+                      {formatDate(fav.createdAt || lesson.createdAt)}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-3 text-sm text-gray-600">
+                        <span className="flex items-center gap-1">
+                          <Heart className="w-4 h-4" />
+                          {lesson.likesCount || 0}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Bookmark className="w-4 h-4" />
+                          {lesson.favoritesCount || 0}
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1">
+                        <Tooltip title="View Lesson">
+                          <Link to={`/lesson/${lesson._id}`}>
+                            <IconButton size="small" color="primary">
+                              <Eye className="w-4 h-4" />
+                            </IconButton>
+                          </Link>
+                        </Tooltip>
+                        <Tooltip title="Remove from Favorites">
+                          <IconButton
+                            size="small"
+                            color="error"
+                            onClick={() =>
+                              handleRemove(lesson._id, lesson.title)
+                            }
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </div>
   );

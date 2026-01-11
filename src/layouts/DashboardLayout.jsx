@@ -15,6 +15,7 @@ import { FiUsers, FiSettings, FiAlertCircle } from "react-icons/fi";
 import { MdOutlineAdminPanelSettings, MdClass } from "react-icons/md";
 import UserAvatar from "../components/ui/UserAvatar";
 import Logo from "../components/ui/Logo";
+import ThemeToggle from "../components/ui/ThemeToggle";
 
 const DashboardLayout = () => {
   const { user, role } = useAuth();
@@ -35,11 +36,11 @@ const DashboardLayout = () => {
     `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
       isActive
         ? "bg-primary text-white shadow-md"
-        : "text-gray-600 hover:bg-primary/5 hover:text-primary"
+        : "text-gray-600 dark:text-gray-300 hover:bg-primary/5 dark:hover:bg-primary/10 hover:text-primary"
     }`;
 
   return (
-    <div className="h-screen bg-base-200 flex overflow-hidden">
+    <div className="h-screen bg-base-200 dark:bg-gray-900 flex overflow-hidden">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
@@ -52,7 +53,7 @@ const DashboardLayout = () => {
       <aside
         className={`
                     fixed lg:static inset-y-0 left-0 z-50 flex-shrink-0
-                    w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out 
+                    w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out 
                     ${
                       isSidebarOpen
                         ? "translate-x-0"
@@ -62,11 +63,11 @@ const DashboardLayout = () => {
       >
         <div className="h-full flex flex-col">
           {/* Logo Area */}
-          <div className="h-16 flex items-center justify-between px-6 border-b border-gray-100">
+          <div className="h-16 flex items-center justify-between px-6 border-b border-gray-100 dark:border-gray-700">
             <Logo />
             <button
               onClick={closeSidebar}
-              className="lg:hidden text-gray-500 hover:text-gray-700"
+              className="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
             >
               <RxCross1 size={24} />
             </button>
@@ -186,14 +187,14 @@ const DashboardLayout = () => {
 
           {/* User Info Footer */}
           {user && (
-            <div className="p-4 border-t border-gray-100">
+            <div className="p-4 border-t border-gray-100 dark:border-gray-700">
               <div className="flex items-center gap-3">
                 <UserAvatar user={user} size="md" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {user?.displayName || "User"}
                   </p>
-                  <p className="text-xs text-gray-500 truncate">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                     {user?.email}
                   </p>
                 </div>
@@ -206,15 +207,15 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Mobile Header */}
-        <div className="lg:hidden h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4">
+        <div className="lg:hidden h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
           <button
             onClick={toggleSidebar}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           >
             <RxHamburgerMenu size={24} />
           </button>
-          <span className="font-semibold text-gray-900">Dashboard</span>
-          <div className="w-6"></div> {/* Spacer for center alignment */}
+          <span className="font-semibold text-gray-900 dark:text-white">Dashboard</span>
+          <ThemeToggle />
         </div>
 
         {/* Dashboard Content */}
