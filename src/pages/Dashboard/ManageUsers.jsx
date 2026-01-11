@@ -91,11 +91,11 @@ const ManageUsers = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
-          <p className="text-gray-500">Total Users: {users.length}</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">User Management</h1>
+          <p className="text-gray-500 dark:text-gray-400">Total Users: {users.length}</p>
         </div>
         <div className="relative w-full md:w-64">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -112,10 +112,10 @@ const ManageUsers = () => {
       <TableContainer
         component={Paper}
         elevation={0}
-        className="border border-gray-100 rounded-xl"
+        className="border border-gray-100 dark:border-gray-700 rounded-xl"
       >
         <Table>
-          <TableHead className="bg-gray-50">
+          <TableHead className="bg-gray-50 dark:bg-gray-700">
             <TableRow>
               <TableCell className="font-bold">User</TableCell>
               <TableCell className="font-bold">Email</TableCell>
@@ -156,7 +156,7 @@ const ManageUsers = () => {
                   </TableCell>
                   <TableCell>
                     {/* Display total lessons or 0 if not available */}
-                    <span className="font-semibold text-gray-700">
+                    <span className="font-semibold text-gray-700 dark:text-gray-300">
                       {user.totalLessons || 0}
                     </span>
                   </TableCell>

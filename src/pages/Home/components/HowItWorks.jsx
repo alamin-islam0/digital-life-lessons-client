@@ -41,7 +41,7 @@ const HowItWorks = () => {
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-gray-500">{step.desc}</p>
+                <p className="text-gray-500 dark:text-gray-400">{step.desc}</p>
               </div>
             ))}
           </div>

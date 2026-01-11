@@ -127,7 +127,7 @@ const Blog = () => {
                 </div>
               </div>
               <div className="p-8">
-                <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300 mb-4">
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
                     {featuredPost.category}
                   </span>
@@ -138,10 +138,10 @@ const Blog = () => {
                   <span>•</span>
                   <span>{featuredPost.readTime}</span>
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-primary transition-colors">
                   {featuredPost.title}
                 </h2>
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                   {featuredPost.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
@@ -149,7 +149,7 @@ const Blog = () => {
                     <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
                       <User className="w-5 h-5 text-white" />
                     </div>
-                    <span className="font-semibold text-gray-900">
+                    <span className="font-semibold text-gray-900 dark:text-white">
                       {featuredPost.author}
                     </span>
                   </div>
@@ -178,7 +178,7 @@ const Blog = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-3 text-xs text-gray-600 mb-3">
+                    <div className="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-300 mb-3">
                       <span className="px-3 py-1 bg-secondary/10 text-secondary rounded-full font-semibold">
                         {post.category}
                       </span>
@@ -187,10 +187,10 @@ const Blog = () => {
                         {post.date}
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
                     <div className="flex items-center justify-between">
@@ -198,7 +198,7 @@ const Blog = () => {
                         <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
                           <User className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-sm font-semibold text-gray-900">
+                        <span className="text-sm font-semibold text-gray-900 dark:text-white">
                           {post.author}
                         </span>
                       </div>
@@ -223,8 +223,8 @@ const Blog = () => {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Categories */}
-            <div data-aos="fade-left" className="bg-white rounded-2xl shadow-lg p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <div data-aos="fade-left" className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Categories
               </h3>
               <div className="space-y-3">
@@ -235,11 +235,11 @@ const Blog = () => {
                   >
                     <div className="flex items-center gap-3">
                       <category.icon className="w-5 h-5 text-primary" />
-                      <span className="font-semibold text-gray-900 group-hover:text-primary transition-colors">
+                      <span className="font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
                         {category.name}
                       </span>
                     </div>
-                    <span className="px-3 py-1 bg-base-200 text-gray-600 rounded-full text-sm font-bold">
+                    <span className="px-3 py-1 bg-base-200 text-gray-600 dark:text-gray-300 rounded-full text-sm font-bold">
                       {category.count}
                     </span>
                   </button>
@@ -261,17 +261,17 @@ const Blog = () => {
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="w-full px-4 py-3 rounded-xl text-gray-900 focus:ring-2 focus:ring-white focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-white focus:outline-none"
                 />
-                <button className="w-full py-3 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 transition-all">
+                <button className="w-full py-3 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 dark:bg-gray-800 transition-all">
                   Subscribe
                 </button>
               </div>
             </div>
 
             {/* Popular Tags */}
-            <div data-aos="fade-left" data-aos-delay="200" className="bg-white rounded-2xl shadow-lg p-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <div data-aos="fade-left" data-aos-delay="200" className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Popular Tags
               </h3>
               <div className="flex flex-wrap gap-2">

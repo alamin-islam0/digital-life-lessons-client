@@ -102,11 +102,11 @@ const ReportedLessons = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Reported Lessons</h1>
-          <p className="text-gray-500">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Reported Lessons</h1>
+          <p className="text-gray-500 dark:text-gray-400">
             Total Reported Lessons: {reports.length}
           </p>
         </div>
@@ -115,10 +115,10 @@ const ReportedLessons = () => {
       <TableContainer
         component={Paper}
         elevation={0}
-        className="border border-gray-100 rounded-xl"
+        className="border border-gray-100 dark:border-gray-700 rounded-xl"
       >
         <Table>
-          <TableHead className="bg-gray-50">
+          <TableHead className="bg-gray-50 dark:bg-gray-700">
             <TableRow>
               <TableCell className="bangla-text font-bold">
                 Lesson Title
@@ -225,13 +225,13 @@ const ReportedLessons = () => {
                 {reportDetails.map((detail) => (
                   <div
                     key={detail._id}
-                    className="border border-gray-200 rounded-xl p-4 hover:bg-gray-50 transition-colors"
+                    className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:bg-gray-50 dark:bg-gray-700 transition-colors"
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <Typography
                           variant="subtitle2"
-                          className="bangla-text font-bold text-gray-900"
+                          className="bangla-text font-bold text-gray-900 dark:text-white"
                         >
                           {detail.reporter?.name || "Unknown User"} (
                           {detail.reporter?.email})
@@ -245,7 +245,7 @@ const ReportedLessons = () => {
                       </span>
                     </div>
                     {detail.message && (
-                      <div className="bg-white p-3 rounded-lg border border-gray-100 text-gray-700 text-sm mt-2">
+                      <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm mt-2">
                         {detail.message}
                       </div>
                     )}
@@ -254,7 +254,7 @@ const ReportedLessons = () => {
               </div>
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
               No details found
             </div>
           )}

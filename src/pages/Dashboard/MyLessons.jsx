@@ -131,8 +131,8 @@ const MyLessons = () => {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Lessons</h1>
-          <p className="text-gray-600">Total {lessons.length} lessons</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">My Lessons</h1>
+          <p className="text-gray-600 dark:text-gray-300">Total {lessons.length} lessons</p>
         </div>
         <Link
           to="/dashboard/add-lesson"
@@ -144,21 +144,21 @@ const MyLessons = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="md:col-span-1">
           <input
             type="text"
             placeholder="Search lessons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -171,7 +171,7 @@ const MyLessons = () => {
         <select
           value={filterVisibility}
           onChange={(e) => setFilterVisibility(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Visibility</option>
           <option value="public">Public</option>
@@ -181,7 +181,7 @@ const MyLessons = () => {
         <select
           value={filterAccess}
           onChange={(e) => setFilterAccess(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Access Levels</option>
           <option value="free">Free</option>
@@ -190,12 +190,12 @@ const MyLessons = () => {
       </div>
 
       {lessons.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-md p-12 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-12 text-center">
           <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-gray-900 mb-2">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             No lessons yet
           </h3>
-          <p className="text-gray-600 mb-6">Create your first life lesson</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Create your first life lesson</p>
           <Link
             to="/dashboard/add-lesson"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
@@ -205,8 +205,8 @@ const MyLessons = () => {
           </Link>
         </div>
       ) : filteredLessons.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-md p-12 text-center">
-          <p className="text-gray-600">No lessons match your filters.</p>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-12 text-center">
+          <p className="text-gray-600 dark:text-gray-300">No lessons match your filters.</p>
           <button
             onClick={() => {
               setSearchTerm("");
@@ -223,7 +223,7 @@ const MyLessons = () => {
         <TableContainer component={Paper} className="rounded-2xl shadow-md">
           <Table>
             <TableHead>
-              <TableRow className="bg-gray-50">
+              <TableRow className="bg-gray-50 dark:bg-gray-700">
                 <TableCell className="font-bold">Title</TableCell>
                 <TableCell className="font-bold">Category</TableCell>
                 <TableCell className="font-bold">Tone</TableCell>
@@ -282,11 +282,11 @@ const MyLessons = () => {
                       }
                     />
                   </TableCell>
-                  <TableCell className="text-sm text-gray-600">
+                  <TableCell className="text-sm text-gray-600 dark:text-gray-300">
                     {formatDate(lesson.createdAt)}
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-3 text-sm text-gray-600">
+                    <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
                       <span className="flex items-center gap-1">
                         <Heart className="w-4 h-4" />
                         {lesson.likesCount || 0}

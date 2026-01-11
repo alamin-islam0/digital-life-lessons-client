@@ -71,10 +71,10 @@ const BenefitsSection = () => {
                 <benefit.icon className={`w-7 h-7 ${benefit.color}`} />
               </div>
 
-              <h3 className="text-xl font-bold text-gray-900 mb-3 relative z-10">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 relative z-10">
                 {benefit.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed relative z-10">
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">
                 {benefit.description}
               </p>
             </div>

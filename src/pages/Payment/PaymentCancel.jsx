@@ -4,15 +4,15 @@ import { XCircle, RefreshCw } from "lucide-react";
 const PaymentCancel = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-error/5 px-4">
-      <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
+      <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
         <div className="w-24 h-24 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6">
           <XCircle className="w-12 h-12 text-error" />
         </div>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Payment Cancelled
         </h1>
-        <p className="text-gray-600 text-lg mb-8">
+        <p className="text-gray-600 dark:text-gray-300 text-lg mb-8">
           Your payment was not completed for some reason. You can try again if
           you wish.
         </p>
@@ -27,7 +27,7 @@ const PaymentCancel = () => {
           </Link>
           <Link
             to="/"
-            className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200"
+            className="block w-full py-3 bg-white text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
           >
             Return to Home
           </Link>

@@ -82,7 +82,7 @@ const AdminHome = () => {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
         <div className="bg-primary/10 text-primary px-4 py-2 rounded-lg font-semibold">
           Today's Summary
         </div>
@@ -156,8 +156,8 @@ const ChartWidget = ({
   gradientId,
 }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md">
-      <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
         <Icon className={`w-5 h-5 ${iconColor}`} />
         {title}
       </h3>

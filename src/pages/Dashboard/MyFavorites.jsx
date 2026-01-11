@@ -116,16 +116,16 @@ const MyFavorites = () => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Saved Lessons
         </h1>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-300">
           Total {favorites.length} lessons saved
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
@@ -133,14 +133,14 @@ const MyFavorites = () => {
             placeholder="Search saved lessons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -153,7 +153,7 @@ const MyFavorites = () => {
         <select
           value={filterTone}
           onChange={(e) => setFilterTone(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
         >
           <option value="all">All Emotional Tones</option>
           {tones.map((tone) => (
@@ -166,12 +166,12 @@ const MyFavorites = () => {
 
       {/* Results */}
       {favorites.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-md p-12 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-12 text-center">
           <Bookmark className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-gray-900 mb-2">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             No saved lessons yet
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
             Start saving lessons you want to read later
           </p>
           <Link
@@ -183,8 +183,8 @@ const MyFavorites = () => {
           </Link>
         </div>
       ) : filteredFavorites.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-md p-12 text-center">
-          <p className="text-gray-600">No lessons match your filters.</p>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-12 text-center">
+          <p className="text-gray-600 dark:text-gray-300">No lessons match your filters.</p>
           <button
             onClick={() => {
               setSearchTerm("");
@@ -200,7 +200,7 @@ const MyFavorites = () => {
         <TableContainer component={Paper} className="rounded-2xl shadow-md">
           <Table>
             <TableHead>
-              <TableRow className="bg-gray-50">
+              <TableRow className="bg-gray-50 dark:bg-gray-700">
                 <TableCell className="font-bold">Title</TableCell>
                 <TableCell className="font-bold">Category</TableCell>
                 <TableCell className="font-bold">Emotional Tone</TableCell>
@@ -236,14 +236,14 @@ const MyFavorites = () => {
                         variant="outlined"
                       />
                     </TableCell>
-                    <TableCell className="text-sm text-gray-600">
+                    <TableCell className="text-sm text-gray-600 dark:text-gray-300">
                       {author.name || author.displayName || "Unknown"}
                     </TableCell>
-                    <TableCell className="text-sm text-gray-600">
+                    <TableCell className="text-sm text-gray-600 dark:text-gray-300">
                       {formatDate(fav.createdAt || lesson.createdAt)}
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-3 text-sm text-gray-600">
+                      <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
                         <span className="flex items-center gap-1">
                           <Heart className="w-4 h-4" />
                           {lesson.likesCount || 0}

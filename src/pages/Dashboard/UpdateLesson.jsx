@@ -95,20 +95,20 @@ const UpdateLesson = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
             <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Update Lesson</h1>
-            <p className="text-gray-600">Edit your lesson</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Update Lesson</h1>
+            <p className="text-gray-600 dark:text-gray-300">Edit your lesson</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Title <span className="text-error">*</span>
             </label>
             <input
@@ -130,7 +130,7 @@ const UpdateLesson = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Detailed Description <span className="text-error">*</span>
             </label>
             <textarea
@@ -153,7 +153,7 @@ const UpdateLesson = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Category <span className="text-error">*</span>
               </label>
               <select
@@ -174,7 +174,7 @@ const UpdateLesson = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Emotional Tone <span className="text-error">*</span>
               </label>
               <select
@@ -196,7 +196,7 @@ const UpdateLesson = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Image Link (Optional)
             </label>
             <input
@@ -218,7 +218,7 @@ const UpdateLesson = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Privacy
               </label>
               <select
@@ -231,13 +231,13 @@ const UpdateLesson = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Access Level
               </label>
               <select
                 {...register("accessLevel")}
                 disabled={!isPremium}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 dark:bg-gray-800 disabled:cursor-not-allowed"
               >
                 <option value="free">Free</option>
                 <option value="premium" disabled={!isPremium}>
@@ -259,7 +259,7 @@ const UpdateLesson = () => {
             <button
               type="button"
               onClick={() => navigate("/dashboard/my-lessons")}
-              className="px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+              className="px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 transition-all"
             >
               Cancel
             </button>

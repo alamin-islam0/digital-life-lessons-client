@@ -82,13 +82,13 @@ const About = () => {
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary/20 rounded-full blur-xl"></div>
                 <FaQuoteLeft className="text-6xl text-primary mb-6 relative z-10" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
                 Our Mission
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 At Digital Life Lessons, we believe that every experience—whether a triumph or a setback—holds valuable insights. Our mission is to create a safe, supportive space where people can share their stories, learn from others, and grow together.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                 We're building more than just a platform; we're cultivating a community of lifelong learners who understand that wisdom comes from both our own experiences and the experiences of those around us.
               </p>
             </div>
@@ -97,13 +97,13 @@ const About = () => {
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                   >
                     <stat.icon className="w-8 h-8 text-secondary mb-3" />
                     <h3 className="text-3xl font-bold text-primary mb-1">
                       {stat.value}
                     </h3>
-                    <p className="text-gray-600 text-sm">{stat.label}</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -116,10 +116,10 @@ const About = () => {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Our Core Values
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               These principles guide everything we do and shape the community we're building
             </p>
           </div>
@@ -136,10 +136,10 @@ const About = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <value.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                     {value.description}
                   </p>
                 </div>
@@ -153,10 +153,10 @@ const About = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Meet Our Team
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Passionate individuals dedicated to creating meaningful connections through shared experiences
             </p>
           </div>
@@ -177,13 +177,13 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                     {member.name}
                   </h3>
                   <p className="text-secondary font-semibold mb-3">
                     {member.role}
                   </p>
-                  <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{member.bio}</p>
                 </div>
               </div>
             ))}
@@ -203,7 +203,7 @@ const About = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/register"
-              className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+              className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 dark:bg-gray-800 transition-all shadow-lg hover:shadow-xl"
             >
               Get Started Free
             </a>

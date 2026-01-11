@@ -110,13 +110,13 @@ const ManageLessons = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             Lesson Management
           </h1>
-          <p className="text-gray-500">Total Lessons: {lessons.length}</p>
+          <p className="text-gray-500 dark:text-gray-400">Total Lessons: {lessons.length}</p>
         </div>
         <div className="relative w-full md:w-64">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -133,10 +133,10 @@ const ManageLessons = () => {
       <TableContainer
         component={Paper}
         elevation={0}
-        className="border border-gray-100 rounded-xl"
+        className="border border-gray-100 dark:border-gray-700 rounded-xl"
       >
         <Table>
-          <TableHead className="bg-gray-50">
+          <TableHead className="bg-gray-50 dark:bg-gray-700">
             <TableRow>
               <TableCell className="bangla-text font-bold">Title</TableCell>
               <TableCell className="bangla-text font-bold">Author</TableCell>

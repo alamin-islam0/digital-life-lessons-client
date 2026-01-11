@@ -33,38 +33,38 @@ const Pricing = () => {
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Free Plan */}
-        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900">Free</h3>
-            <p className="text-gray-500 mt-2">Best to start with</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Free</h3>
+            <p className="text-gray-500 dark:text-gray-400 mt-2">Best to start with</p>
             <div className="mt-4 flex items-baseline">
-              <span className="text-4xl font-bold text-gray-900">Tk 0</span>
-              <span className="text-gray-500 ml-2">/ Lifetime</span>
+              <span className="text-4xl font-bold text-gray-900 dark:text-white">Tk 0</span>
+              <span className="text-gray-500 dark:text-gray-400 ml-2">/ Lifetime</span>
             </div>
           </div>
 
           <ul className="space-y-4 mb-8">
             <li className="flex items-center gap-3">
               <Check className="w-5 h-5 text-success flex-shrink-0" />
-              <span className="text-gray-700">
+              <span className="text-gray-700 dark:text-gray-300">
                 {" "}
                 Watch unlimited free lessons
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Check className="w-5 h-5 text-success flex-shrink-0" />
-              <span className="text-gray-700">
+              <span className="text-gray-700 dark:text-gray-300">
                 {" "}
                 Create your own lessons (limited)
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Check className="w-5 h-5 text-success flex-shrink-0" />
-              <span className="text-gray-700"> Comment and Like</span>
+              <span className="text-gray-700 dark:text-gray-300"> Comment and Like</span>
             </li>
           </ul>
 
-          <button className="w-full py-3 bg-base-200 text-gray-900 rounded-xl font-bold hover:bg-base-300 transition-colors cursor-default">
+          <button className="w-full py-3 bg-base-200 text-gray-900 dark:text-white rounded-xl font-bold hover:bg-base-300 transition-colors cursor-default">
             Your Current Plan
           </button>
         </div>
@@ -78,16 +78,16 @@ const Pricing = () => {
           </div>
 
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               Premium
               <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-bold uppercase tracking-wider">
                 Popular
               </span>
             </h3>
-            <p className="text-gray-500 mt-2">Unlock all features</p>
+            <p className="text-gray-500 dark:text-gray-400 mt-2">Unlock all features</p>
             <div className="mt-4 flex items-baseline">
-              <span className="text-4xl font-bold text-gray-900">Tk 500</span>
-              <span className="text-gray-500 ml-2">/ One-time</span>
+              <span className="text-4xl font-bold text-gray-900 dark:text-white">Tk 500</span>
+              <span className="text-gray-500 dark:text-gray-400 ml-2">/ One-time</span>
             </div>
           </div>
 
@@ -96,7 +96,7 @@ const Pricing = () => {
               <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-success" />
               </div>
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 dark:text-gray-300 font-medium">
                 Access all premium lessons
               </span>
             </li>
@@ -104,7 +104,7 @@ const Pricing = () => {
               <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-success" />
               </div>
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 dark:text-gray-300 font-medium">
                 Create premium lessons
               </span>
             </li>
@@ -112,7 +112,7 @@ const Pricing = () => {
               <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-success" />
               </div>
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 dark:text-gray-300 font-medium">
                 Ad-free experience
               </span>
             </li>
@@ -120,7 +120,7 @@ const Pricing = () => {
               <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-success" />
               </div>
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 dark:text-gray-300 font-medium">
                 Lifetime membership
               </span>
             </li>
@@ -128,7 +128,7 @@ const Pricing = () => {
               <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-success" />
               </div>
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 dark:text-gray-300 font-medium">
                 Priority support
               </span>
             </li>

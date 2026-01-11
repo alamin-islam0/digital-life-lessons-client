@@ -114,9 +114,9 @@ const PrivacyTerms = () => {
 
       {/* Last Updated */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up">
-          <p className="text-gray-600">
-            <span className="font-semibold text-gray-900">Last Updated:</span> January 12, 2026
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up">
+          <p className="text-gray-600 dark:text-gray-300">
+            <span className="font-semibold text-gray-900 dark:text-white">Last Updated:</span> January 12, 2026
           </p>
         </div>
       </div>
@@ -125,10 +125,10 @@ const PrivacyTerms = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12" data-aos="fade-up">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Privacy Policy
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               We are committed to protecting your privacy and ensuring transparency about how we handle your data.
             </p>
           </div>
@@ -139,19 +139,19 @@ const PrivacyTerms = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300"
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300"
               >
                 <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-6">
                   <section.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   {section.title}
                 </h3>
                 <ul className="space-y-3">
                   {section.content.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-600 leading-relaxed">{item}</span>
+                      <span className="text-gray-600 dark:text-gray-300 leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -165,10 +165,10 @@ const PrivacyTerms = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12" data-aos="fade-up">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Terms of Service
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               By using Digital Life Lessons, you agree to these terms. Please read them carefully.
             </p>
           </div>
@@ -184,14 +184,14 @@ const PrivacyTerms = () => {
                 <div className="w-14 h-14 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center mb-6">
                   <section.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   {section.title}
                 </h3>
                 <ul className="space-y-3">
                   {section.content.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-600 leading-relaxed">{item}</span>
+                      <span className="text-gray-600 dark:text-gray-300 leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -218,7 +218,7 @@ const PrivacyTerms = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 transition-all shadow-lg"
+                className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-gray-100 dark:bg-gray-800 transition-all shadow-lg"
               >
                 Contact Privacy Team
               </a>
@@ -236,10 +236,10 @@ const PrivacyTerms = () => {
       {/* Contact Section */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Questions About Privacy or Terms?
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             If you have any questions or concerns about our privacy policy or terms of service, please don't hesitate to reach out.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -161,8 +161,8 @@ const DashboardHome = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/dashboard/add-lesson"
@@ -173,21 +173,21 @@ const DashboardHome = () => {
           </Link>
           <Link
             to="/dashboard/my-lessons"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 transition-all"
           >
             <BookOpen className="w-5 h-5" />
             My Lessons
           </Link>
           <Link
             to="/dashboard/my-favorites"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 transition-all"
           >
             <Bookmark className="w-5 h-5" />
             Saved Lessons
           </Link>
           <Link
             to="/dashboard/profile"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 transition-all"
           >
             <TrendingUp className="w-5 h-5" />
             Profile
@@ -198,7 +198,7 @@ const DashboardHome = () => {
       {/* Recent Lessons */}
       <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Recent Lessons</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recent Lessons</h2>
           <Link
             to="/dashboard/my-lessons"
             className="text-primary hover:text-primary/80 font-semibold"
@@ -216,12 +216,12 @@ const DashboardHome = () => {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-md p-12 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-12 text-center">
             <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
               No lessons yet
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Create your first life lesson and share with others
             </p>
             <Link
@@ -235,18 +235,18 @@ const DashboardHome = () => {
         )}
       </div>
 
-      <div className="bg-white rounded-2xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Activity & contributions
           </h2>
-          <div className="flex bg-gray-100 rounded-lg p-1">
+          <div className="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
             <button
               onClick={() => setChartView("weekly")}
               className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                 chartView === "weekly"
                   ? "bg-white text-primary shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
+                  : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:text-white"
               }`}
             >
               Weekly
@@ -256,7 +256,7 @@ const DashboardHome = () => {
               className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                 chartView === "monthly"
                   ? "bg-white text-primary shadow-sm"
-                  : "text-gray-600 hover:text-gray-900"
+                  : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:text-white"
               }`}
             >
               Monthly

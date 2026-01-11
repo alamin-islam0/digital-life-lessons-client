@@ -53,13 +53,13 @@ const AuthorProfile = () => {
 
   if (!author && lessons.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-700">
         <div className="text-center p-8 bg-white rounded-2xl shadow-md">
           <UserAvatar size="xl" />
-          <h2 className="text-2xl font-bold text-gray-900 mt-4">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-4">
             Author info not available
           </h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
             This author hasn't posted any public lessons yet or simply doesn't
             exist.
           </p>
@@ -69,10 +69,10 @@ const AuthorProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-700 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Author Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12 flex flex-col md:flex-row items-center md:items-start gap-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-12 flex flex-col md:flex-row items-center md:items-start gap-8">
           <div className="flex-shrink-0">
             <UserAvatar
               user={author}
@@ -81,15 +81,15 @@ const AuthorProfile = () => {
             />
           </div>
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {author?.name || author?.displayName || "Author"}
             </h1>
-            <p className="text-gray-600 mb-4">{author?.email}</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">{author?.email}</p>
 
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm text-gray-600">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm text-gray-600 dark:text-gray-300">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4 text-primary-600" />
-                <span className="font-semibold text-gray-900">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   {lessons.length}
                 </span>{" "}
                 Lessons Shared
@@ -100,7 +100,7 @@ const AuthorProfile = () => {
         </div>
 
         {/* Lessons Grid */}
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
           Shared Lessons
         </h2>
         {lessons.length > 0 ? (
@@ -110,7 +110,7 @@ const AuthorProfile = () => {
             ))}
           </div>
         ) : (
-          <p className="text-gray-600">No lessons to display.</p>
+          <p className="text-gray-600 dark:text-gray-300">No lessons to display.</p>
         )}
       </div>
     </div>

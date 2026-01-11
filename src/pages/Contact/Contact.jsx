@@ -116,10 +116,10 @@ const Contact = () => {
                 <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <info.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                   {info.title}
                 </h3>
-                <p className="text-gray-600">{info.details}</p>
+                <p className="text-gray-600 dark:text-gray-300">{info.details}</p>
               </a>
             ))}
           </div>
@@ -132,13 +132,13 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div data-aos="fade-right">
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                   Send Us a Message
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Your Name
                     </label>
                     <input
@@ -152,7 +152,7 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Email Address
                     </label>
                     <input
@@ -166,7 +166,7 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Subject
                     </label>
                     <input
@@ -180,7 +180,7 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Message
                     </label>
                     <textarea
@@ -207,20 +207,20 @@ const Contact = () => {
             {/* FAQ & Social */}
             <div data-aos="fade-left" className="space-y-8">
               {/* FAQ */}
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                   Quick Answers
                 </h2>
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
                     <div
                       key={index}
-                      className="border-b border-gray-100 last:border-0 pb-4 last:pb-0"
+                      className="border-b border-gray-100 dark:border-gray-700 last:border-0 pb-4 last:pb-0"
                     >
-                      <h3 className="font-bold text-gray-900 mb-2">
+                      <h3 className="font-bold text-gray-900 dark:text-white mb-2">
                         {faq.question}
                       </h3>
-                      <p className="text-gray-600 text-sm">{faq.answer}</p>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">{faq.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -279,7 +279,7 @@ const Contact = () => {
               </div>
 
               {/* Map Placeholder */}
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden h-64">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden h-64">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968459391!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
                   width="100%"

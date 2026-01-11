@@ -113,14 +113,14 @@ const PaymentSuccess = () => {
   if (verifying) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-info/5 px-4">
-        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
+        <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
           <div className="w-24 h-24 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <Loader2 className="w-12 h-12 text-info animate-spin" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Verifying payment...
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 dark:text-gray-300 text-lg">
             Please wait, we are verifying your payment and activating premium
             access.
           </p>
@@ -132,15 +132,15 @@ const PaymentSuccess = () => {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-error/5 px-4">
-        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
+        <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
           <div className="w-24 h-24 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⚠️</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Verification Failed
           </h1>
-          <p className="text-gray-600 text-lg mb-8">{error}</p>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 text-lg mb-8">{error}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
             Don't worry! Your payment was successful. Check again later or
             contact support.
           </p>
@@ -153,7 +153,7 @@ const PaymentSuccess = () => {
             </Link>
             <Link
               to="/"
-              className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2"
+              className="block w-full py-3 bg-white text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700 flex items-center justify-center gap-2"
             >
               <Home className="w-5 h-5" />
               Back to Home
@@ -166,15 +166,15 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-success/5 px-4">
-      <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
+      <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
         <div className="w-24 h-24 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
           <CheckCircle className="w-12 h-12 text-success" />
         </div>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Payment Successful!
         </h1>
-        <p className="text-gray-600 text-lg mb-6">
+        <p className="text-gray-600 dark:text-gray-300 text-lg mb-6">
           Congratulations! You are now a premium member. All premium features
           have been activated on your account.
         </p>
@@ -182,30 +182,30 @@ const PaymentSuccess = () => {
         {/* Payment Details */}
         {paymentData && (
           <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-xl p-6 mb-6 border border-base-300">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
               Payment Details
             </h3>
             <div className="space-y-3 text-left">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600 flex items-center gap-2">
+                <span className="text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <CreditCard className="w-4 h-4" />
                   <span className="bangla-text">Amount</span>
                 </span>
-                <span className="font-bold text-gray-900">
+                <span className="font-bold text-gray-900 dark:text-white">
                   Tk {(paymentData.amount / 100).toFixed(2)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600 flex items-center gap-2">
+                <span className="text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span className="bangla-text">Date</span>
                 </span>
-                <span className="font-semibold text-gray-900">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   {new Date(paymentData.paymentDate).toLocaleDateString()}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Status</span>
+                <span className="text-gray-600 dark:text-gray-300">Status</span>
                 <span className="px-3 py-1 bg-success/10 text-success rounded-full text-sm font-bold">
                   Completed
                 </span>
@@ -223,14 +223,14 @@ const PaymentSuccess = () => {
           </Link>
           <Link
             to="/"
-            className="block w-full py-3 bg-white text-gray-700 rounded-xl font-bold hover:bg-gray-50 transition-colors border border-gray-200 flex items-center justify-center gap-2"
+            className="block w-full py-3 bg-white text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700 flex items-center justify-center gap-2"
           >
             <Home className="w-5 h-5" />
             Back to Home
           </Link>
         </div>
 
-        <p className="mt-6 text-sm text-gray-500">
+        <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">
           You will be automatically redirected to the dashboard in 6 seconds...
         </p>
       </div>

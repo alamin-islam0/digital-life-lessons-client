@@ -34,8 +34,8 @@ const StatsCard = ({
           </div>
         )}
       </div>
-      <p className="text-sm text-gray-600 mb-1">{title}</p>
-      <p className="text-3xl font-bold text-gray-900">{value}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{title}</p>
+      <p className="text-3xl font-bold text-gray-900 dark:text-white">{value}</p>
     </div>
   );
 };

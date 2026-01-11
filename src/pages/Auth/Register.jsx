@@ -125,10 +125,10 @@ const Register = () => {
         {/* Left Side - Illustration/Info */}
         <div className="hidden lg:block">
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Join Us Today!
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
               Share your life experiences and learn with others. Be part of a
               thriving community.
             </p>
@@ -137,19 +137,19 @@ const Register = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <PenTool className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Create unlimited lessons</p>
+                <p className="text-gray-700 dark:text-gray-300">Create unlimited lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <BookOpen className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Learn from thousands of lessons</p>
+                <p className="text-gray-700 dark:text-gray-300">Learn from thousands of lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-success to-success/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Gem className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Unlock premium features</p>
+                <p className="text-gray-700 dark:text-gray-300">Unlock premium features</p>
               </div>
             </div>
           </div>
@@ -157,19 +157,19 @@ const Register = () => {
 
         {/* Right Side - Register Form */}
         <div className="w-full">
-          <div className="bg-white rounded-4xl shadow-2xl p-8 sm:p-10">
+          <div className="bg-white dark:bg-gray-800 rounded-4xl shadow-2xl p-8 sm:p-10">
             <div className="text-center mb-8">
               <Logo />
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 Register
               </h2>
-              <p className="text-gray-600">Create a new account</p>
+              <p className="text-gray-600 dark:text-gray-300">Create a new account</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* Name */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Name
                 </label>
                 <div className="relative">
@@ -196,7 +196,7 @@ const Register = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Email
                 </label>
                 <div className="relative">
@@ -223,7 +223,7 @@ const Register = () => {
 
               {/* Photo Upload */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Profile Picture
                 </label>
                 <div className="relative">
@@ -246,7 +246,7 @@ const Register = () => {
 
               {/* Password */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Password
                 </label>
                 <div className="relative">
@@ -263,7 +263,7 @@ const Register = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-300"
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -285,7 +285,7 @@ const Register = () => {
                       className={`text-xs ${
                         password.length >= 6
                           ? "text-success"
-                          : "text-gray-500"
+                          : "text-gray-500 dark:text-gray-400"
                       }`}
                     >
                       ✓ At least 6 characters
@@ -294,7 +294,7 @@ const Register = () => {
                       className={`text-xs ${
                         /[A-Z]/.test(password)
                           ? "text-success"
-                          : "text-gray-500"
+                          : "text-gray-500 dark:text-gray-400"
                       }`}
                     >
                       ✓ 1 uppercase letter
@@ -303,7 +303,7 @@ const Register = () => {
                       className={`text-xs ${
                         /[a-z]/.test(password)
                           ? "text-success"
-                          : "text-gray-500"
+                          : "text-gray-500 dark:text-gray-400"
                       }`}
                     >
                       ✓ 1 lowercase letter
@@ -327,7 +327,7 @@ const Register = () => {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">Or</span>
+                <span className="px-4 bg-white text-gray-500 dark:text-gray-400">Or</span>
               </div>
             </div>
 
@@ -335,14 +335,14 @@ const Register = () => {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition-all"
+              className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-300 rounded-xl font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-gray-700 transition-all"
             >
               <FcGoogle className="w-6 h-6" />
               Register with Google
             </button>
 
             {/* Login Link */}
-            <p className="mt-6 text-center text-gray-600">
+            <p className="mt-6 text-center text-gray-600 dark:text-gray-300">
               Already have an account?{" "}
               <Link
                 to="/login"

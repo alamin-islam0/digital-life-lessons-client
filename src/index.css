@@ -9,7 +9,7 @@
   line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light;
+  color-scheme: light dark;
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,6 +28,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #f8fafc;
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  background-color: #0f172a;
 }
 
 /* Smooth scrolling */
@@ -35,7 +40,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Light mode */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -54,7 +59,19 @@ html {
   background: #092344;
 }
 
+/* Custom scrollbar - Dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #32B2C9;
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2a9fb5;
+}
 
 /* Loading animation */
 @keyframes spin {
@@ -83,7 +100,7 @@ html {
   animation: fadeIn 0.5s ease-out;
 }
 
-/* Glassmorphism */
+/* Glassmorphism - Light mode */
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
@@ -91,15 +108,32 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Glassmorphism - Dark mode */
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(50, 178, 201, 0.2);
+}
+
 /* Premium badge glow */
 .premium-glow {
   box-shadow: 0 0 20px rgba(50, 178, 201, 0.5);
 }
 
-/* Base button reset if needed, but Tailwind handles most of this */
+.dark .premium-glow {
+  box-shadow: 0 0 25px rgba(50, 178, 201, 0.6);
+}
+
+/* Base button reset */
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Dark mode transitions */
+.dark * {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes slowZoom {
@@ -122,4 +156,31 @@ button:focus-visible {
 
 .animate-shimmer {
   animation: shimmer 2s infinite linear;
+}
+
+/* Utility classes for dark mode */
+@layer utilities {
+  .bg-card {
+    @apply bg-white dark:bg-gray-800;
+  }
+  
+  .bg-card-hover {
+    @apply hover:bg-gray-50 dark:hover:bg-gray-700;
+  }
+  
+  .text-primary-content {
+    @apply text-gray-900 dark:text-white;
+  }
+  
+  .text-secondary-content {
+    @apply text-gray-600 dark:text-gray-300;
+  }
+  
+  .border-default {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+  
+  .shadow-card {
+    @apply shadow-md dark:shadow-xl dark:shadow-gray-900/50;
+  }
 }

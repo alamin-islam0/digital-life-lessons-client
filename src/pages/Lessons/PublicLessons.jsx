@@ -168,14 +168,14 @@ const PublicLessons = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search for lessons, topics, or keywords..."
-                className="w-full pl-16 pr-6 py-5 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent shadow-lg text-lg transition-all"
+                className="w-full pl-16 pr-6 py-5 bg-white border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent shadow-lg text-lg transition-all"
               />
             </div>
           </form>
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8" data-aos="fade-up" data-aos-delay="100">
           {/* Filter Toggle Button (Mobile) */}
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -193,7 +193,7 @@ const PublicLessons = () => {
           >
             {/* Category Filter */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <label className="block text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                 <Filter className="w-4 h-4 text-primary" />
                 Category
               </label>
@@ -203,7 +203,7 @@ const PublicLessons = () => {
                   setCategory(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat === "All" ? "" : cat}>
@@ -215,7 +215,7 @@ const PublicLessons = () => {
 
             {/* Emotional Tone Filter */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <label className="block text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                 <Heart className="w-4 h-4 text-secondary" />
                 Emotional Tone
               </label>
@@ -225,7 +225,7 @@ const PublicLessons = () => {
                   setEmotionalTone(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {emotionalTones.map((tone) => (
                   <option key={tone} value={tone === "All" ? "" : tone}>
@@ -237,7 +237,7 @@ const PublicLessons = () => {
 
             {/* Sort Filter */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <label className="block text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-accent" />
                 Sort By
               </label>
@@ -247,7 +247,7 @@ const PublicLessons = () => {
                   setSortBy(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {sortOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -260,9 +260,9 @@ const PublicLessons = () => {
 
           {/* Active Filters Display */}
           {hasActiveFilters && (
-            <div className="mt-6 pt-6 border-t border-gray-100">
+            <div className="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700">
               <div className="flex flex-wrap gap-2 items-center">
-                <span className="text-sm font-semibold text-gray-700">Active Filters:</span>
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Active Filters:</span>
                 {searchTerm && (
                   <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium flex items-center gap-2 hover:bg-primary/20 transition-colors">
                     Search: "{searchTerm}"
@@ -320,12 +320,12 @@ const PublicLessons = () => {
         {/* Results Count */}
         {!isLoading && (
           <div className="mb-6 flex items-center justify-between" data-aos="fade-up" data-aos-delay="200">
-            <p className="text-gray-600">
-              Showing <span className="font-bold text-gray-900">{paginatedLessons.length}</span> of{" "}
-              <span className="font-bold text-gray-900">{totalItems}</span> lessons
+            <p className="text-gray-600 dark:text-gray-300">
+              Showing <span className="font-bold text-gray-900 dark:text-white">{paginatedLessons.length}</span> of{" "}
+              <span className="font-bold text-gray-900 dark:text-white">{totalItems}</span> lessons
             </p>
             {totalPages > 1 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Page {page} of {totalPages}
               </p>
             )}
@@ -382,10 +382,10 @@ const PublicLessons = () => {
             <div className="w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <Filter className="w-12 h-12 text-primary" />
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-3">
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
               No Lessons Found
             </h3>
-            <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-md mx-auto">
               We couldn't find any lessons matching your criteria. Try adjusting your filters.
             </p>
             <button

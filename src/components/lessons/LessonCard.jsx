@@ -66,21 +66,21 @@ const LessonCard = ({ lesson, showBlur = false }) => {
 
   return (
     <div
-      className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group h-[520px] flex flex-col border border-gray-100 hover:border-primary/20 ${
+      className={`bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-gray-900/50 transition-all duration-500 overflow-hidden group h-[520px] flex flex-col border border-gray-100 dark:border-gray-700 dark:border-gray-700 hover:border-primary/20 dark:hover:border-primary/40 ${
         showBlur ? "relative" : ""
       }`}
     >
       {/* Premium Lock Overlay */}
       {showBlur && isPremium && (
-        <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-20 flex items-center justify-center">
           <div className="text-center p-8 max-w-sm">
             <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="w-10 h-10 text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-2">
               Premium Content
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 dark:text-gray-300 mb-6">
               Unlock this lesson and thousands more with Premium
             </p>
             <Link
@@ -126,7 +126,7 @@ const LessonCard = ({ lesson, showBlur = false }) => {
               <div className="absolute top-4 left-4 z-10">
                 <span
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold backdrop-blur-md bg-white/90 border ${
-                    categoryColors[category] || "bg-white/90 text-gray-700 border-gray-200"
+                    categoryColors[category] || "bg-white/90 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700"
                   }`}
                 >
                   {category}
@@ -146,7 +146,7 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           <div className="mb-3">
             <span
               className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
-                toneColors[emotionalTone] || "bg-gray-100 text-gray-700 border-gray-200"
+                toneColors[emotionalTone] || "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700"
               }`}
             >
               {emotionalTone}
@@ -154,23 +154,23 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white dark:text-white mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed flex-grow">
+          <p className="text-gray-600 dark:text-gray-300 dark:text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed flex-grow">
             {description}
           </p>
 
           {/* Author Info */}
-          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
+          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100 dark:border-gray-700 dark:border-gray-700">
             <UserAvatar user={displayAuthor} size="sm" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-gray-900 truncate">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white dark:text-white truncate">
                 {displayAuthor.name}
               </p>
-              <p className="text-xs text-gray-500 flex items-center gap-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 {formatDate(createdAt)}
               </p>
@@ -180,15 +180,15 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           {/* Stats Row */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-error transition-colors">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-300 hover:text-error transition-colors">
                 <Heart className="w-4 h-4" />
                 <span className="font-medium">{displayLikesCount}</span>
               </span>
-              <span className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-primary transition-colors">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
                 <Bookmark className="w-4 h-4" />
                 <span className="font-medium">{displayFavoritesCount}</span>
               </span>
-              <span className="flex items-center gap-1.5 text-sm text-gray-600">
+              <span className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-300">
                 <Eye className="w-4 h-4" />
                 <span className="font-medium">{views.toLocaleString()}</span>
               </span>

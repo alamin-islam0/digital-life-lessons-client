@@ -45,8 +45,8 @@ const AddLesson = () => {
             <div className="w-40 h-40">
               <Lottie animationData={successAnimation} loop={false} />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mt-4">Success!</h3>
-            <p className="text-gray-600 mt-2">Lesson created successfully</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-4">Success!</h3>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Lesson created successfully</p>
           </div>
         ),
         showConfirmButton: true,
@@ -113,17 +113,17 @@ const AddLesson = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
             <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
               Create New Lesson
             </h1>
-            <p className="text-gray-600">Share your life experience</p>
+            <p className="text-gray-600 dark:text-gray-300">Share your life experience</p>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ const AddLesson = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Title */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Title <span className="text-error">*</span>
             </label>
             <input
@@ -155,7 +155,7 @@ const AddLesson = () => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Detailed Description <span className="text-error">*</span>
             </label>
             <textarea
@@ -180,7 +180,7 @@ const AddLesson = () => {
           {/* Category & Emotional Tone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Category <span className="text-error">*</span>
               </label>
               <select
@@ -202,7 +202,7 @@ const AddLesson = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Emotional Tone <span className="text-error">*</span>
               </label>
               <select
@@ -226,7 +226,7 @@ const AddLesson = () => {
 
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               Lesson Image (Optional)
             </label>
             <div className="relative">
@@ -248,7 +248,7 @@ const AddLesson = () => {
           {/* Visibility & Access Level */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 Privacy
               </label>
               <select
@@ -261,13 +261,13 @@ const AddLesson = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 bangla-text mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 bangla-text mb-2">
                 Access Level
               </label>
               <select
                 {...register("accessLevel")}
                 disabled={!isPremium}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent bangla-text disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent bangla-text disabled:bg-gray-100 dark:bg-gray-800 disabled:cursor-not-allowed"
                 title={!isPremium ? "Upgrade to create premium lessons" : ""}
               >
                 <option value="free">Free</option>
@@ -296,7 +296,7 @@ const AddLesson = () => {
             <button
               type="button"
               onClick={() => navigate("/dashboard/my-lessons")}
-              className="px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all bangla-text"
+              className="px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 transition-all bangla-text"
             >
               Cancel
             </button>

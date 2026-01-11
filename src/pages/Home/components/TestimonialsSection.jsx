@@ -30,14 +30,14 @@ const TestimonialsSection = () => {
             {testimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="bg-white p-8 rounded-3xl shadow-lg relative"
+                className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg relative"
                 data-aos="fade-up"
                 data-aos-delay={idx * 100}
               >
                 <div className="text-primary-300 absolute top-8 left-8 text-6xl opacity-30 font-serif">
                   "
                 </div>
-                <p className="text-gray-600 mb-6 italic relative z-10">{t.text}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 italic relative z-10">{t.text}</p>
                 <div className="flex items-center gap-3">
                   <img
                     src={t.image}
@@ -45,8 +45,8 @@ const TestimonialsSection = () => {
                     className="w-12 h-12 rounded-full"
                   />
                   <div>
-                    <h4 className="font-bold text-gray-900">{t.name}</h4>
-                    <span className="text-xs text-gray-500">{t.role}</span>
+                    <h4 className="font-bold text-gray-900 dark:text-white">{t.name}</h4>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{t.role}</span>
                   </div>
                 </div>
               </div>

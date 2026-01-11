@@ -89,10 +89,10 @@ const Login = () => {
         {/* Left Side - Illustration/Info */}
         <div className="hidden lg:block">
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Welcome Back!
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
               Write down your life lessons and share them with others. Every
               experience is valuable.
             </p>
@@ -101,19 +101,19 @@ const Login = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <PenTool className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Write down your experiences</p>
+                <p className="text-gray-700 dark:text-gray-300">Write down your experiences</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <BookOpen className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Get inspired by others' lessons</p>
+                <p className="text-gray-700 dark:text-gray-300">Get inspired by others' lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-success to-success/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Gem className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700">Access premium content</p>
+                <p className="text-gray-700 dark:text-gray-300">Access premium content</p>
               </div>
             </div>
           </div>
@@ -121,17 +121,17 @@ const Login = () => {
 
         {/* Right Side - Login Form */}
         <div className="w-full">
-          <div className="bg-white rounded-4xl shadow-2xl p-8 sm:p-10">
+          <div className="bg-white dark:bg-gray-800 rounded-4xl shadow-2xl p-8 sm:p-10">
             <div className="text-center mb-8">
               <Logo />
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Login</h2>
-              <p className="text-gray-600">Access your account</p>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Login</h2>
+              <p className="text-gray-600 dark:text-gray-300">Access your account</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Email */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Email
                 </label>
                 <div className="relative">
@@ -158,7 +158,7 @@ const Login = () => {
 
               {/* Password */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Password
                 </label>
                 <div className="relative">
@@ -175,7 +175,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-300"
                   >
                     {showPassword ? (
                       <EyeOff className="w-5 h-5" />
@@ -206,7 +206,7 @@ const Login = () => {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">Or</span>
+                <span className="px-4 bg-white text-gray-500 dark:text-gray-400">Or</span>
               </div>
             </div>
 
@@ -214,14 +214,14 @@ const Login = () => {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition-all"
+              className="w-full flex items-center justify-center gap-3 py-3 border-2 border-gray-300 rounded-xl font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-gray-700 transition-all"
             >
               <FcGoogle className="w-6 h-6" />
               Login with Google
             </button>
 
             {/* Register Link */}
-            <p className="mt-6 text-center text-gray-600">
+            <p className="mt-6 text-center text-gray-600 dark:text-gray-300">
               Don't have an account?{" "}
               <Link
                 to="/register"

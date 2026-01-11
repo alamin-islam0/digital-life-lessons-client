@@ -41,7 +41,7 @@ const UserAvatar = ({ user, size = "md", className = "" }) => {
 
   return (
     <div
-      className={`${currentSize} rounded-full bg-gray-100 text-gray-400 flex items-center justify-center border-2 border-white shadow-sm ${className}`}
+      className={`${currentSize} rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center border-2 border-white shadow-sm ${className}`}
     >
       <User className="w-1/2 h-1/2" />
     </div>

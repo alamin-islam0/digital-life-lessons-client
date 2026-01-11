@@ -101,7 +101,7 @@ const Profile = () => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Profile Header Card */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8">
         <div className="bg-gradient-to-r from-primary to-secondary h-32 md:h-48"></div>
         <div className="px-8 pb-8">
           <div className="relative flex flex-col md:flex-row items-center md:items-end -mt-16 mb-6 gap-6">
@@ -114,10 +114,10 @@ const Profile = () => {
             </div>
 
             <div className="flex-1 text-center md:text-left mb-2">
-              <h1 className="text-3xl font-bold text-gray-900 mb-1">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                 {user?.displayName}
               </h1>
-              <p className="text-gray-600 flex items-center justify-center md:justify-start gap-2">
+              <p className="text-gray-600 dark:text-gray-300 flex items-center justify-center md:justify-start gap-2">
                 <Mail className="w-4 h-4" />
                 {user?.email}
               </p>
@@ -130,7 +130,7 @@ const Profile = () => {
                   Premium Member
                 </span>
               )}
-              <span className="px-4 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
+              <span className="px-4 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-sm font-medium">
                 {dbUser?.role === "admin" ? "Admin" : "User"}
               </span>
             </div>
@@ -146,10 +146,10 @@ const Profile = () => {
           ) : (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="max-w-md space-y-4 bg-gray-50 p-6 rounded-xl"
+              className="max-w-md space-y-4 bg-gray-50 dark:bg-gray-700 p-6 rounded-xl"
             >
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Name
                 </label>
                 <input
@@ -159,7 +159,7 @@ const Profile = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Profile Picture
                 </label>
                 <input
@@ -180,7 +180,7 @@ const Profile = () => {
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}
-                  className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  className="px-6 py-2 bg-gray-200 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
                 >
                   Cancel
                 </button>
@@ -189,25 +189,25 @@ const Profile = () => {
           )}
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-gray-100">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
             <div className="text-center p-4 bg-info/10 rounded-xl">
               <p className="text-2xl font-bold text-info">
                 {myLessons.length}
               </p>
-              <p className="text-gray-600 text-sm">Public Lessons</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Public Lessons</p>
             </div>
             <div className="text-center p-4 bg-secondary/10 rounded-xl">
               <p className="text-2xl font-bold text-secondary">
                 {dbUser?.totalFavorites || 0}
               </p>
-              <p className="text-gray-600 text-sm">Saved Lessons</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Saved Lessons</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* User's Public Lessons */}
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
         My Public Lessons
       </h2>
       {myLessons.length > 0 ? (
@@ -218,7 +218,7 @@ const Profile = () => {
         </div>
       ) : (
         <div className="text-center py-12 bg-white rounded-2xl shadow-sm">
-          <p className="text-gray-500">No public lessons</p>
+          <p className="text-gray-500 dark:text-gray-400">No public lessons</p>
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 const LessonCardSkeleton = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden animate-pulse h-full">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden animate-pulse h-full">
       {/* Image Skeleton */}
       <div className="h-56 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-shimmer"></div>
       
@@ -25,7 +25,7 @@ const LessonCardSkeleton = () => {
         </div>
         
         {/* Author Skeleton */}
-        <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+        <div className="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
           <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
           <div className="flex-1 space-y-2">
             <div className="h-4 bg-gray-200 rounded w-1/2"></div>
