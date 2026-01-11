@@ -27,6 +27,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useUserPlan from "../../hooks/useUserPlan";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { axiosPublic } from "../../lib/axiosInstances";
 import UserAvatar from "../../components/ui/UserAvatar";
 import Loading from "../../components/ui/Loading";
 import LessonCard from "../../components/lessons/LessonCard";
@@ -46,11 +47,23 @@ const LessonDetails = () => {
 
   // Fetch lesson details
   const { data: lesson, isLoading } = useQuery({
-    queryKey: ["lesson", id],
+    queryKey: ["lesson", id, user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/lessons/${id}`);
-
-      return res.data;
+      if (user) {
+        const res = await axiosSecure.get(`/lessons/${id}`);
+        return res.data;
+      } else {
+        // Workaround: Access public lesson via the public list endpoint
+        // since the specific ID endpoint might be protected
+        const res = await axiosPublic.get("/lessons/public?limit=1000");
+        const publicLessons = res.data.lessons || [];
+        const foundLesson = publicLessons.find((l) => l._id === id);
+        
+        if (!foundLesson) {
+          throw new Error("Lesson not found");
+        }
+        return foundLesson;
+      }
     },
   });
 
@@ -59,7 +72,7 @@ const LessonDetails = () => {
     queryKey: ["similar-category", lesson?.category],
     queryFn: async () => {
       if (!lesson?.category) return { lessons: [] };
-      const res = await axiosSecure.get(
+      const res = await axiosPublic.get(
         `/lessons/public?category=${lesson.category}&limit=6`
       );
       return res.data;
@@ -73,7 +86,7 @@ const LessonDetails = () => {
     queryKey: ["similar-tone", lesson?.emotionalTone],
     queryFn: async () => {
       if (!lesson?.emotionalTone) return { lessons: [] };
-      const res = await axiosSecure.get(
+      const res = await axiosPublic.get(
         `/lessons/public?emotionalTone=${lesson.emotionalTone}&limit=6`
       );
       return res.data;
@@ -86,14 +99,15 @@ const LessonDetails = () => {
   const { data: comments = [] } = useQuery({
     queryKey: ["comments", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/lessons/${id}/comments`);
+      // Comments are generally public
+      const res = await axiosPublic.get(`/lessons/${id}/comments`);
       return res.data;
     },
   });
 
   // Fetch user favorites to check status
   const { data: userFavorites = [] } = useQuery({
-    queryKey: ["userFavorites"],
+    queryKey: ["userFavorites", user?.email],
     queryFn: async () => {
       if (!user) return [];
       const res = await axiosSecure.get(`/lessons/favorites`);
