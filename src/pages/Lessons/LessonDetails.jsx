@@ -49,21 +49,32 @@ const LessonDetails = () => {
   const { data: lesson, isLoading } = useQuery({
     queryKey: ["lesson", id, user?.email],
     queryFn: async () => {
+      let lessonData = null;
+
+      // Try secure fetch first if user is logged in
       if (user) {
-        const res = await axiosSecure.get(`/lessons/${id}`);
-        return res.data;
-      } else {
-        // Workaround: Access public lesson via the public list endpoint
-        // since the specific ID endpoint might be protected
+        try {
+          const res = await axiosSecure.get(`/lessons/${id}`);
+          lessonData = res.data;
+        } catch (error) {
+          console.warn("Secure fetch failed, falling back to public fetch:", error);
+          // If 401 or other error, we'll fall through to the public fetch
+        }
+      }
+
+      // If no user or secure fetch failed, try public fetch
+      if (!lessonData) {
         const res = await axiosPublic.get("/lessons/public?limit=1000");
         const publicLessons = res.data.lessons || [];
         const foundLesson = publicLessons.find((l) => l._id === id);
-        
+
         if (!foundLesson) {
           throw new Error("Lesson not found");
         }
-        return foundLesson;
+        lessonData = foundLesson;
       }
+
+      return lessonData;
     },
   });
 

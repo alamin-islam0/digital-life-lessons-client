@@ -23,7 +23,10 @@ const Navbar = () => {
 
   const navLinks = [
     { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
     { path: "/public-lessons", label: "Public Lessons" },
+    { path: "/blog", label: "Blog" },
+    { path: "/contact", label: "Contact" },
   ];
 
   if (user) {

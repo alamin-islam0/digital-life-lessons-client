@@ -13,6 +13,10 @@ import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Payment/PaymentCancel";
 import NotFound from "../pages/Error/NotFound";
 import AuthorProfile from "../pages/Lessons/AuthorProfile";
+import About from "../pages/About/About";
+import Contact from "../pages/Contact/Contact";
+import Blog from "../pages/Blog/Blog";
+import PrivacyTerms from "../pages/PrivacyTerms/PrivacyTerms";
 
 // User Dashboard Pages
 import DashboardHome from "../pages/Dashboard/DashboardHome";
@@ -41,6 +45,22 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "blog",
+        element: <Blog />,
+      },
+      {
+        path: "privacy-terms",
+        element: <PrivacyTerms />,
       },
       {
         path: "login",

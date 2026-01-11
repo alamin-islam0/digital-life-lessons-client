@@ -1,4 +1,5 @@
 import axios from "axios";
+import { auth } from "./firebase.config";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api";
@@ -22,8 +23,6 @@ export const axiosSecure = axios.create({
 // Request interceptor to add auth token
 axiosSecure.interceptors.request.use(
   async (config) => {
-    // Get Firebase auth token
-    const auth = (await import("./firebase.config")).auth;
     const user = auth.currentUser;
 
     if (user) {
