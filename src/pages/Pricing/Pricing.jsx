@@ -25,7 +25,7 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-16 px-4">
       <SectionHeader
         title="Our Plans"
         subtitle="Choose the best plan according to your needs"
@@ -45,34 +45,34 @@ const Pricing = () => {
 
           <ul className="space-y-4 mb-8">
             <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+              <Check className="w-5 h-5 text-success flex-shrink-0" />
               <span className="text-gray-700">
                 {" "}
                 Watch unlimited free lessons
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+              <Check className="w-5 h-5 text-success flex-shrink-0" />
               <span className="text-gray-700">
                 {" "}
                 Create your own lessons (limited)
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+              <Check className="w-5 h-5 text-success flex-shrink-0" />
               <span className="text-gray-700"> Comment and Like</span>
             </li>
           </ul>
 
-          <button className="w-full py-3 bg-gray-100 text-gray-900 rounded-xl font-bold hover:bg-gray-200 transition-colors cursor-default">
+          <button className="w-full py-3 bg-base-200 text-gray-900 rounded-xl font-bold hover:bg-base-300 transition-colors cursor-default">
             Your Current Plan
           </button>
         </div>
 
         {/* Premium Plan */}
-        <div className="relative bg-white rounded-2xl p-8 shadow-xl border-2 border-primary-500 transform md:scale-105 z-10">
+        <div className="relative bg-white rounded-2xl p-8 shadow-xl border-2 border-primary transform md:scale-105 z-10">
           <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3">
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg premium-glow">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-lg premium-glow">
               <Zap className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -80,7 +80,7 @@ const Pricing = () => {
           <div className="mb-6">
             <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
               Premium
-              <span className="px-3 py-1 bg-primary-100 text-primary-700 text-xs rounded-full font-bold uppercase tracking-wider">
+              <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-bold uppercase tracking-wider">
                 Popular
               </span>
             </h3>
@@ -93,40 +93,40 @@ const Pricing = () => {
 
           <ul className="space-y-4 mb-8">
             <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
+              <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span className="text-gray-700 font-medium">
                 Access all premium lessons
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
+              <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span className="text-gray-700 font-medium">
                 Create premium lessons
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
+              <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span className="text-gray-700 font-medium">
                 Ad-free experience
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
+              <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span className="text-gray-700 font-medium">
                 Lifetime membership
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-3 h-3 text-green-600" />
+              <div className="w-5 h-5 bg-success/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <Check className="w-3 h-3 text-success" />
               </div>
               <span className="text-gray-700 font-medium">
                 Priority support
@@ -137,7 +137,7 @@ const Pricing = () => {
           {isPremium ? (
             <button
               disabled
-              className="w-full py-3 bg-green-100 text-green-700 rounded-xl font-bold flex items-center justify-center gap-2 cursor-default"
+              className="w-full py-3 bg-success/10 text-success rounded-xl font-bold flex items-center justify-center gap-2 cursor-default"
             >
               <Check className="w-5 h-5" />
               You are already premium
@@ -146,7 +146,7 @@ const Pricing = () => {
             <button
               onClick={handleUpgrade}
               disabled={createCheckoutSession.isPending}
-              className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl font-bold hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed"
             >
               {createCheckoutSession.isPending
                 ? "Processing..."

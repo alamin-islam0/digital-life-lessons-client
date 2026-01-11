@@ -83,7 +83,7 @@ const AdminHome = () => {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <div className="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg font-semibold">
+        <div className="bg-primary/10 text-primary px-4 py-2 rounded-lg font-semibold">
           Today's Summary
         </div>
       </div>
@@ -94,29 +94,29 @@ const AdminHome = () => {
           title="Total Users"
           value={stats?.totalUsers || 0}
           icon={Users}
-          bgColor="bg-blue-50"
-          iconColor="text-blue-600"
+          bgColor="bg-info/10"
+          iconColor="text-info"
         />
         <StatsCard
           title="Total Lessons (All)"
           value={stats?.totalLessons || 0}
           icon={BookOpen}
-          bgColor="bg-green-50"
-          iconColor="text-green-600"
+          bgColor="bg-success/10"
+          iconColor="text-success"
         />
         <StatsCard
           title="Reported Lessons"
           value={stats?.reportedLessons || 0}
           icon={Flag}
-          bgColor="bg-red-50"
-          iconColor="text-red-600"
+          bgColor="bg-error/10"
+          iconColor="text-error"
         />
         <StatsCard
           title="Today's New Lessons"
           value={stats?.todayLessons || 0}
           icon={BookOpen}
-          bgColor="bg-purple-50"
-          iconColor="text-purple-600"
+          bgColor="bg-secondary/10"
+          iconColor="text-secondary"
         />
       </div>
 
@@ -125,19 +125,19 @@ const AdminHome = () => {
         <ChartWidget
           title="User Growth (Last 7 Days)"
           icon={TrendingUp}
-          iconColor="text-primary-600"
+          iconColor="text-primary"
           data={chartData}
           dataKey="users"
-          color="#0ea5e9"
+          color="#0B2C56"
           gradientId="colorUsers"
         />
         <ChartWidget
           title="Lesson Growth (Last 7 Days)"
           icon={BookOpen}
-          iconColor="text-secondary-600"
+          iconColor="text-secondary"
           data={chartData}
           dataKey="lessons"
-          color="#d946ef"
+          color="#32B2C9"
           gradientId="colorLessons"
         />
       </div>

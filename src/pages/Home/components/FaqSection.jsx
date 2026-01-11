@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Plus, Minus, HelpCircle } from "lucide-react";
 
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState(0);
@@ -27,96 +26,50 @@ const FaqSection = () => {
     },
   ];
 
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? -1 : index);
-  };
-
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-100/20 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-20">
-          
-          {/* Left Column: Header & Context */}
-          <div className="md:w-1/3 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 font-semibold text-sm mb-6">
-              <HelpCircle className="w-4 h-4" />
-              <span>Support & Help</span>
-            </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Everything you need to know about the product and billing. Can’t
-              find the answer you’re looking for? Please chat to our friendly team.
-            </p>
-            <div className="hidden md:block">
-              <button className="px-8 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/10">
-                Contact Support
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column: Accordion */}
-          <div className="md:w-2/3 space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className={`group rounded-2xl border transition-all duration-300 ${
-                  openIndex === idx
-                    ? "bg-white border-primary/20 shadow-xl shadow-primary/5"
-                    : "bg-white hover:bg-gray-50 border-gray-100"
-                }`}
-              >
-                <button
-                  onClick={() => handleToggle(idx)}
-                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
-                >
-                  <span
-                    className={`text-lg font-semibold transition-colors ${
-                      openIndex === idx ? "text-primary-600" : "text-gray-900"
-                    }`}
-                  >
-                    {faq.q}
-                  </span>
-                  <span
-                    className={`ml-4 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      openIndex === idx
-                        ? "bg-primary text-white rotate-180"
-                        : "bg-gray-100 text-gray-500 group-hover:bg-primary/10 group-hover:text-primary"
-                    }`}
-                  >
-                    {openIndex === idx ? (
-                      <Minus className="w-5 h-5" />
-                    ) : (
-                      <Plus className="w-5 h-5" />
-                    )}
-                  </span>
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === idx ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="p-6 pt-0 text-gray-600 leading-relaxed">
-                    {faq.a}
-                  </div>
-                </div>
-              </div>
-            ))}
-            
-             <div className="block md:hidden mt-8 text-center">
-              <button className="px-8 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/10 w-full">
-                Contact Support
-              </button>
-            </div>
-          </div>
+    <section className="py-24 bg-base-100">
+      <div className="max-w-3xl mx-auto px-4">
+        <div className="text-center mb-10">
+          <h2 className="text-4xl font-bold text-base-content mb-4">Frequently Asked Questions</h2>
         </div>
+        
+        {faqs.map((faq, idx) => (
+          <div key={idx} className="mb-1.5">
+            {/* Header / Label */}
+            <button
+              onClick={() => setOpenIndex(idx)}
+              className="w-full flex justify-between items-center p-4 bg-base-200 cursor-pointer font-bold text-left hover:bg-base-300 transition-colors"
+            >
+              <span className="text-sm md:text-base text-base-content">{faq.q}</span>
+              <div className={`flex items-center transition-transform duration-500 ease-in-out ${openIndex === idx ? "rotate-180" : ""}`}>
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  height="16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={openIndex === idx ? "text-primary" : "text-base-content"}
+                >
+                  <path
+                    d="M4.293 5.293a1 1 0 0 1 1.414 0L8 7.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 0-1.414z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+
+            {/* Content */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out bg-base-100 border-x border-b border-base-200 ${
+                openIndex === idx ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="p-4 bg-base-100 text-xs md:text-sm text-base-content/70 border-t border-base-200">
+                <p>{faq.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -140,7 +140,7 @@ const ReportedLessons = () => {
                     {report.lesson?.title || "Deleted Lesson"}
                   </TableCell>
                   <TableCell className="bangla-text text-sm">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-100 text-red-700 rounded-full font-bold">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-error/10 text-error rounded-full font-bold">
                       <AlertTriangle className="w-4 h-4" />
                       {report.reportCount}
                     </span>
@@ -199,7 +199,7 @@ const ReportedLessons = () => {
           ) : reportDetails.length > 0 ? (
             <div className="space-y-6">
               {/* Lesson Info */}
-              <div className="bg-blue-50 p-4 rounded-xl mb-4">
+              <div className="bg-info/10 p-4 rounded-xl mb-4">
                 <Typography
                   variant="subtitle2"
                   color="textSecondary"
@@ -209,7 +209,7 @@ const ReportedLessons = () => {
                 </Typography>
                 <Link
                   to={`/lesson/${selectedLessonId}`}
-                  className="text-lg font-bold text-primary-700 hover:underline block"
+                  className="text-lg font-bold text-primary hover:underline block"
                   target="_blank"
                 >
                   Click here to view lesson
@@ -240,7 +240,7 @@ const ReportedLessons = () => {
                           {new Date(detail.createdAt).toLocaleDateString()}
                         </Typography>
                       </div>
-                      <span className="px-3 py-1 bg-red-50 text-red-700 text-xs rounded-lg font-medium border border-red-100">
+                      <span className="px-3 py-1 bg-error/5 text-error text-xs rounded-lg font-medium border border-error/20">
                         {detail.reason}
                       </span>
                     </div>

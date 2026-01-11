@@ -46,12 +46,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ea5e9;
+  background: #0B2C56;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: #092344;
 }
 
 
@@ -93,7 +93,7 @@ html {
 
 /* Premium badge glow */
 .premium-glow {
-  box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+  box-shadow: 0 0 20px rgba(50, 178, 201, 0.5);
 }
 
 /* Base button reset if needed, but Tailwind handles most of this */

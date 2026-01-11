@@ -43,12 +43,12 @@ const Navbar = () => {
       className={({ isActive }) =>
         `font-medium transition-colors ${mobile
           ? `block px-4 py-3 rounded-lg ${isActive
-            ? "bg-primary-100 text-primary-700"
+            ? "bg-primary/10 text-primary"
             : "text-gray-700 hover:bg-gray-100"
           }`
           : `${isActive
-            ? "text-primary-600"
-            : "text-gray-700 hover:text-primary-600"
+            ? "text-primary"
+            : "text-gray-700 hover:text-primary"
           }`
         }`
       }
@@ -74,7 +74,7 @@ const Navbar = () => {
 
             {/* Premium Badge */}
             {user && isPremium && (
-              <span className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-full text-sm font-semibold premium-glow">
+              <span className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-semibold premium-glow">
                 <Star className="w-4 h-4" />
                 Premium
               </span>
@@ -106,7 +106,7 @@ const Navbar = () => {
                         </p>
                         <p className="text-sm text-gray-500">{user.email}</p>
                         {isPremium && (
-                          <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">
+                          <span className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-semibold">
                             <Star className="w-3 h-3" />
                             Premium Member
                           </span>
@@ -135,7 +135,7 @@ const Navbar = () => {
 
                       <button
                         onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 transition-colors text-red-600 w-full text-left"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-error/10 transition-colors text-error w-full text-left"
                       >
                         <LogOut className="w-4 h-4" />
                         Logout
@@ -148,13 +148,13 @@ const Navbar = () => {
               <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+                  className="px-4 py-2 text-primary font-semibold hover:text-primary/80 transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
+                  className="px-6 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:opacity-90 transition-all"
                 >
                   Register
                 </Link>
@@ -184,7 +184,7 @@ const Navbar = () => {
 
             {user && isPremium && (
               <div className="px-4 py-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-full text-sm font-semibold">
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-semibold">
                   <Star className="w-4 h-4" />
                   Premium
                 </span>
@@ -226,7 +226,7 @@ const Navbar = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-3 px-4 py-3 hover:bg-red-50 rounded-lg transition-colors text-red-600 w-full text-left"
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-error/10 rounded-lg transition-colors text-error w-full text-left"
                   >
                     <LogOut className="w-4 h-4" />
                     Logout
@@ -237,14 +237,14 @@ const Navbar = () => {
                   <Link
                     to="/login"
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-3 text-center text-primary-600 font-semibold hover:bg-primary-50 rounded-lg transition-colors"
+                    className="block px-4 py-3 text-center text-primary font-semibold hover:bg-primary/5 rounded-lg transition-colors"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-3 text-center bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
+                    className="block px-4 py-3 text-center bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:opacity-90 transition-all"
                   >
                     Register
                   </Link>

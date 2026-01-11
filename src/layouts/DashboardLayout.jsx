@@ -34,12 +34,12 @@ const DashboardLayout = () => {
   const navLinkStyles = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
       isActive
-        ? "bg-blue-600 text-white shadow-md"
-        : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+        ? "bg-primary text-white shadow-md"
+        : "text-gray-600 hover:bg-primary/5 hover:text-primary"
     }`;
 
   return (
-    <div className="h-screen bg-gray-50 flex overflow-hidden">
+    <div className="h-screen bg-base-200 flex overflow-hidden">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
@@ -176,7 +176,7 @@ const DashboardLayout = () => {
               </NavLink>
               <Link
                 to="/"
-                className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200"
+                className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
               >
                 <RxExit size={20} />
                 <span>Back to Home</span>
@@ -218,7 +218,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-auto bg-gray-50/50 p-4 md:p-8">
+        <div className="flex-1 overflow-auto bg-base-200/50 p-4 md:p-8">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

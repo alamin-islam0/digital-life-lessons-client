@@ -18,7 +18,7 @@ const HeroSection = () => {
         "Every experience teaches a lesson. Share yours and inspire the world.",
       image:
         "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2670&auto=format&fit=crop",
-      color: "from-blue-600 to-cyan-500",
+      color: "from-primary to-secondary",
     },
     {
       title: "Learn & Grow",
@@ -26,14 +26,14 @@ const HeroSection = () => {
         "Discover life lessons from people across the globe. Avoid mistakes, seek truth.",
       image:
         "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2573&auto=format&fit=crop",
-      color: "from-purple-600 to-pink-500",
+      color: "from-secondary to-accent",
     },
     {
       title: "Leave a Legacy",
       subtitle: "Your words can guide someone long after you've written them.",
       image:
         "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2670&auto=format&fit=crop",
-      color: "from-amber-500 to-orange-600",
+      color: "from-primary to-accent",
     },
   ];
 
@@ -75,7 +75,7 @@ const HeroSection = () => {
                     className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium w-fit"
                     data-aos="fade-down"
                   >
-                    <Sparkles className="w-4 h-4 text-yellow-400" />
+                    <Sparkles className="w-4 h-4 text-accent" />
                     <span>Digital Life Lessons</span>
                   </div>
 

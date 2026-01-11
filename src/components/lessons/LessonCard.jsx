@@ -44,20 +44,21 @@ const LessonCard = ({ lesson, showBlur = false }) => {
   const isPremium = accessLevel === "premium";
 
   // Category badge colors
+  // Category badge colors
   const categoryColors = {
-    "Personal Development": "bg-blue-100 text-blue-700",
-    Career: "bg-green-100 text-green-700",
-    Relationships: "bg-pink-100 text-pink-700",
-    Mindset: "bg-purple-100 text-purple-700",
-    "Learning from Mistakes": "bg-orange-100 text-orange-700",
+    "Personal Development": "bg-primary/10 text-primary",
+    Career: "bg-secondary/10 text-secondary",
+    Relationships: "bg-accent/10 text-accent",
+    Mindset: "bg-info/10 text-info",
+    "Learning from Mistakes": "bg-warning/10 text-warning-content", // using warning-content for better contrast if needed, or stick to text-warning
   };
 
   // Emotional tone colors
   const toneColors = {
-    Motivational: "bg-yellow-100 text-yellow-700",
-    Sadness: "bg-gray-100 text-gray-700",
-    Realization: "bg-indigo-100 text-indigo-700",
-    Gratitude: "bg-teal-100 text-teal-700",
+    Motivational: "bg-success/10 text-success",
+    Sadness: "bg-neutral/10 text-neutral-content",
+    Realization: "bg-primary/5 text-primary",
+    Gratitude: "bg-secondary/5 text-secondary",
   };
 
   const formatDate = (date) => {
@@ -71,17 +72,18 @@ const LessonCard = ({ lesson, showBlur = false }) => {
         }`}
     >
       {/* Premium Lock Overlay */}
+      {/* Premium Lock Overlay */}
       {showBlur && isPremium && (
         <div className="absolute inset-0 bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center">
           <div className="text-center p-6">
-            <Lock className="w-12 h-12 text-yellow-600 mx-auto mb-3" />
+            <Lock className="w-12 h-12 text-secondary mx-auto mb-3" />
             <h3 className="text-xl font-bold text-gray-900 mb-2">
               Premium Lesson
             </h3>
             <p className="text-gray-600 mb-4">Upgrade to view this lesson</p>
             <Link
               to="/pricing"
-              className="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-yellow-600 hover:to-yellow-700 transition-all"
+              className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-all"
             >
               Upgrade Now
             </Link>
@@ -123,14 +125,14 @@ const LessonCard = ({ lesson, showBlur = false }) => {
               </span>
             </div>
             {isPremium && (
-              <span className="px-3 w-28 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 text-white premium-glow">
+              <span className="px-3 w-28 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-secondary text-white premium-glow">
                 ⭐ Premium
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
             {title}
           </h3>
 
@@ -174,7 +176,7 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           {/* CTA Button */}
           <Link
             to={`/lesson/${_id}`}
-            className="block w-full text-center bg-gradient-to-r from-primary-500 to-primary-600 text-white py-2.5 rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
+            className="block w-full text-center bg-gradient-to-r from-primary to-secondary text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition-all"
           >
             View Details
           </Link>

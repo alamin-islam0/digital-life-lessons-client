@@ -102,7 +102,7 @@ const Profile = () => {
     <div className="max-w-6xl mx-auto">
       {/* Profile Header Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-        <div className="bg-gradient-to-r from-primary-500 to-secondary-500 h-32 md:h-48"></div>
+        <div className="bg-gradient-to-r from-primary to-secondary h-32 md:h-48"></div>
         <div className="px-8 pb-8">
           <div className="relative flex flex-col md:flex-row items-center md:items-end -mt-16 mb-6 gap-6">
             <div className="ring-4 ring-white rounded-full bg-white">
@@ -125,7 +125,7 @@ const Profile = () => {
 
             <div className="flex flex-col items-center md:items-end gap-2">
               {dbUser?.isPremium && (
-                <span className="px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-full font-bold shadow-lg flex items-center gap-2 premium-glow">
+                <span className="px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-bold shadow-lg flex items-center gap-2 premium-glow">
                   <Star className="w-5 h-5 fill-current" />
                   Premium Member
                 </span>
@@ -139,7 +139,7 @@ const Profile = () => {
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="w-full md:w-auto px-6 py-2 bg-primary-100 text-primary-700 rounded-lg font-semibold hover:bg-primary-200 transition-colors"
+              className="w-full md:w-auto px-6 py-2 bg-primary/10 text-primary rounded-lg font-semibold hover:bg-primary/20 transition-colors"
             >
               Edit Profile
             </button>
@@ -155,7 +155,7 @@ const Profile = () => {
                 <input
                   type="text"
                   {...register("name", { required: "Name is required" })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
                 />
               </div>
               <div>
@@ -166,13 +166,13 @@ const Profile = () => {
                   type="file"
                   accept="image/*"
                   {...register("image")}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                 />
               </div>
               <div className="flex gap-2">
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors flex items-center gap-2"
+                  className="px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:opacity-90 transition-colors flex items-center gap-2"
                 >
                   <Save className="w-4 h-4" />
                   Save
@@ -190,14 +190,14 @@ const Profile = () => {
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-gray-100">
-            <div className="text-center p-4 bg-blue-50 rounded-xl">
-              <p className="text-2xl font-bold text-blue-600">
+            <div className="text-center p-4 bg-info/10 rounded-xl">
+              <p className="text-2xl font-bold text-info">
                 {myLessons.length}
               </p>
               <p className="text-gray-600 text-sm">Public Lessons</p>
             </div>
-            <div className="text-center p-4 bg-purple-50 rounded-xl">
-              <p className="text-2xl font-bold text-purple-600">
+            <div className="text-center p-4 bg-secondary/10 rounded-xl">
+              <p className="text-2xl font-bold text-secondary">
                 {dbUser?.totalFavorites || 0}
               </p>
               <p className="text-gray-600 text-sm">Saved Lessons</p>

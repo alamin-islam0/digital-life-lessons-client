@@ -97,7 +97,7 @@ const UpdateLesson = () => {
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-2xl shadow-lg p-8">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
             <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -109,7 +109,7 @@ const UpdateLesson = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Title <span className="text-red-500">*</span>
+              Title <span className="text-error">*</span>
             </label>
             <input
               type="text"
@@ -120,10 +120,10 @@ const UpdateLesson = () => {
                   message: "Title must be at least 5 characters",
                 },
               })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.title && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-sm text-error">
                 {errors.title.message}
               </p>
             )}
@@ -131,7 +131,7 @@ const UpdateLesson = () => {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Detailed Description <span className="text-red-500">*</span>
+              Detailed Description <span className="text-error">*</span>
             </label>
             <textarea
               {...register("description", {
@@ -142,10 +142,10 @@ const UpdateLesson = () => {
                 },
               })}
               rows="8"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
             />
             {errors.description && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-sm text-error">
                 {errors.description.message}
               </p>
             )}
@@ -154,11 +154,11 @@ const UpdateLesson = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Category <span className="text-red-500">*</span>
+                Category <span className="text-error">*</span>
               </label>
               <select
                 {...register("category", { required: "Select Category" })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
@@ -167,7 +167,7 @@ const UpdateLesson = () => {
                 ))}
               </select>
               {errors.category && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-sm text-error">
                   {errors.category.message}
                 </p>
               )}
@@ -175,11 +175,11 @@ const UpdateLesson = () => {
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Emotional Tone <span className="text-red-500">*</span>
+                Emotional Tone <span className="text-error">*</span>
               </label>
               <select
                 {...register("emotionalTone", { required: "Select Tone" })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {emotionalTones.map((tone) => (
                   <option key={tone} value={tone}>
@@ -188,7 +188,7 @@ const UpdateLesson = () => {
                 ))}
               </select>
               {errors.emotionalTone && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="mt-1 text-sm text-error">
                   {errors.emotionalTone.message}
                 </p>
               )}
@@ -207,10 +207,10 @@ const UpdateLesson = () => {
                   message: "Enter valid URL",
                 },
               })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
             />
             {errors.image && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-sm text-error">
                 {errors.image.message}
               </p>
             )}
@@ -223,7 +223,7 @@ const UpdateLesson = () => {
               </label>
               <select
                 {...register("visibility")}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 <option value="public">Public</option>
                 <option value="private">Private</option>
@@ -237,7 +237,7 @@ const UpdateLesson = () => {
               <select
                 {...register("accessLevel")}
                 disabled={!isPremium}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
               >
                 <option value="free">Free</option>
                 <option value="premium" disabled={!isPremium}>
@@ -251,7 +251,7 @@ const UpdateLesson = () => {
             <button
               type="submit"
               disabled={updateLessonMutation.isPending}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
             >
               <Save className="w-5 h-5" />
               {updateLessonMutation.isPending ? "Updating..." : "Update"}

@@ -123,25 +123,17 @@ const MyFavorites = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {favorites.map((fav) => {
-            // Handle both structures: wrapping object with .lesson OR direct lesson object
-            const lessonData = fav.lesson || fav;
-
-            // Skip if no valid lesson data found
-            if (!lessonData || !lessonData._id) return null;
-
             return (
               <div key={fav._id || lessonData._id} className="relative">
                 <LessonCard lesson={lessonData} />
                 <button
                   onClick={() => removeFavoriteMutation.mutate(lessonData._id)}
-                  className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all shadow-md"
+                  className="absolute top-4 right-4 p-2 bg-error text-white rounded-lg hover:opacity-90 transition-all shadow-md"
                 >
                   <Bookmark className="w-4 h-4 fill-current" />
                 </button>
               </div>
             );
-          })}
         </div>
       )}
     </div>

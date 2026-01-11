@@ -4,8 +4,8 @@ const StatsCard = ({
   title,
   value,
   icon: Icon,
-  bgColor = "bg-blue-50",
-  iconColor = "text-blue-600",
+  bgColor = "bg-primary/5",
+  iconColor = "text-primary",
   trend,
   trendValue,
 }) => {
@@ -15,14 +15,14 @@ const StatsCard = ({
     >
       <div className="flex items-center justify-between mb-4">
         <div
-          className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center`}
+          className={`w-12 h-12 bg-white rounded-lg flex items-center justify-center`}
         >
           <Icon className={`w-6 h-6 ${iconColor}`} />
         </div>
         {trend && (
           <div
             className={`flex items-center gap-1 text-sm font-semibold ${
-              trend === "up" ? "text-green-600" : "text-red-600"
+              trend === "up" ? "text-success" : "text-error"
             }`}
           >
             {trend === "up" ? (

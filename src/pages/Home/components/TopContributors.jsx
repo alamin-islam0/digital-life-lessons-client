@@ -8,7 +8,7 @@ const TopContributors = ({ contributors, isLoading }) => {
     <section className="py-24 bg-base-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16" data-aos="fade-down">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-700 font-semibold text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
             <Trophy className="w-4 h-4" />
             <span>Weekly Leaderboard</span>
           </div>
@@ -31,7 +31,7 @@ const TopContributors = ({ contributors, isLoading }) => {
                 data-aos-delay={index * 100}
                 className="group relative bg-base-100 rounded-3xl p-6 border border-base-200 hover:border-primary/50 shadow-lg shadow-base-200 hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 text-center"
               >
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-amber-300 to-amber-500 flex items-center justify-center text-white font-bold text-sm border-2 border-white shadow-sm z-10">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-sm border-2 border-white shadow-sm z-10">
                   #{index + 1}
                 </div>
 

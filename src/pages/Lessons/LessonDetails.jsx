@@ -86,7 +86,7 @@ const LessonDetails = () => {
     queryKey: ["similar-tone", lesson?.emotionalTone],
     queryFn: async () => {
       if (!lesson?.emotionalTone) return { lessons: [] };
-      const res = await axiosPublic.get(
+      const res = await axiosSecure.get(
         `/lessons/public?emotionalTone=${lesson.emotionalTone}&limit=6`
       );
       return res.data;
@@ -481,12 +481,12 @@ const LessonDetails = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-8">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors mb-6 font-medium"
+          className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors mb-6 font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Go Back
@@ -494,7 +494,7 @@ const LessonDetails = () => {
 
         {/* Premium Lock Banner */}
         {isPremiumLesson && !isPremium && (
-          <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-2xl p-6 mb-6 shadow-lg">
+          <div className="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-6 mb-6 shadow-lg">
             <div className="flex items-center gap-4">
               <Lock className="w-12 h-12" />
               <div className="flex-1">
@@ -507,7 +507,7 @@ const LessonDetails = () => {
               </div>
               <Link
                 to="/pricing"
-                className="px-6 py-3 bg-white text-yellow-600 rounded-lg font-bold hover:bg-gray-100 transition-all whitespace-nowrap"
+                className="px-6 py-3 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 transition-all whitespace-nowrap"
               >
                 Upgrade Now
               </Link>
@@ -524,14 +524,14 @@ const LessonDetails = () => {
           {/* Header */}
           <div className="p-8 border-b border-gray-100">
             <div className="flex flex-wrap gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-info/10 text-info rounded-full text-sm font-semibold">
                 {lesson.category}
               </span>
-              <span className="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-sm font-semibold">
                 {lesson.emotionalTone}
               </span>
               {isPremiumLesson && (
-                <span className="px-4 py-1.5 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-full text-sm font-semibold premium-glow">
+                <span className="px-4 py-1.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-semibold premium-glow">
                   ⭐ Premium
                 </span>
               )}
@@ -588,7 +588,7 @@ const LessonDetails = () => {
                 <div className="flex items-center gap-2 text-gray-700">
                   <Heart
                     className={`w-5 h-5 ${
-                      hasLikes ? "fill-red-500 text-red-500" : ""
+                      hasLikes ? "fill-error text-error" : ""
                     }`}
                   />
                   <span className="font-semibold">
@@ -598,7 +598,7 @@ const LessonDetails = () => {
                 <div className="flex items-center gap-2 text-gray-700">
                   <Bookmark
                     className={`w-5 h-5 ${
-                      hasFavorites ? "fill-primary-500 text-primary-500" : ""
+                      hasFavorites ? "fill-primary text-primary" : ""
                     }`}
                   />
                   <span className="font-semibold">
@@ -614,7 +614,7 @@ const LessonDetails = () => {
                 onClick={handleLike}
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${
                   isLiked
-                    ? "bg-red-100 text-red-700 hover:bg-red-200"
+                    ? "bg-error/10 text-error hover:bg-error/20"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -628,7 +628,7 @@ const LessonDetails = () => {
                 onClick={handleFavorite}
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${
                   isFavorited
-                    ? "bg-primary-100 text-primary-700 hover:bg-primary-200"
+                    ? "bg-primary/10 text-primary hover:bg-primary/20"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -648,7 +648,7 @@ const LessonDetails = () => {
 
               <button
                 onClick={handleReport}
-                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-lg font-semibold hover:bg-red-100 transition-all active:scale-95"
+                className="flex items-center gap-2 px-6 py-3 bg-error/5 text-error rounded-lg font-semibold hover:bg-error/10 transition-all active:scale-95"
               >
                 <Flag className="w-5 h-5" />
                 Report
@@ -685,7 +685,7 @@ const LessonDetails = () => {
                 {authorId && (
                   <Link
                     to={`/author/${authorId}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary-500 text-primary-600 rounded-xl font-bold hover:bg-primary-50 transition-all shadow-sm hover:shadow-md"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary text-primary rounded-xl font-bold hover:bg-primary/5 transition-all shadow-sm hover:shadow-md"
                   >
                     View all lessons by this author
                   </Link>
@@ -708,12 +708,12 @@ const LessonDetails = () => {
               onChange={(e) => setComment(e.target.value)}
               placeholder="Write your opinion..."
               rows="3"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none bg-gray-50"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent resize-none bg-gray-50"
             />
             <button
               type="submit"
               disabled={!comment.trim() || commentMutation.isPending}
-              className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              className="mt-3 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
             >
               <Send className="w-4 h-4" />
               Post Comment

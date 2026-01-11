@@ -127,7 +127,7 @@ const PublicLessons = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title="Public Life Lessons"
@@ -145,7 +145,7 @@ const PublicLessons = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search lessons..."
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
           </form>
@@ -176,7 +176,7 @@ const PublicLessons = () => {
                   setCategory(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat === "All" ? "" : cat}>
@@ -197,7 +197,7 @@ const PublicLessons = () => {
                   setEmotionalTone(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {emotionalTones.map((tone) => (
                   <option key={tone} value={tone === "All" ? "" : tone}>
@@ -218,7 +218,7 @@ const PublicLessons = () => {
                   setSortBy(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 {sortOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -238,7 +238,7 @@ const PublicLessons = () => {
             authorId) && (
             <div className="mt-4 flex flex-wrap gap-2">
               {searchTerm && (
-                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm flex items-center gap-1">
                   Search: {searchTerm}
                   <X
                     className="w-3 h-3 cursor-pointer"
@@ -247,7 +247,7 @@ const PublicLessons = () => {
                 </span>
               )}
               {category && (
-                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm flex items-center gap-1">
                   {category}
                   <X
                     className="w-3 h-3 cursor-pointer"
@@ -256,7 +256,7 @@ const PublicLessons = () => {
                 </span>
               )}
               {emotionalTone && (
-                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm flex items-center gap-1">
                   {emotionalTone}
                   <X
                     className="w-3 h-3 cursor-pointer"
@@ -265,7 +265,7 @@ const PublicLessons = () => {
                 </span>
               )}
               {authorId && (
-                <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm flex items-center gap-1">
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm flex items-center gap-1">
                   Filtered by Author
                   <X
                     className="w-3 h-3 cursor-pointer"
@@ -282,7 +282,7 @@ const PublicLessons = () => {
                   setSearchParams({});
                   setPage(1);
                 }}
-                className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm hover:bg-red-200 transition-colors"
+                className="px-3 py-1 bg-error/10 text-error rounded-full text-sm hover:bg-error/20 transition-colors"
               >
                 Clear all filters
               </button>
@@ -341,7 +341,7 @@ const PublicLessons = () => {
                 setSearchParams({});
                 setPage(1);
               }}
-              className="px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
+              className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:opacity-90 transition-all"
             >
               Clear all filters
             </button>

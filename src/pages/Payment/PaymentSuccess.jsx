@@ -112,10 +112,10 @@ const PaymentSuccess = () => {
 
   if (verifying) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-info/5 px-4">
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
-          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+          <div className="w-24 h-24 bg-info/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Loader2 className="w-12 h-12 text-info animate-spin" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
             Verifying payment...
@@ -131,9 +131,9 @@ const PaymentSuccess = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-error/5 px-4">
         <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
-          <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-24 h-24 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⚠️</span>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -147,7 +147,7 @@ const PaymentSuccess = () => {
           <div className="space-y-4">
             <Link
               to="/dashboard"
-              className="block w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg"
+              className="block w-full py-3 bg-primary text-white rounded-xl font-bold hover:opacity-90 transition-colors shadow-lg"
             >
               Go to Dashboard
             </Link>
@@ -165,10 +165,10 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-success/5 px-4">
       <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
-        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
-          <CheckCircle className="w-12 h-12 text-green-600" />
+        <div className="w-24 h-24 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+          <CheckCircle className="w-12 h-12 text-success" />
         </div>
 
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -181,7 +181,7 @@ const PaymentSuccess = () => {
 
         {/* Payment Details */}
         {paymentData && (
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6 border border-blue-200">
+          <div className="bg-gradient-to-br from-base-100 to-base-200 rounded-xl p-6 mb-6 border border-base-300">
             <h3 className="text-lg font-bold text-gray-900 mb-4">
               Payment Details
             </h3>
@@ -206,7 +206,7 @@ const PaymentSuccess = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Status</span>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">
+                <span className="px-3 py-1 bg-success/10 text-success rounded-full text-sm font-bold">
                   Completed
                 </span>
               </div>
@@ -217,7 +217,7 @@ const PaymentSuccess = () => {
         <div className="space-y-4">
           <Link
             to="/dashboard"
-            className="block w-full py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors shadow-lg"
+            className="block w-full py-3 bg-primary text-white rounded-xl font-bold hover:opacity-90 transition-colors shadow-lg"
           >
             Go to Dashboard
           </Link>

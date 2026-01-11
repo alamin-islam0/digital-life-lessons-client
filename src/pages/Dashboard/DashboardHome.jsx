@@ -114,7 +114,7 @@ const DashboardHome = () => {
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-white">
+      <div className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-white">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
           Welcome, {user?.displayName || "User"}!
         </h1>
@@ -130,8 +130,8 @@ const DashboardHome = () => {
           title="Total Lessons"
           value={stats?.totalLessons || 0}
           icon={BookOpen}
-          bgColor="bg-blue-50"
-          iconColor="text-blue-600"
+          bgColor="bg-info/10"
+          iconColor="text-info"
           trend="up"
           trendValue="+12%"
         />
@@ -139,15 +139,15 @@ const DashboardHome = () => {
           title="Saved Lessons"
           value={stats?.totalFavorites || 0}
           icon={Bookmark}
-          bgColor="bg-purple-50"
-          iconColor="text-purple-600"
+          bgColor="bg-secondary/10"
+          iconColor="text-secondary"
         />
         <StatsCard
           title="Total Likes"
           value={stats?.totalLikes || 0}
           icon={Heart}
-          bgColor="bg-pink-50"
-          iconColor="text-pink-600"
+          bgColor="bg-accent/10"
+          iconColor="text-accent"
           trend="up"
           trendValue="+8%"
         />
@@ -155,8 +155,8 @@ const DashboardHome = () => {
           title="Public Lessons"
           value={stats?.publicLessons || 0}
           icon={TrendingUp}
-          bgColor="bg-green-50"
-          iconColor="text-green-600"
+          bgColor="bg-success/10"
+          iconColor="text-success"
         />
       </div>
 
@@ -166,7 +166,7 @@ const DashboardHome = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/dashboard/add-lesson"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
           >
             <BookOpen className="w-5 h-5" />
             Add New Lesson
@@ -201,7 +201,7 @@ const DashboardHome = () => {
           <h2 className="text-2xl font-bold text-gray-900">Recent Lessons</h2>
           <Link
             to="/dashboard/my-lessons"
-            className="text-primary-600 hover:text-primary-700 font-semibold"
+            className="text-primary hover:text-primary/80 font-semibold"
           >
             View All →
           </Link>
@@ -226,7 +226,7 @@ const DashboardHome = () => {
             </p>
             <Link
               to="/dashboard/add-lesson"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-primary-700 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:opacity-90 transition-all"
             >
               <BookOpen className="w-5 h-5" />
               Create Lesson
@@ -245,7 +245,7 @@ const DashboardHome = () => {
               onClick={() => setChartView("weekly")}
               className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                 chartView === "weekly"
-                  ? "bg-white text-primary-600 shadow-sm"
+                  ? "bg-white text-primary shadow-sm"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -255,7 +255,7 @@ const DashboardHome = () => {
               onClick={() => setChartView("monthly")}
               className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                 chartView === "monthly"
-                  ? "bg-white text-primary-600 shadow-sm"
+                  ? "bg-white text-primary shadow-sm"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -298,9 +298,8 @@ const DashboardHome = () => {
               />
               <Bar
                 dataKey="count"
-                fill="#4F46E5"
+                fill="#0B2C56"
                 radius={[4, 4, 0, 0]}
-                barSize={40}
                 name="Lessons Created"
               />
             </BarChart>

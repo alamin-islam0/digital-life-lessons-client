@@ -120,7 +120,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-white to-primary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/5 via-white to-primary/5 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Side - Illustration/Info */}
         <div className="hidden lg:block">
@@ -134,19 +134,19 @@ const Register = () => {
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <PenTool className="text-white w-6 h-6" />
                 </div>
                 <p className="text-gray-700">Create unlimited lessons</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <BookOpen className="text-white w-6 h-6" />
                 </div>
                 <p className="text-gray-700">Learn from thousands of lessons</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-success to-success/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Gem className="text-white w-6 h-6" />
                 </div>
                 <p className="text-gray-700">Unlock premium features</p>
@@ -183,12 +183,12 @@ const Register = () => {
                         message: "Name must be at least 2 characters",
                       },
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Your name"
                   />
                 </div>
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-error">
                     {errors.name.message}
                   </p>
                 )}
@@ -210,12 +210,12 @@ const Register = () => {
                         message: "Please enter a valid email",
                       },
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Your email"
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-error">
                     {errors.email.message}
                   </p>
                 )}
@@ -234,11 +234,11 @@ const Register = () => {
                     {...register("image", {
                       required: "Profile picture is required",
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
                   />
                 </div>
                 {errors.image && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-error">
                     {errors.image.message}
                   </p>
                 )}
@@ -257,7 +257,7 @@ const Register = () => {
                       required: "Password is required",
                       validate: validatePassword,
                     })}
-                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     placeholder="Your password"
                   />
                   <button
@@ -273,7 +273,7 @@ const Register = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-error">
                     {errors.password.message}
                   </p>
                 )}
@@ -284,7 +284,7 @@ const Register = () => {
                     <p
                       className={`text-xs ${
                         password.length >= 6
-                          ? "text-green-600"
+                          ? "text-success"
                           : "text-gray-500"
                       }`}
                     >
@@ -293,7 +293,7 @@ const Register = () => {
                     <p
                       className={`text-xs ${
                         /[A-Z]/.test(password)
-                          ? "text-green-600"
+                          ? "text-success"
                           : "text-gray-500"
                       }`}
                     >
@@ -302,7 +302,7 @@ const Register = () => {
                     <p
                       className={`text-xs ${
                         /[a-z]/.test(password)
-                          ? "text-green-600"
+                          ? "text-success"
                           : "text-gray-500"
                       }`}
                     >
@@ -315,7 +315,7 @@ const Register = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white rounded-xl font-bold text-lg hover:from-secondary-600 hover:to-secondary-700 transition-all shadow-lg hover:shadow-xl"
+                className="w-full py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
               >
                 Register
               </button>
@@ -346,7 +346,7 @@ const Register = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-primary-600 font-semibold hover:text-primary-700"
+                className="text-primary font-semibold hover:text-primary/80"
               >
                 Login
               </Link>

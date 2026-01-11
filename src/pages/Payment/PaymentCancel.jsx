@@ -3,10 +3,10 @@ import { XCircle, RefreshCw } from "lucide-react";
 
 const PaymentCancel = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-red-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-error/5 px-4">
       <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl text-center max-w-lg w-full">
-        <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <XCircle className="w-12 h-12 text-red-600" />
+        <div className="w-24 h-24 bg-error/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <XCircle className="w-12 h-12 text-error" />
         </div>
 
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -20,7 +20,7 @@ const PaymentCancel = () => {
         <div className="space-y-4">
           <Link
             to="/pricing"
-            className="block w-full py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-colors shadow-lg flex items-center justify-center gap-2"
+            className="block w-full py-3 bg-error text-white rounded-xl font-bold hover:opacity-90 transition-colors shadow-lg flex items-center justify-center gap-2"
           >
             <RefreshCw className="w-5 h-5" />
             Try Again
