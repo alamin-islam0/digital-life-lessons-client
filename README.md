@@ -1,101 +1,153 @@
-# Digital Life Lessons 🌟
+# 🎓 Digital Life Lessons
 
-**Digital Life Lessons** is a modern, full-stack web application designed to connect people through shared experiences. It serves as a platform where users can document their life lessons, learn from others' mistakes and successes, and build a community grounded in wisdom and empathy.
-
-Designed with a premium user experience in mind, the platform features a responsive interface, dark/light mode, and seamless content discovery tools.
-
-## 🚀 Key Features
-
-### 👤 User Experience
-*   **Authentication & Authorization:** Secure login and registration using Email/Password and Google Social Login.
-*   **User Dashboard:** specialized dashboards for standard users and administrators.
-*   **Profile Management:** Users can update their profiles and manage their account details.
-*   **Dark/Light Mode:** Fully integrated theme toggler for optimal reading comfort in any environment.
-
-### 📚 Lesson Management
-*   **Create & Share:** Users can easily draft and publish their own life lessons.
-*   **Discovery:** Advanced search, filtering (by Category, Emotional Tone), and sorting (Newest, Oldest, Most Liked, Most Saved).
-*   **Premium Content:** Exclusive "Premium" lessons accessible only to subscribed members.
-*   **Interaction:** Users can **Like**, **Save (Favorite)**, and **Comment** on lessons to engage with the community.
-*   **Reporting System:** Users can report inappropriate content for admin review.
-
-### 💼 Membership & Payments
-*   **Tiered Access:** Free and Premium membership tiers.
-*   **Stripe Integration:** Secure payment processing for upgrading to Premium membership.
-
-### 🛡️ Admin Capabilities
-*   **User Management:** Admins can view all users, manage roles (promote to admin), and ban users if necessary.
-*   **Content Moderation:** Overview of all lessons and ability to manage reported content.
-*   **Statistics:** Visual dashboard displaying site-wide metrics (Total Users, Lessons, Sales).
-
-## 🛠️ Technologies Used
-
-### Frontend
-*   **React.js:** Core UI library.
-*   **Tailwind CSS:** Utility-first CSS framework for styling.
-*   **DaisyUI:** Component library for Tailwind.
-*   **React Router:** For seamless client-side navigation.
-*   **TanStack Query (React Query):** For efficient server state management and data fetching.
-*   **Axios:** HTTP client.
-*   **Framer Motion / AOS:** For smooth animations.
-*   **Lucide React:** Modern, lightweight icon set.
-*   **Recharts:** For data visualization on dashboards.
-
-### Backend (Assumed context)
-*   **Node.js & Express.js:** REST API architecture.
-*   **MongoDB:** NoSQL database for flexible data storage.
-*   **Firebase Authentication:** Secure user identity management.
-*   **Stripe API:** Payment processing.
-
-## 📦 How to Run Locally
-
-Follow these steps to set up the project locally on your machine.
-
-### Prerequisites
-*   Node.js (v16 or higher)
-*   npm or yarn
-*   A MongoDB database URI
-*   Firebase Project configuration
-*   Stripe Account (for payments)
-
-### Installation
-
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/your-username/digital-life-lessons-client.git
-    cd digital-life-lessons-client
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Environment Setup**
-    Create a `.env.local` file in the root directory and add the following keys:
-    ```env
-    # Firebase Configuration
-    VITE_apiKey=your_firebase_api_key
-    VITE_authDomain=your_firebase_auth_domain
-    VITE_projectId=your_firebase_project_id
-    VITE_storageBucket=your_firebase_storage_bucket
-    VITE_messagingSenderId=your_firebase_messaging_sender_id
-    VITE_appId=your_firebase_app_id
-
-    # Backend API URL
-    VITE_API_URL=http://localhost:5001/api
-
-    # Stripe (Public Key)
-    VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
-    ```
-
-4.  **Run the Application**
-    ```bash
-    npm run dev
-    ```
-    The application will start at `http://localhost:5173`.
+**Digital Life Lessons** is a modern, community-driven platform where users can share their life experiences and learn from others. It connects people through stories of success, failure, relationships, and personal growth. The platform features robust user roles, premium content access, and an interactive dashboard for managing lessons.
 
 ---
 
-## 🌟 Acknowledgements
-This project was built to demonstrate advanced React patterns, secure authentication flows, and payment integration. Special thanks to the open-source community for the amazing tools and libraries used in this project.
+## 🚀 Live Demo
+
+Coming Soon...
+
+<!-- Add your live link here, e.g., [Live Site](https://your-project-url.web.app) -->
+
+## 🛠️ Admin & User Credentials (Demo)
+
+To quickly explore the features, you can use these **Demo Login** buttons on the login page, or manually enter:
+
+### **Admin (Read-Only)**
+
+- **Email:** `alaminislam@gmail.com`
+- **Password:** `Admin@2026`
+  > _Note: Admin actions (managing users, lessons) are restricted in demo mode._
+
+### **User**
+
+- **Email:** `user@gmail.com`
+- **Password:** `User@2000`
+
+---
+
+## ✨ Features
+
+### 🔹 **General Features**
+
+- **Authentication:** Secure Email/Password login & Google Social Login (Firebase).
+- **Responsive Design:** Fully responsive UI built with **Tailwind CSS** and **DaisyUI**, optimized for Mobile, Tablet, and Desktop.
+- **Dark/Light Mode:** Seamless theme switching with persistent user preference.
+- **Animations:** Smooth transitions using **AOS (Animate On Scroll)** and **Lottie** animations.
+
+### 🔹 **User Features**
+
+- **Browse Lessons:** View public lessons with filtering and search capabilities.
+- **Create & Manage:** Users can write, edit, and delete their own lessons.
+- **Dashboard:** A personalized dashboard to track my lessons.
+- **Profile Management:** Update user profile information.
+
+### 🔹 **Premium Features (Stripe Integration)**
+
+- **Subscription:** Users can upgrade to **Premium Membership**.
+- **Exclusive Content:** Access to premium-only lessons.
+- **Recognition:** Special "Premium" badge on profile and comments.
+
+### 🔹 **Admin Features**
+
+- **User Management:** View all users, manage roles (promote to Admin), and ban users.
+- **Lesson Management:** Review, approve, or remove published lessons.
+- **Analytics:** View platform statistics (total users, lessons, views).
+
+---
+
+## 💻 Tech Stack
+
+### **Frontend**
+
+- **React.js** (Vite)
+- **React Router DOM** (Navigation)
+- **Tailwind CSS & DaisyUI** (Styling)
+- **Lucide React & React Icons** (Icons)
+- **Framer Motion / AOS** (Animations)
+- **Swiper.js** (Sliders)
+- **React Hook Form** (Form Handling)
+
+### **Backend (Integration)**
+
+- **Firebase Authentication** (Identity)
+- **Axios** (API Requests)
+- **TanStack Query** (State Management & Caching)
+- **SweetAlert2** (Notifications)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/alamin-islam0/digital-life-lessons-client.git
+cd digital-life-lessons-client
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Configure Environment Variables
+
+Create a `.env` file in the root directory and add your Firebase and Backend API keys:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000
+VITE_Payment_Gateway_PK=your_stripe_public_key
+
+# Firebase Config
+VITE_apiKey=your_api_key
+VITE_authDomain=your_auth_domain
+VITE_projectId=your_project_id
+VITE_storageBucket=your_storage_bucket
+VITE_messagingSenderId=your_messaging_sender_id
+VITE_appId=your_app_id
+```
+
+### 4️⃣ Run the Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 📦 Build for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have any ideas or improvements:
+
+1. Fork the repo.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes.
+4. Push to the branch (`git push origin feature-name`).
+5. Open a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">Made with ❤️ by <b>Alamin Islam</b></p>
