@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Mail, Lock, Eye, EyeOff, PenTool, BookOpen, Gem } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, PenTool, BookOpen, Gem, Shield, User } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
@@ -17,6 +17,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -81,6 +82,16 @@ const Login = () => {
         timer: 3000,
       });
     }
+  };
+
+  const handleAdminDemo = () => {
+    setValue("email", "alaminislam@gmail.com");
+    setValue("password", "Admin@2026");
+  };
+
+  const handleUserDemo = () => {
+    setValue("email", "user@gmail.com");
+    setValue("password", "User@2000");
   };
 
   return (
@@ -189,6 +200,26 @@ const Login = () => {
                     {errors.password.message}
                   </p>
                 )}
+              </div>
+
+              {/* Demo Login Buttons */}
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  onClick={handleAdminDemo}
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-300 border border-purple-200 dark:border-purple-800 rounded-xl font-medium text-sm hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-all active:scale-95"
+                >
+                  <Shield className="w-4 h-4" />
+                  Admin Demo
+                </button>
+                <button
+                  type="button"
+                  onClick={handleUserDemo}
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-300 border border-blue-200 dark:border-blue-800 rounded-xl font-medium text-sm hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all active:scale-95"
+                >
+                  <User className="w-4 h-4" />
+                  User Demo
+                </button>
               </div>
 
               {/* Submit Button */}
