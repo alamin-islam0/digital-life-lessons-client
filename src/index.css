@@ -158,6 +158,19 @@ button:focus-visible {
   animation: shimmer 2s infinite linear;
 }
 
+/* Animation delays for loading dots */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
 /* Utility classes for dark mode */
 @layer utilities {
   .bg-card {
