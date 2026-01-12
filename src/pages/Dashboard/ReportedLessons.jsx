@@ -118,7 +118,7 @@ const ReportedLessons = () => {
         className="border border-gray-100 dark:border-gray-700 rounded-xl"
       >
         <Table>
-          <TableHead className="bg-gray-50 dark:bg-gray-700">
+          <TableHead className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
             <TableRow>
               <TableCell className="bangla-text font-bold">
                 Lesson Title
@@ -225,7 +225,7 @@ const ReportedLessons = () => {
                 {reportDetails.map((detail) => (
                   <div
                     key={detail._id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:bg-gray-50 dark:bg-gray-700 transition-colors"
+                    className="border border-gray-200 dark:border-gray-700 dark:border-gray-700 rounded-xl p-4 hover:bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 transition-colors"
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div>

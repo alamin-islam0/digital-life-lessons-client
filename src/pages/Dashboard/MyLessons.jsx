@@ -136,7 +136,7 @@ const MyLessons = () => {
         </div>
         <Link
           to="/dashboard/add-lesson"
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg"
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg dark:shadow-gray-900/50"
         >
           <BookOpen className="w-5 h-5" />
           New Lesson
@@ -151,14 +151,14 @@ const MyLessons = () => {
             placeholder="Search lessons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -171,7 +171,7 @@ const MyLessons = () => {
         <select
           value={filterVisibility}
           onChange={(e) => setFilterVisibility(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Visibility</option>
           <option value="public">Public</option>
@@ -181,7 +181,7 @@ const MyLessons = () => {
         <select
           value={filterAccess}
           onChange={(e) => setFilterAccess(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
         >
           <option value="all">All Access Levels</option>
           <option value="free">Free</option>
@@ -220,10 +220,10 @@ const MyLessons = () => {
           </button>
         </div>
       ) : (
-        <TableContainer component={Paper} className="rounded-2xl shadow-md">
+        <TableContainer component={Paper} className="rounded-2xl shadow-md dark:shadow-gray-900/50">
           <Table>
             <TableHead>
-              <TableRow className="bg-gray-50 dark:bg-gray-700">
+              <TableRow className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
                 <TableCell className="font-bold">Title</TableCell>
                 <TableCell className="font-bold">Category</TableCell>
                 <TableCell className="font-bold">Tone</TableCell>

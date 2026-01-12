@@ -146,7 +146,7 @@ const Profile = () => {
           ) : (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="max-w-md space-y-4 bg-gray-50 dark:bg-gray-700 p-6 rounded-xl"
+              className="max-w-md space-y-4 bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 p-6 rounded-xl"
             >
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">

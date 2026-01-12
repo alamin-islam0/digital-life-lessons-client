@@ -115,7 +115,7 @@ const ManageUsers = () => {
         className="border border-gray-100 dark:border-gray-700 rounded-xl"
       >
         <Table>
-          <TableHead className="bg-gray-50 dark:bg-gray-700">
+          <TableHead className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
             <TableRow>
               <TableCell className="font-bold">User</TableCell>
               <TableCell className="font-bold">Email</TableCell>

@@ -156,7 +156,7 @@ const ChartWidget = ({
   gradientId,
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md dark:shadow-gray-900/50">
       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
         <Icon className={`w-5 h-5 ${iconColor}`} />
         {title}

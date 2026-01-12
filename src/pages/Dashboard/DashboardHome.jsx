@@ -166,7 +166,7 @@ const DashboardHome = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/dashboard/add-lesson"
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
+            className="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold hover:opacity-90 transition-all shadow-md hover:shadow-lg dark:shadow-gray-900/50"
           >
             <BookOpen className="w-5 h-5" />
             Add New Lesson
