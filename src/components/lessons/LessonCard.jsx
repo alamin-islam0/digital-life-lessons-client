@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Heart, Bookmark, Eye, Lock, Calendar, User, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import UserAvatar from "../ui/UserAvatar";
 
 const LessonCard = ({ lesson, showBlur = false }) => {
+  const [imgError, setImgError] = useState(false);
   if (!lesson) return null;
 
   const {
@@ -101,13 +103,15 @@ const LessonCard = ({ lesson, showBlur = false }) => {
       >
         {/* Image Section with Overlay */}
         <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
-          {image ? (
+          {(image || lesson.coverImage || lesson.thumbnail) && !imgError ? (
             <>
               <img
-                src={image}
+                src={image || lesson.coverImage || lesson.thumbnail}
                 alt={title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={() => setImgError(true)}
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>

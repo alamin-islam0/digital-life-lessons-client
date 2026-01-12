@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useUserPlan from "../../hooks/useUserPlan";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/ui/Loading";
 
 // Import Section Components
 import HeroSection from "./components/HeroSection";
@@ -23,7 +24,7 @@ const Home = () => {
   const { data: featuredLessons = [], isLoading: featuredLoading } = useQuery({
     queryKey: ["featured-lessons"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/lessons/featured");
+      const res = await axiosSecure.get("/lessons/featured?limit=8");
       return res.data;
     },
   });
@@ -33,7 +34,7 @@ const Home = () => {
     queryKey: ["most-saved-lessons"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        "/lessons/public?sort=mostSaved&limit=6"
+        "/lessons/public?sort=mostSaved&limit=8"
       );
       return res.data;
     },
@@ -93,6 +94,10 @@ const Home = () => {
           .slice(0, 4);
       },
     });
+
+  if (featuredLoading || savedLoading || contributorsLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-base-100 font-sans overflow-x-hidden">
