@@ -45,9 +45,9 @@ const Navbar = () => {
       to={to}
       onClick={() => mobile && setIsOpen(false)}
       className={({ isActive }) =>
-        `font-medium bg-gray-100 dark:bg-gray-800 active:bg-secondary/10 dark:active:bg-secondary/20 transition-colors ${
+        `font-medium transition-colors ${
           mobile
-            ? `block px-4 py-3 rounded-lg ${
+            ? `block dark:bg-gray-800 px-4 py-3 rounded-lg ${
                 isActive
                   ? "bg-primary/10 text-secondary"
                   : "text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-800"
@@ -72,7 +72,7 @@ const Navbar = () => {
           <Logo />
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 bg-tran">
             {navLinks.map((link) => (
               <NavLinkItem key={link.path} to={link.path}>
                 {link.label}
