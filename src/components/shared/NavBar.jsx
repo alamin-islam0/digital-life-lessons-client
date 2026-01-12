@@ -47,12 +47,12 @@ const Navbar = () => {
       className={({ isActive }) =>
         `font-medium transition-colors ${mobile
           ? `block px-4 py-3 rounded-lg ${isActive
-            ? "bg-primary/10 text-primary"
+            ? "bg-primary/10 text-secondary"
             : "text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-800"
           }`
           : `${isActive
-            ? "text-primary"
-            : "text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-primary"
+            ? "text-secondary"
+            : "text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-secondary"
           }`
         }`
       }

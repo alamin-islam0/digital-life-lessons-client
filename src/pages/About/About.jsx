@@ -54,7 +54,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200">
+    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-primary to-secondary text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -100,7 +100,7 @@ const About = () => {
                     className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                   >
                     <stat.icon className="w-8 h-8 text-secondary mb-3" />
-                    <h3 className="text-3xl font-bold text-primary mb-1">
+                    <h3 className="text-3xl font-bold text-primary dark:text-secondary mb-1">
                       {stat.value}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">{stat.label}</p>
@@ -113,7 +113,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -166,7 +166,7 @@ const About = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-gray-900/50 transition-all duration-300"
               >
                 <div className="relative overflow-hidden">
                   <img

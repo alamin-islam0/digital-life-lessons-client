@@ -85,7 +85,7 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200">
+    <div className="min-h-screen bg-gradient-to-b from-base-100 to-base-200 dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-primary to-secondary text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
