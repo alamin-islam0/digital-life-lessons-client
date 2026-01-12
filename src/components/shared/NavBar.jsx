@@ -121,7 +121,7 @@ const Navbar = () => {
                       <Link
                         to="/dashboard/profile"
                         onClick={() => setShowDropdown(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300 dark:text-gray-300"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-secondary/10 dark:hover:text-secondary transition-colors text-gray-700 dark:text-gray-300 dark:text-gray-300"
                       >
                         <User className="w-4 h-4" />
                         Profile
@@ -132,7 +132,7 @@ const Navbar = () => {
                           role === "admin" ? "/dashboard/admin" : "/dashboard"
                         }
                         onClick={() => setShowDropdown(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300 dark:text-gray-300"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-secondary/10 dark:hover:text-secondary transition-colors text-gray-700 dark:text-gray-300 dark:text-gray-300"
                       >
                         <LayoutDashboard className="w-4 h-4" />
                         Dashboard

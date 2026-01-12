@@ -202,7 +202,7 @@ const Blog = () => {
                           {post.author}
                         </span>
                       </div>
-                      <button className="text-primary font-bold text-sm hover:gap-2 flex items-center gap-1 transition-all">
+                      <button className="text-primary dark:text-secondary font-bold text-sm hover:gap-2 flex items-center gap-1 transition-all">
                         Read
                         <ArrowRight className="w-4 h-4" />
                       </button>

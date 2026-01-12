@@ -25,7 +25,7 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 dark:from-gray-900 dark:to-gray-800 py-16 px-4">
       <SectionHeader
         title="Our Plans"
         subtitle="Choose the best plan according to your needs"
@@ -64,13 +64,13 @@ const Pricing = () => {
             </li>
           </ul>
 
-          <button className="w-full py-3 bg-base-200 text-gray-900 dark:text-white rounded-xl font-bold hover:bg-base-300 transition-colors cursor-default">
+          <button className="w-full py-3 bg-base-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl font-bold hover:bg-base-300 dark:hover:bg-gray-600 transition-colors cursor-default">
             Your Current Plan
           </button>
         </div>
 
         {/* Premium Plan */}
-        <div className="relative bg-white rounded-2xl p-8 shadow-xl border-2 border-primary transform md:scale-105 z-10">
+        <div className="relative bg-gradient-to-br from-primary/5 via-white to-secondary/5 dark:from-primary/20 dark:via-gray-800 dark:to-secondary/20 rounded-2xl p-8 shadow-xl border-2 border-primary dark:border-secondary transform md:scale-105 z-10">
           <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3">
             <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-lg premium-glow">
               <Zap className="w-8 h-8 text-white" />
@@ -80,7 +80,7 @@ const Pricing = () => {
           <div className="mb-6">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               Premium
-              <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-bold uppercase tracking-wider">
+              <span className="px-3 py-1 bg-primary/10 dark:bg-secondary/20 text-primary dark:text-secondary text-xs rounded-full font-bold uppercase tracking-wider">
                 Popular
               </span>
             </h3>

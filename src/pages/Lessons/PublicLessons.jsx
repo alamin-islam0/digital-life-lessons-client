@@ -168,14 +168,14 @@ const PublicLessons = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search for lessons, topics, or keywords..."
-                className="w-full pl-16 pr-6 py-5 bg-white border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent shadow-lg text-lg transition-all"
+                className="w-full pl-16 pr-6 py-5 bg-white dark:bg-primary/20 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent shadow-lg text-lg transition-all"
               />
             </div>
           </form>
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+        <div className="bg-white dark:bg-primary/20 rounded-2xl shadow-lg p-6 mb-8" data-aos="fade-up" data-aos-delay="100">
           {/* Filter Toggle Button (Mobile) */}
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -194,7 +194,7 @@ const PublicLessons = () => {
             {/* Category Filter */}
             <div>
               <label className="block text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                <Filter className="w-4 h-4 text-primary" />
+                <Filter className="w-4 h-4 text-primary dark:text-secondary" />
                 Category
               </label>
               <select
@@ -203,7 +203,7 @@ const PublicLessons = () => {
                   setCategory(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full dark:bg-primary/20 px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat === "All" ? "" : cat}>
@@ -225,7 +225,7 @@ const PublicLessons = () => {
                   setEmotionalTone(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full dark:bg-primary/20 px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {emotionalTones.map((tone) => (
                   <option key={tone} value={tone === "All" ? "" : tone}>
@@ -247,7 +247,7 @@ const PublicLessons = () => {
                   setSortBy(e.target.value);
                   setPage(1);
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
+                className="w-full dark:bg-primary/20 px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-medium"
               >
                 {sortOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -325,7 +325,7 @@ const PublicLessons = () => {
               <span className="font-bold text-gray-900 dark:text-white">{totalItems}</span> lessons
             </p>
             {totalPages > 1 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-500 dark:text-secondary/10">
                 Page {page} of {totalPages}
               </p>
             )}
@@ -371,6 +371,47 @@ const PublicLessons = () => {
                     "& .MuiPaginationItem-root": {
                       fontSize: "1rem",
                       fontWeight: 600,
+                      color: "rgb(15, 23, 42)", // gray-900
+                      "&.Mui-selected": {
+                        backgroundColor: "#0B2C56", // primary
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "#092344",
+                        },
+                      },
+                      "&:hover": {
+                        backgroundColor: "rgba(11, 44, 86, 0.1)",
+                      },
+                    },
+                    "@media (prefers-color-scheme: dark)": {
+                      "& .MuiPaginationItem-root": {
+                        color: "rgb(209, 213, 219)", // gray-300
+                        "&.Mui-selected": {
+                          backgroundColor: "#32B2C9", // secondary
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "#2a9fb5",
+                          },
+                        },
+                        "&:hover": {
+                          backgroundColor: "rgba(50, 178, 201, 0.1)",
+                        },
+                      },
+                    },
+                    ".dark &": {
+                      "& .MuiPaginationItem-root": {
+                        color: "rgb(209, 213, 219)", // gray-300
+                        "&.Mui-selected": {
+                          backgroundColor: "#32B2C9", // secondary
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "#2a9fb5",
+                          },
+                        },
+                        "&:hover": {
+                          backgroundColor: "rgba(50, 178, 201, 0.1)",
+                        },
+                      },
                     },
                   }}
                 />
