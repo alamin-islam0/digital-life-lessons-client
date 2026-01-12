@@ -92,7 +92,7 @@ const Login = () => {
             <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Welcome Back!
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 dark:text-primary mb-8 leading-relaxed">
               Write down your life lessons and share them with others. Every
               experience is valuable.
             </p>
@@ -101,19 +101,19 @@ const Login = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <PenTool className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Write down your experiences</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-primary">Write down your experiences</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <BookOpen className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Get inspired by others' lessons</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-secondary">Get inspired by others' lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-success to-success/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Gem className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Access premium content</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-success">Access premium content</p>
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ const Login = () => {
                         message: "Please enter a valid email",
                       },
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all dark:bg-primary/20"
                     placeholder="Your email"
                   />
                 </div>
@@ -169,7 +169,7 @@ const Login = () => {
                       required: "Password is required",
                       validate: validatePassword,
                     })}
-                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all dark:bg-primary/20"
                     placeholder="Your password"
                   />
                   <button

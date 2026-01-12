@@ -40,7 +40,7 @@ const DashboardLayout = () => {
     }`;
 
   return (
-    <div className="h-screen bg-base-200 dark:bg-gray-900 flex overflow-hidden">
+    <div className="dark h-screen bg-gray-900 flex overflow-hidden" data-theme="dark">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
@@ -53,7 +53,7 @@ const DashboardLayout = () => {
       <aside
         className={`
                     fixed lg:static inset-y-0 left-0 z-50 flex-shrink-0
-                    w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out 
+                    w-64 bg-gray-800 border-r border-gray-700 transform transition-transform duration-300 ease-in-out 
                     ${
                       isSidebarOpen
                         ? "translate-x-0"
@@ -63,11 +63,11 @@ const DashboardLayout = () => {
       >
         <div className="h-full flex flex-col">
           {/* Logo Area */}
-          <div className="h-16 flex items-center justify-between px-6 border-b border-gray-100 dark:border-gray-700">
+          <div className="h-16 flex items-center justify-between px-6 border-b border-gray-700">
             <Logo />
             <button
               onClick={closeSidebar}
-              className="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              className="lg:hidden text-gray-400 hover:text-gray-200"
             >
               <RxCross1 size={24} />
             </button>
@@ -163,7 +163,7 @@ const DashboardLayout = () => {
               </>
             )}
 
-            <div className="pt-6 mt-6 border-t border-gray-100">
+            <div className="pt-6 mt-6 border-t border-gray-700">
               <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                 Account
               </p>
@@ -177,7 +177,7 @@ const DashboardLayout = () => {
               </NavLink>
               <Link
                 to="/"
-                className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-primary/10 hover:text-secondary rounded-lg transition-all duration-200"
               >
                 <RxExit size={20} />
                 <span>Back to Home</span>
@@ -187,14 +187,14 @@ const DashboardLayout = () => {
 
           {/* User Info Footer */}
           {user && (
-            <div className="p-4 border-t border-gray-100 dark:border-gray-700">
+            <div className="p-4 border-t border-gray-700">
               <div className="flex items-center gap-3">
                 <UserAvatar user={user} size="md" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                  <p className="text-sm font-medium text-white truncate">
                     {user?.displayName || "User"}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  <p className="text-xs text-gray-400 truncate">
                     {user?.email}
                   </p>
                 </div>
@@ -205,21 +205,20 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-gray-900">
         {/* Mobile Header */}
-        <div className="lg:hidden h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4">
+        <div className="lg:hidden h-16 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-4">
           <button
             onClick={toggleSidebar}
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="text-gray-400 hover:text-gray-200"
           >
             <RxHamburgerMenu size={24} />
           </button>
-          <span className="font-semibold text-gray-900 dark:text-white">Dashboard</span>
-          <ThemeToggle />
+          <span className="font-semibold text-white">Dashboard</span>
         </div>
 
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-auto bg-base-200/50 p-4 md:p-8">
+        <div className="flex-1 overflow-auto bg-gray-900 p-4 md:p-8">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

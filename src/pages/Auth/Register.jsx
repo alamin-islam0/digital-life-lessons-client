@@ -128,7 +128,7 @@ const Register = () => {
             <h1 className="text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Join Us Today!
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed dark:text-primary">
               Share your life experiences and learn with others. Be part of a
               thriving community.
             </p>
@@ -137,19 +137,19 @@ const Register = () => {
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <PenTool className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Create unlimited lessons</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-primary">Create unlimited lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <BookOpen className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Learn from thousands of lessons</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-secondary">Learn from thousands of lessons</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-success to-success/80 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Gem className="text-white w-6 h-6" />
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">Unlock premium features</p>
+                <p className="text-gray-700 dark:text-gray-300 dark:text-success">Unlock premium features</p>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ const Register = () => {
                         message: "Name must be at least 2 characters",
                       },
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all dark:bg-primary/20"
                     placeholder="Your name"
                   />
                 </div>
@@ -210,7 +210,7 @@ const Register = () => {
                         message: "Please enter a valid email",
                       },
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all dark:bg-primary/20"
                     placeholder="Your email"
                   />
                 </div>
@@ -234,7 +234,7 @@ const Register = () => {
                     {...register("image", {
                       required: "Profile picture is required",
                     })}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200 dark:file:text-secondary dark:bg-primary/20 hover:file:bg-secondary/20 dark:text-gray-300"
                   />
                 </div>
                 {errors.image && (
@@ -257,7 +257,7 @@ const Register = () => {
                       required: "Password is required",
                       validate: validatePassword,
                     })}
-                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full pl-12 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all dark:bg-primary/20"
                     placeholder="Your password"
                   />
                   <button

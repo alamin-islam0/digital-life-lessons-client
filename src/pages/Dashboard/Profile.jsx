@@ -139,7 +139,7 @@ const Profile = () => {
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="w-full md:w-auto px-6 py-2 bg-primary/10 text-primary rounded-lg font-semibold hover:bg-primary/20 transition-colors"
+              className="w-full md:w-auto px-6 py-2 bg-primary/10 text-primary rounded-lg font-semibold hover:bg-secondary/30 transition-colors bg-secondary/20 dark:text-secondary" 
             >
               Edit Profile
             </button>

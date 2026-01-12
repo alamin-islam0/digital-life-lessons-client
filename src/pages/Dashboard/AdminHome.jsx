@@ -83,7 +83,7 @@ const AdminHome = () => {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-        <div className="bg-primary/10 text-primary px-4 py-2 rounded-lg font-semibold">
+        <div className="bg-primary/10 dark:bg-secondary/20 text-primary dark:text-secondary px-4 py-2 rounded-lg font-semibold">
           Today's Summary
         </div>
       </div>
@@ -94,28 +94,28 @@ const AdminHome = () => {
           title="Total Users"
           value={stats?.totalUsers || 0}
           icon={Users}
-          bgColor="bg-info/10"
-          iconColor="text-info"
+          bgColor="bg-info/10 dark:bg-secondary/20"
+          iconColor="text-info dark:text-secondary"
         />
         <StatsCard
           title="Total Lessons (All)"
           value={stats?.totalLessons || 0}
           icon={BookOpen}
-          bgColor="bg-success/10"
-          iconColor="text-success"
+          bgColor="bg-success/10 dark:bg-secondary/20"
+          iconColor="text-success dark:text-secondary"
         />
         <StatsCard
           title="Reported Lessons"
           value={stats?.reportedLessons || 0}
           icon={Flag}
-          bgColor="bg-error/10"
+          bgColor="bg-error/10 dark:bg-secondary/20"
           iconColor="text-error"
         />
         <StatsCard
           title="Today's New Lessons"
           value={stats?.todayLessons || 0}
           icon={BookOpen}
-          bgColor="bg-secondary/10"
+          bgColor="bg-secondary/10 dark:bg-secondary/20"
           iconColor="text-secondary"
         />
       </div>
@@ -125,7 +125,7 @@ const AdminHome = () => {
         <ChartWidget
           title="User Growth (Last 7 Days)"
           icon={TrendingUp}
-          iconColor="text-primary"
+          iconColor="text-primary dark:text-secondary"
           data={chartData}
           dataKey="users"
           color="#0B2C56"
@@ -134,7 +134,7 @@ const AdminHome = () => {
         <ChartWidget
           title="Lesson Growth (Last 7 Days)"
           icon={BookOpen}
-          iconColor="text-secondary"
+          iconColor="text-secondary dark:text-secondary"
           data={chartData}
           dataKey="lessons"
           color="#32B2C9"
@@ -163,7 +163,7 @@ const ChartWidget = ({
       </h3>
       <div className="flex h-80">
         {/* Fixed Y-Axis Container */}
-        <div className="w-12 h-full flex-shrink-0 -mr-2 z-10 bg-white">
+        <div className="w-12 h-full flex-shrink-0 -mr-2 z-10 bg-white dark:bg-gray-800">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={data}
@@ -174,7 +174,10 @@ const ChartWidget = ({
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "#6b7280", fontSize: 12 }}
+                tick={{ 
+                  fill: document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280', 
+                  fontSize: 12 
+                }}
                 width={48}
               />
             </AreaChart>
@@ -198,13 +201,15 @@ const ChartWidget = ({
                 <CartesianGrid
                   strokeDasharray="3 3"
                   vertical={false}
-                  stroke="#f0f0f0"
+                  stroke={document.documentElement.classList.contains('dark') ? '#374151' : '#f0f0f0'}
                 />
                 <XAxis
                   dataKey="name"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: "#6b7280" }}
+                  tick={{ 
+                    fill: document.documentElement.classList.contains('dark') ? '#ffffff' : '#6b7280' 
+                  }}
                 />
                 {/* Hidden Y-Axis to maintain grid alignment logic if needed, or omit */}
                 <Tooltip
@@ -214,6 +219,8 @@ const ChartWidget = ({
                     strokeDasharray: "4 4",
                   }}
                   contentStyle={{
+                    backgroundColor: document.documentElement.classList.contains('dark') ? 'rgba(50, 178, 201, 0.2)' : '#ffffff',
+                    color: document.documentElement.classList.contains('dark') ? '#ffffff' : '#1f2937',
                     borderRadius: "12px",
                     border: "none",
                     boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",

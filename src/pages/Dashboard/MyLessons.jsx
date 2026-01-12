@@ -136,7 +136,7 @@ const MyLessons = () => {
         </div>
         <Link
           to="/dashboard/add-lesson"
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all shadow-md hover:shadow-lg dark:shadow-gray-900/50"
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-secondary to-primary text-white rounded-xl font-semibold hover:from-primary hover:to-secondary transition-all shadow-md hover:shadow-lg dark:shadow-gray-900/50"
         >
           <BookOpen className="w-5 h-5" />
           New Lesson
@@ -151,14 +151,14 @@ const MyLessons = () => {
             placeholder="Search lessons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-primary/20 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 bg-primary/20 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 dark:bg-secondary/20"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -171,7 +171,7 @@ const MyLessons = () => {
         <select
           value={filterVisibility}
           onChange={(e) => setFilterVisibility(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white dark:bg-primary/20"
         >
           <option value="all">All Visibility</option>
           <option value="public">Public</option>
@@ -181,7 +181,7 @@ const MyLessons = () => {
         <select
           value={filterAccess}
           onChange={(e) => setFilterAccess(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white dark:bg-primary/20"
         >
           <option value="all">All Access Levels</option>
           <option value="free">Free</option>
@@ -214,14 +214,63 @@ const MyLessons = () => {
               setFilterVisibility("all");
               setFilterAccess("all");
             }}
-            className="mt-4 text-primary-600 hover:underline"
+            className="mt-4 text-secondary hover:underline"
           >
             Clear all filters
           </button>
         </div>
       ) : (
-        <TableContainer component={Paper} className="rounded-2xl shadow-md dark:shadow-gray-900/50">
-          <Table>
+        <TableContainer 
+          component={Paper} 
+          className="rounded-2xl shadow-md dark:shadow-gray-900/50"
+          sx={{
+            backgroundColor: 'white',
+            '& .MuiPaper-root': {
+              backgroundColor: 'white',
+            },
+            '@media (prefers-color-scheme: dark)': {
+              backgroundColor: '#1f2937',
+              '& .MuiPaper-root': {
+                backgroundColor: '#1f2937',
+              },
+            },
+            '.dark &': {
+              backgroundColor: '#1f2937',
+              '& .MuiPaper-root': {
+                backgroundColor: '#1f2937',
+              },
+            },
+          }}
+        >
+          <Table
+            sx={{
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(229, 231, 235, 1)',
+                color: 'inherit',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(249, 250, 251, 1)',
+              },
+              '@media (prefers-color-scheme: dark)': {
+                '& .MuiTableCell-root': {
+                  borderColor: 'rgba(55, 65, 81, 0.5)',
+                  color: '#e5e7eb',
+                },
+                '& .MuiTableRow-root:hover': {
+                  backgroundColor: 'rgba(50, 178, 201, 0.1)',
+                },
+              },
+              '.dark &': {
+                '& .MuiTableCell-root': {
+                  borderColor: 'rgba(55, 65, 81, 0.5)',
+                  color: '#e5e7eb',
+                },
+                '& .MuiTableRow-root:hover': {
+                  backgroundColor: 'rgba(50, 178, 201, 0.1)',
+                },
+              },
+            }}
+          >
             <TableHead>
               <TableRow className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
                 <TableCell className="font-bold">Title</TableCell>
@@ -246,7 +295,7 @@ const MyLessons = () => {
                       size="small"
                       className=""
                       color="primary"
-                      variant="outlined"
+                      variant="filled"
                     />
                   </TableCell>
                   <TableCell>
@@ -255,7 +304,7 @@ const MyLessons = () => {
                       size="small"
                       className=""
                       color="secondary"
-                      variant="outlined"
+                      variant="filled"
                     />
                   </TableCell>
                   <TableCell>
@@ -266,7 +315,7 @@ const MyLessons = () => {
                       size="small"
                       className=""
                       color={
-                        lesson.visibility === "public" ? "success" : "default"
+                        lesson.visibility === "public" ? "primary" : "error"
                       }
                     />
                   </TableCell>
@@ -276,10 +325,18 @@ const MyLessons = () => {
                         lesson.accessLevel === "premium" ? "Premium" : "Free"
                       }
                       size="small"
-                      className=""
-                      color={
-                        lesson.accessLevel === "premium" ? "warning" : "info"
-                      }
+                      sx={{
+                        backgroundColor: lesson.accessLevel === "premium" ? '#f59e0b' : '#3b82f6',
+                        color: 'white',
+                        '@media (prefers-color-scheme: dark)': {
+                          backgroundColor: lesson.accessLevel === "premium" ? '#32B2C9' : 'rgba(11, 44, 86, 0.2)',
+                          color: lesson.accessLevel === "premium" ? 'white' : '#32B2C9',
+                        },
+                        '.dark &': {
+                          backgroundColor: lesson.accessLevel === "premium" ? '#32B2C9' : 'rgba(11, 44, 86, 0.2)',
+                          color: lesson.accessLevel === "premium" ? 'white' : '#32B2C9',
+                        },
+                      }}
                     />
                   </TableCell>
                   <TableCell className="text-sm text-gray-600 dark:text-gray-300">

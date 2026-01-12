@@ -432,7 +432,7 @@ const LessonDetails = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <BookOpen className="w-20 h-20 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-2">
             Lesson not found
           </h2>
           <Link
@@ -497,7 +497,7 @@ const LessonDetails = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors mb-6 font-medium"
+          className="flex items-center gap-2 text-gray-600 dark:text-gray-300 dark:text-gray-300 hover:text-primary transition-colors mb-6 font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Go Back
@@ -518,7 +518,7 @@ const LessonDetails = () => {
               </div>
               <Link
                 to="/pricing"
-                className="px-6 py-3 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 dark:bg-gray-800 transition-all whitespace-nowrap"
+                className="px-6 py-3 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 transition-all whitespace-nowrap"
               >
                 Upgrade Now
               </Link>
@@ -533,7 +533,7 @@ const LessonDetails = () => {
           }`}
         >
           {/* Header */}
-          <div className="p-8 border-b border-gray-100 dark:border-gray-700">
+          <div className="p-8 border-b border-gray-100 dark:bg-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:border-gray-700">
             <div className="flex flex-wrap gap-2 mb-4">
               <span className="px-4 py-1.5 bg-info/10 text-info rounded-full text-sm font-semibold">
                 {lesson.category}
@@ -548,12 +548,12 @@ const LessonDetails = () => {
               )}
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">
               {lesson.title}
             </h1>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-300 dark:text-gray-300">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span className="bangla-text">
@@ -574,9 +574,9 @@ const LessonDetails = () => {
           </div>
 
           {/* Content */}
-          <div className="p-8">
-            <div className="prose max-w-none">
-              <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
+          <div className="p-8 bg-gray-50 dark:bg-gray-800 dark:bg-gray-800">
+            <div className="prose max-w-none dark:bg-gray-800 dark:bg-gray-800">
+              <p className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-wrap">
                 {lesson.description}
               </p>
             </div>
@@ -593,10 +593,10 @@ const LessonDetails = () => {
           </div>
 
           {/* Stats & Actions */}
-          <div className="p-8 bg-gray-50 dark:bg-gray-700 border-t border-gray-100 dark:border-gray-700">
+          <div className="p-8 bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 border-t border-gray-100 dark:border-gray-700 dark:border-gray-700">
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 dark:text-gray-300">
                   <Heart
                     className={`w-5 h-5 ${
                       hasLikes ? "fill-error text-error" : ""
@@ -606,7 +606,7 @@ const LessonDetails = () => {
                     {lesson.likesCount || 0}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 dark:text-gray-300">
                   <Bookmark
                     className={`w-5 h-5 ${
                       hasFavorites ? "fill-primary text-primary" : ""
@@ -626,7 +626,7 @@ const LessonDetails = () => {
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${
                   isLiked
                     ? "bg-error/10 text-error hover:bg-error/20"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200"
+                    : "bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-200"
                 }`}
               >
                 <Heart
@@ -640,7 +640,7 @@ const LessonDetails = () => {
                 className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all active:scale-95 ${
                   isFavorited
                     ? "bg-primary/10 text-primary hover:bg-primary/20"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200"
+                    : "bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-200"
                 }`}
               >
                 <Bookmark
@@ -651,7 +651,7 @@ const LessonDetails = () => {
 
               <button
                 onClick={handleShare}
-                className="flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-200 transition-all active:scale-95"
+                className="flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-200 transition-all active:scale-95"
               >
                 <Share2 className="w-5 h-5" />
                 Share
@@ -670,7 +670,7 @@ const LessonDetails = () => {
 
         {/* Dedicated Author Section Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg mt-8 p-8">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-100 dark:border-gray-700 pb-4">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white dark:text-white mb-6 border-b border-gray-100 dark:border-gray-700 dark:border-gray-700 pb-4">
             About the Creator
           </h3>
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
@@ -680,14 +680,14 @@ const LessonDetails = () => {
               className="w-24 h-24 text-3xl"
             />
             <div className="flex-1 text-center md:text-left">
-              <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h4 className="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-2">
                 {authorName}
               </h4>
               {authorEmail && (
-                <p className="text-gray-500 dark:text-gray-400 mb-4">{authorEmail}</p>
+                <p className="text-gray-500 dark:text-gray-400 dark:text-gray-400 mb-4">{authorEmail}</p>
               )}
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 dark:bg-gray-800 rounded-lg text-gray-700 dark:text-gray-300 dark:text-gray-300 font-medium mb-4">
                 <BookOpen className="w-4 h-4" />
                 <span>{author.totalLessons || 0} Lessons Created</span>
               </div>
@@ -708,7 +708,7 @@ const LessonDetails = () => {
 
         {/* Dedicated Comments Section Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg mt-8 p-8">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white dark:text-white mb-6">
             Comments ({comments.length})
           </h3>
 
@@ -719,7 +719,7 @@ const LessonDetails = () => {
               onChange={(e) => setComment(e.target.value)}
               placeholder="Write your opinion..."
               rows="3"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent resize-none bg-gray-50 dark:bg-gray-700"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent resize-none bg-gray-50 dark:bg-gray-700 dark:bg-gray-700"
             />
             <button
               type="submit"
@@ -737,26 +737,26 @@ const LessonDetails = () => {
               comments.map((c) => (
                 <div
                   key={c._id}
-                  className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-100 dark:border-gray-700"
+                  className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700 rounded-xl p-6 border border-gray-100 dark:border-gray-700 dark:border-gray-700"
                 >
                   <div className="flex items-start gap-4">
                     <UserAvatar user={c.user} size="md" />
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-bold text-gray-900 dark:text-white">
+                        <span className="font-bold text-gray-900 dark:text-white dark:text-white">
                           {c.user?.name || c.user?.displayName}
                         </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400">
                           • {formatDate(c.createdAt)}
                         </span>
                       </div>
-                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{c.text}</p>
+                      <p className="text-gray-700 dark:text-gray-300 dark:text-gray-300 leading-relaxed">{c.text}</p>
                     </div>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 dark:text-gray-400 text-center py-4">
+              <p className="text-gray-500 dark:text-gray-400 dark:text-gray-400 text-center py-4">
                 No comments yet. Be the first to share your thoughts!
               </p>
             )}
@@ -766,7 +766,7 @@ const LessonDetails = () => {
         {/* Similar Lessons */}
         {similarByCategory.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-6">
               More lessons in this category
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -783,7 +783,7 @@ const LessonDetails = () => {
 
         {similarByTone.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white dark:text-white mb-6">
               More lessons with this tone
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

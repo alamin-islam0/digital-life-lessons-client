@@ -133,14 +133,14 @@ const MyFavorites = () => {
             placeholder="Search saved lessons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all bg-white dark:bg-gray-700 dark:text-white"
           />
         </div>
 
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white dark:bg-gray-700 dark:text-white"
         >
           <option value="all">All Categories</option>
           {categories.map((category) => (
@@ -153,7 +153,7 @@ const MyFavorites = () => {
         <select
           value={filterTone}
           onChange={(e) => setFilterTone(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white"
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white dark:bg-gray-700 dark:text-white"
         >
           <option value="all">All Emotional Tones</option>
           {tones.map((tone) => (
@@ -197,17 +197,66 @@ const MyFavorites = () => {
           </button>
         </div>
       ) : (
-        <TableContainer component={Paper} className="rounded-2xl shadow-md dark:shadow-gray-900/50">
-          <Table>
+        <TableContainer
+          component={Paper}
+          className="rounded-2xl shadow-md dark:shadow-gray-900/50"
+          sx={{
+            backgroundColor: 'white',
+            '& .MuiPaper-root': {
+              backgroundColor: 'white',
+            },
+            '@media (prefers-color-scheme: dark)': {
+              backgroundColor: '#1f2937',
+              '& .MuiPaper-root': {
+                backgroundColor: '#1f2937',
+              },
+            },
+            '.dark &': {
+              backgroundColor: '#1f2937',
+              '& .MuiPaper-root': {
+                backgroundColor: '#1f2937',
+              },
+            },
+          }}
+        >
+          <Table
+             sx={{
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(229, 231, 235, 1)',
+                color: 'inherit',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(249, 250, 251, 1)',
+              },
+              '@media (prefers-color-scheme: dark)': {
+                '& .MuiTableCell-root': {
+                  borderColor: 'rgba(55, 65, 81, 0.5)',
+                  color: '#e5e7eb',
+                },
+                '& .MuiTableRow-root:hover': {
+                  backgroundColor: 'rgba(50, 178, 201, 0.1)',
+                },
+              },
+              '.dark &': {
+                '& .MuiTableCell-root': {
+                  borderColor: 'rgba(55, 65, 81, 0.5)',
+                  color: '#e5e7eb',
+                },
+                '& .MuiTableRow-root:hover': {
+                  backgroundColor: 'rgba(50, 178, 201, 0.1)',
+                },
+              },
+            }}
+          >
             <TableHead>
-              <TableRow className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
-                <TableCell className="font-bold">Title</TableCell>
-                <TableCell className="font-bold">Category</TableCell>
-                <TableCell className="font-bold">Emotional Tone</TableCell>
-                <TableCell className="font-bold">Author</TableCell>
-                <TableCell className="font-bold">Saved On</TableCell>
-                <TableCell className="font-bold">Stats</TableCell>
-                <TableCell className="font-bold">Actions</TableCell>
+              <TableRow className="bg-gray-50 dark:bg-gray-700">
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Title</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Category</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Emotional Tone</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Author</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Saved On</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Stats</TableCell>
+                <TableCell className="font-bold border-b border-gray-200 dark:border-gray-600">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -217,23 +266,35 @@ const MyFavorites = () => {
                 
                 return (
                   <TableRow key={fav._id || lesson._id} hover>
-                    <TableCell className="font-medium max-w-xs">
+                    <TableCell className="font-medium max-w-xs text-gray-900 dark:text-gray-100">
                       <div className="line-clamp-2">{lesson.title}</div>
                     </TableCell>
                     <TableCell>
                       <Chip
                         label={lesson.category}
                         size="small"
-                        color="primary"
-                        variant="outlined"
+                        sx={{
+                          backgroundColor: 'rgba(50, 178, 201, 0.2)',
+                          color: '#32B2C9',
+                          fontWeight: 600,
+                          '.dark &': {
+                             color: 'white',
+                          }
+                        }}
                       />
                     </TableCell>
                     <TableCell>
                       <Chip
                         label={lesson.emotionalTone}
                         size="small"
-                        color="secondary"
-                        variant="outlined"
+                        sx={{
+                          backgroundColor: 'rgba(11, 44, 86, 0.1)',
+                          color: '#0B2C56',
+                           '.dark &': {
+                             backgroundColor: 'rgba(11, 44, 86, 0.3)',
+                             color: '#e5e7eb',
+                          }
+                        }}
                       />
                     </TableCell>
                     <TableCell className="text-sm text-gray-600 dark:text-gray-300">
@@ -258,7 +319,7 @@ const MyFavorites = () => {
                       <div className="flex items-center gap-1">
                         <Tooltip title="View Lesson">
                           <Link to={`/lesson/${lesson._id}`}>
-                            <IconButton size="small" color="primary">
+                            <IconButton size="small" className="text-primary hover:bg-primary/10">
                               <Eye className="w-4 h-4" />
                             </IconButton>
                           </Link>
@@ -266,7 +327,7 @@ const MyFavorites = () => {
                         <Tooltip title="Remove from Favorites">
                           <IconButton
                             size="small"
-                            color="error"
+                            className="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
                             onClick={() =>
                               handleRemove(lesson._id, lesson.title)
                             }

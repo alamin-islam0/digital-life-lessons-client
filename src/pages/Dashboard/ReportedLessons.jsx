@@ -116,8 +116,54 @@ const ReportedLessons = () => {
         component={Paper}
         elevation={0}
         className="border border-gray-100 dark:border-gray-700 rounded-xl"
+        sx={{
+          backgroundColor: 'white',
+          '& .MuiPaper-root': {
+            backgroundColor: 'white',
+          },
+          '@media (prefers-color-scheme: dark)': {
+            backgroundColor: '#1f2937',
+            '& .MuiPaper-root': {
+              backgroundColor: '#1f2937',
+            },
+          },
+          '.dark &': {
+            backgroundColor: '#1f2937',
+            '& .MuiPaper-root': {
+              backgroundColor: '#1f2937',
+            },
+          },
+        }}
       >
-        <Table>
+        <Table
+          sx={{
+            '& .MuiTableCell-root': {
+              borderColor: 'rgba(229, 231, 235, 1)',
+              color: 'inherit',
+            },
+            '& .MuiTableRow-root:hover': {
+              backgroundColor: 'rgba(249, 250, 251, 1)',
+            },
+            '@media (prefers-color-scheme: dark)': {
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(55, 65, 81, 0.5)',
+                color: '#e5e7eb',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+            },
+            '.dark &': {
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(55, 65, 81, 0.5)',
+                color: '#e5e7eb',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+            },
+          }}
+        >
           <TableHead className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
             <TableRow>
               <TableCell className="bangla-text font-bold">
@@ -178,6 +224,32 @@ const ReportedLessons = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{
+            backgroundColor: 'white',
+            '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+              color: '#32B2C9',
+              fontWeight: 600,
+            },
+            '& .MuiTablePagination-select': {
+              color: '#32B2C9',
+              fontWeight: 600,
+            },
+            '& .MuiTablePagination-actions button': {
+              color: '#32B2C9',
+              '&:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+              '&.Mui-disabled': {
+                color: 'rgba(50, 178, 201, 0.3)',
+              },
+            },
+            '@media (prefers-color-scheme: dark)': {
+              backgroundColor: '#1f2937',
+            },
+            '.dark &': {
+              backgroundColor: '#1f2937',
+            },
+          }}
         />
       </TableContainer>
 

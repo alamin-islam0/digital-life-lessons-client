@@ -25,20 +25,35 @@ const ManageLessons = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterAccess, setFilterAccess] = useState("all");
+  const [filterFeatured, setFilterFeatured] = useState("all");
 
-  const { data: lessons = [], isLoading } = useQuery({
-    queryKey: ["all-lessons", searchTerm],
+  const { data: allLessons = [], isLoading } = useQuery({
+    queryKey: ["all-lessons"],
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/lessons");
-      if (searchTerm) {
-        return res.data.filter(
-          (l) =>
-            l.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            l.creator?.name?.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      }
       return res.data;
     },
+  });
+
+  // Get unique categories
+  const categories = [...new Set(allLessons.map((l) => l.category))];
+
+  // Apply filters
+  const lessons = allLessons.filter((lesson) => {
+    const matchesSearch =
+      lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lesson.creator?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      filterCategory === "all" || lesson.category === filterCategory;
+    const matchesAccess =
+      filterAccess === "all" || lesson.accessLevel === filterAccess;
+    const matchesFeatured =
+      filterFeatured === "all" ||
+      (filterFeatured === "featured" && lesson.isFeatured) ||
+      (filterFeatured === "not-featured" && !lesson.isFeatured);
+    return matchesSearch && matchesCategory && matchesAccess && matchesFeatured;
   });
 
   const deleteLessonMutation = useMutation({
@@ -125,17 +140,99 @@ const ManageLessons = () => {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-secondary/20 dark:text-white"
           />
         </div>
+      </div>
+
+      {/* Filters */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white dark:bg-secondary/20 dark:text-white"
+        >
+          <option value="all">All Categories</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filterAccess}
+          onChange={(e) => setFilterAccess(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white dark:bg-secondary/20 dark:text-white"
+        >
+          <option value="all">All Access Levels</option>
+          <option value="premium">Premium</option>
+          <option value="free">Free</option>
+        </select>
+
+        <select
+          value={filterFeatured}
+          onChange={(e) => setFilterFeatured(e.target.value)}
+          className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 bg-white dark:bg-secondary/20 dark:text-white"
+        >
+          <option value="all">All Status</option>
+          <option value="featured">Featured</option>
+          <option value="not-featured">Not Featured</option>
+        </select>
       </div>
 
       <TableContainer
         component={Paper}
         elevation={0}
         className="border border-gray-100 dark:border-gray-700 rounded-xl"
+        sx={{
+          backgroundColor: 'white',
+          '& .MuiPaper-root': {
+            backgroundColor: 'white',
+          },
+          '@media (prefers-color-scheme: dark)': {
+            backgroundColor: '#1f2937',
+            '& .MuiPaper-root': {
+              backgroundColor: '#1f2937',
+            },
+          },
+          '.dark &': {
+            backgroundColor: '#1f2937',
+            '& .MuiPaper-root': {
+              backgroundColor: '#1f2937',
+            },
+          },
+        }}
       >
-        <Table>
+        <Table
+          sx={{
+            '& .MuiTableCell-root': {
+              borderColor: 'rgba(229, 231, 235, 1)',
+              color: 'inherit',
+            },
+            '& .MuiTableRow-root:hover': {
+              backgroundColor: 'rgba(249, 250, 251, 1)',
+            },
+            '@media (prefers-color-scheme: dark)': {
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(55, 65, 81, 0.5)',
+                color: '#e5e7eb',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+            },
+            '.dark &': {
+              '& .MuiTableCell-root': {
+                borderColor: 'rgba(55, 65, 81, 0.5)',
+                color: '#e5e7eb',
+              },
+              '& .MuiTableRow-root:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+            },
+          }}
+        >
           <TableHead className="bg-gray-50 dark:bg-gray-700 dark:bg-gray-700">
             <TableRow>
               <TableCell className="bangla-text font-bold">Title</TableCell>
@@ -163,8 +260,12 @@ const ManageLessons = () => {
                     <Chip
                       label={lesson.category}
                       size="small"
-                      variant="outlined"
                       className="bangla-text"
+                      sx={{
+                        backgroundColor: 'rgba(50, 178, 201, 0.2)',
+                        color: 'white',
+                        fontWeight: 600,
+                      }}
                     />
                   </TableCell>
                   <TableCell>
@@ -172,11 +273,20 @@ const ManageLessons = () => {
                       label={
                         lesson.accessLevel === "premium" ? "Premium" : "Free"
                       }
-                      color={
-                        lesson.accessLevel === "premium" ? "warning" : "info"
-                      }
                       size="small"
                       className="bangla-text"
+                      sx={{
+                        backgroundColor: lesson.accessLevel === "premium" ? '#f59e0b' : '#3b82f6',
+                        color: 'white',
+                        '@media (prefers-color-scheme: dark)': {
+                          backgroundColor: lesson.accessLevel === "premium" ? '#32B2C9' : 'rgba(11, 44, 86, 0.2)',
+                          color: lesson.accessLevel === "premium" ? 'white' : '#32B2C9',
+                        },
+                        '.dark &': {
+                          backgroundColor: lesson.accessLevel === "premium" ? '#32B2C9' : 'rgba(11, 44, 86, 0.2)',
+                          color: lesson.accessLevel === "premium" ? 'white' : '#32B2C9',
+                        },
+                      }}
                     />
                   </TableCell>
                   <TableCell>
@@ -188,13 +298,19 @@ const ManageLessons = () => {
                       }
                     >
                       <IconButton
-                        color={lesson.isFeatured ? "warning" : "default"}
                         onClick={() =>
                           toggleFeaturedMutation.mutate({
                             id: lesson._id,
                             isFeatured: !lesson.isFeatured,
                           })
                         }
+                        sx={{
+                          backgroundColor: lesson.isFeatured ? 'transparent' : 'rgba(50, 178, 201, 0.2)',
+                          color: lesson.isFeatured ? '#32B2C9' : '#6b7280',
+                          '&:hover': {
+                            backgroundColor: lesson.isFeatured ? 'rgba(50, 178, 201, 0.1)' : 'rgba(50, 178, 201, 0.3)',
+                          },
+                        }}
                       >
                         <Star
                           className={`w-5 h-5 ${
@@ -237,6 +353,32 @@ const ManageLessons = () => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{
+            backgroundColor: 'white',
+            '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+              color: '#32B2C9',
+              fontWeight: 600,
+            },
+            '& .MuiTablePagination-select': {
+              color: '#32B2C9',
+              fontWeight: 600,
+            },
+            '& .MuiTablePagination-actions button': {
+              color: '#32B2C9',
+              '&:hover': {
+                backgroundColor: 'rgba(50, 178, 201, 0.1)',
+              },
+              '&.Mui-disabled': {
+                color: 'rgba(50, 178, 201, 0.3)',
+              },
+            },
+            '@media (prefers-color-scheme: dark)': {
+              backgroundColor: '#1f2937',
+            },
+            '.dark &': {
+              backgroundColor: '#1f2937',
+            },
+          }}
         />
       </TableContainer>
     </div>
