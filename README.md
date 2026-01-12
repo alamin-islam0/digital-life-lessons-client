@@ -6,9 +6,8 @@
 
 ## 🚀 Live Demo
 
-Coming Soon...
-
-<!-- Add your live link here, e.g., [Live Site](https://your-project-url.web.app) -->
+- **Live Site:** [https://digital-life-lesson.netlify.app/](https://digital-life-lesson.netlify.app/)
+- **Backend Server Code:** [https://github.com/alamin-islam0/digital-life-lessons-server](https://github.com/alamin-islam0/digital-life-lessons-server)
 
 ## 🛠️ Admin & User Credentials (Demo)
 
