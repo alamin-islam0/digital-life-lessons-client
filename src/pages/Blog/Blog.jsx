@@ -112,7 +112,7 @@ const Blog = () => {
             {/* Featured Post */}
             <article
               data-aos="fade-up"
-              className="group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl dark:shadow-gray-900/50 transition-all duration-300"
             >
               <div className="relative overflow-hidden h-96">
                 <img
@@ -168,7 +168,7 @@ const Blog = () => {
                   key={post.id}
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-gray-900/50 transition-all duration-300 hover:-translate-y-2"
                 >
                   <div className="relative overflow-hidden h-48">
                     <img
@@ -239,7 +239,7 @@ const Blog = () => {
                         {category.name}
                       </span>
                     </div>
-                    <span className="px-3 py-1 bg-base-200 text-gray-600 dark:text-gray-300 rounded-full text-sm font-bold">
+                    <span className="px-3 py-1 bg-base-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full text-sm font-bold">
                       {category.count}
                     </span>
                   </button>
@@ -279,7 +279,7 @@ const Blog = () => {
                   (tag, index) => (
                     <button
                       key={index}
-                      className="px-4 py-2 bg-base-200 hover:bg-primary hover:text-white rounded-full text-sm font-semibold transition-all"
+                      className="px-4 py-2 bg-base-200 dark:bg-gray-700 hover:bg-primary hover:text-white text-gray-700 dark:text-gray-300 rounded-full text-sm font-semibold transition-all"
                     >
                       {tag}
                     </button>
