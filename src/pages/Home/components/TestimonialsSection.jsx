@@ -1,3 +1,5 @@
+import { Quote } from "lucide-react";
+
 const TestimonialsSection = () => {
     const testimonials = [
       {
@@ -21,7 +23,7 @@ const TestimonialsSection = () => {
     ];
   
     return (
-      <section className="py-24 bg-base-200/30">
+      <section className="py-24 bg-primary-300/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-base-content">Reader Stories</h2>
@@ -30,19 +32,19 @@ const TestimonialsSection = () => {
             {testimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg relative"
+                className="bg-white dark:bg-gray-800 dark:shadow-gray-800/10 p-8 rounded-3xl shadow-lg relative"
                 data-aos="fade-up"
                 data-aos-delay={idx * 100}
               >
-                <div className="text-primary-300 absolute top-8 left-8 text-6xl opacity-30 font-serif">
-                  "
+                <div className="text-primary-300 text-6xl pb-3 opacity-30 font-serif">
+                  <Quote/>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-6 italic relative z-10">{t.text}</p>
                 <div className="flex items-center gap-3">
                   <img
                     src={t.image}
                     alt={t.name}
-                    className="w-12 h-12 rounded-full"
+                    className="w-12 h-12 rounded-full text-secondary"
                   />
                   <div>
                     <h4 className="font-bold text-gray-900 dark:text-white">{t.name}</h4>

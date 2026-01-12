@@ -23,7 +23,7 @@ const HowItWorks = () => {
     ];
   
     return (
-      <section className="py-24 bg-base-100">
+      <section className="pt-24 bg-base-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16" data-aos="fade-down">
             <h2 className="text-4xl font-bold text-base-content">How It Works</h2>
@@ -37,7 +37,7 @@ const HowItWorks = () => {
                 data-aos="fade-up"
                 data-aos-delay={idx * 150}
               >
-                <div className="w-24 h-24 mx-auto mb-6 bg-primary text-white text-3xl font-bold flex items-center justify-center rounded-full border-8 border-base-100 shadow-xl">
+                <div className="w-24 h-24 mx-auto mb-6 bg-primary text-white text-3xl font-bold flex items-center justify-center rounded-full border-8 border-secondary shadow-xl shadow-secondary/20 dark:border-secondary">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{step.title}</h3>

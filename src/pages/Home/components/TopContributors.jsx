@@ -8,9 +8,9 @@ const TopContributors = ({ contributors, isLoading }) => {
     <section className="py-24 bg-base-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16" data-aos="fade-down">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4 dark:bg-secondary/20 dark:text-secondary shadow-secondary/20">
             <Trophy className="w-4 h-4" />
-            <span>Weekly Leaderboard</span>
+            <span className="dark:text-secondary">Weekly Leaderboard</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-base-content">
             Top Contributors
@@ -29,7 +29,7 @@ const TopContributors = ({ contributors, isLoading }) => {
                 key={w.email || index}
                 data-aos="zoom-in"
                 data-aos-delay={index * 100}
-                className="group relative bg-base-100 rounded-3xl p-6 border border-base-200 hover:border-primary/50 shadow-lg shadow-base-200 hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 text-center"
+                className="group relative bg-base-100 rounded-3xl p-6 border-2 border-secondary/20 hover:border-primary/50 shadow-lg shadow-base-200 hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 text-center dark:border-secondary/20"
               >
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-sm border-2 border-white shadow-sm z-10">
                   #{index + 1}
@@ -50,7 +50,7 @@ const TopContributors = ({ contributors, isLoading }) => {
                   {w.name}
                 </h3>
 
-                <div className="flex items-center justify-center gap-1.5 text-primary text-sm font-medium mb-4 bg-primary/5 py-1 px-3 rounded-full mx-auto w-fit">
+                <div className="flex items-center justify-center gap-1.5 text-primary text-sm font-medium mb-4 bg-primary/5 py-1 px-3 rounded-full mx-auto w-fit dark:text-secondary dark:bg-secondary/20">
                   <BookOpen className="w-3.5 h-3.5" />
                   <span>{w.count} Lessons</span>
                 </div>

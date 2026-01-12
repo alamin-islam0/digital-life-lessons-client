@@ -29,7 +29,7 @@ const CtaSection = () => {
         <div data-aos="zoom-in" data-aos-delay="200">
           <Link
             to={user ? "/dashboard/add-lesson" : "/register"}
-            className="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary-600 rounded-full font-bold text-lg hover:bg-gray-50 dark:bg-gray-700 hover:shadow-xl hover:shadow-black/20 transition-all transform hover:-translate-y-1"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-secondary/20 to-secondary text-white rounded-xl font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Get Started Now <ArrowRight className="w-5 h-5" />
           </Link>

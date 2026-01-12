@@ -20,7 +20,7 @@ const CategoriesSection = () => {
     {
       name: "Mental Health",
       image:
-        "https://images.unsplash.com/photo-1544367563-12123d8965cd?auto=format&fit=crop&q=80&w=500",
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=500",
     },
     {
       name: "Financial Freedom",

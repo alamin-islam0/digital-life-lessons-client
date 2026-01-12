@@ -54,8 +54,8 @@ const LessonCard = ({ lesson, showBlur = false }) => {
   // Emotional tone colors
   const toneColors = {
     Motivational: "bg-success/10 text-success border-success/20",
-    Sadness: "bg-neutral/10 text-neutral-content border-neutral/20",
-    Realization: "bg-primary/5 text-primary border-primary/20",
+    Sadness: "bg-neutral/10 text-secondary border-secondary",
+    Realization: "bg-primary/5 text-primary border-primary/20 dark:text-secondary dark:border-secondary/20",
     Gratitude: "bg-secondary/5 text-secondary border-secondary/20",
   };
 
@@ -154,7 +154,7 @@ const LessonCard = ({ lesson, showBlur = false }) => {
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white dark:text-white mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white dark:text-white mb-2 line-clamp-2 leading-tight group-hover:text-base transition-colors duration-300">
             {title}
           </h3>
 

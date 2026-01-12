@@ -5,7 +5,7 @@ import Loading from "../../../components/ui/Loading";
 
 const MostSavedLessons = ({ lessons, isLoading, isPremium }) => {
   return (
-    <section className="py-24 bg-gradient-to-b from-base-200 to-base-100 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-primary-200/20 to-primary-100/20 dark:from-primary-200/10 dark:to-primary-100/20 relative overflow-hidden">
       {/* Abstract shapes */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -translate-x-1/2"></div>
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-x-1/2"></div>
@@ -23,7 +23,7 @@ const MostSavedLessons = ({ lessons, isLoading, isPremium }) => {
           <div data-aos="fade-left">
             <Link
               to="/public-lessons"
-              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary rounded-full font-bold hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary rounded-full font-bold hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white hover:border-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg dark:bg-gradient-to-r dark:hover:from-primary dark:hover:to-secondary dark:text-white border-secondary dark:hover:border-transparent dark:hover:scale-105 dark:hover:shadow-lg"
             >
               View All Lessons
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

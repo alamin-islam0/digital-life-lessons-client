@@ -59,10 +59,10 @@ const BenefitsSection = () => {
               key={index}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className={`group relative p-8 rounded-3xl ${benefit.bg} ${benefit.border} border-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden`}
+              className={`group relative p-8 rounded-3xl ${benefit.bg} ${benefit.border} border-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden dark:border-secondary/20`}
             >
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-125 duration-500">
-                <benefit.icon className={`w-32 h-32 ${benefit.color}`} />
+                <benefit.icon className={`w-32 h-32 ${benefit.color} dark:text-secondary`} />
               </div>
 
               <div
